@@ -1,0 +1,243 @@
+/* reset margins */
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, form, label, 
+article, aside, footer, header, nav, section{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* clear fix */
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after{
+  clear: both;
+}
+
+/*global style*/
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+}
+/*Logo*/
+.logo{
+    width: 3em;
+    cursor: pointer;
+}
+
+body{
+    min-width: 320px;
+    background-color: white;
+}
+/*Wrapper class*/
+/* .wrapper{
+    padding: 0 1%;
+} */
+
+/*Main Header*/
+.main-header{
+    background-color: rgb(255, 255, 255); 
+    width: 100%;
+    border-bottom: 2px groove grey;
+    position: fixed;
+}
+.main-header .fff{
+    padding: 1em 0 1em 2em;
+    display: inline-block;
+}
+.main-header .fastfoodfast{
+    width: 10em;
+    display: inline-block;
+    padding: 1em 0 1em 0em;
+    cursor: pointer;
+}
+.main-header nav li{
+    float: left;
+    padding: 1em;
+}
+.main-header nav li a{
+    color: grey;
+    font-size: 1.1em;
+    transition-property: color;
+    transition: ease-in-out;
+    transition-duration: 0.2s;
+}
+.main-header nav li a:hover{
+    color: grey;
+    text-decoration: underline;
+}
+
+.main-header nav:last-child{
+    padding-right: 2em;
+}
+.main-header nav:first-child{
+    padding-left: 2em;
+}
+.main-header nav li.current > a{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+.main-header nav,
+.main-header .signup_in {
+    float: right;
+    padding: 1em 0 1em 0;
+}
+/*Signin and Signup*/
+.main-header .signup_in{
+    padding: 2em 2.5em 1em 0;
+}
+.main-header .signup_in div{
+    display: inline-block;
+    padding: 0.35em;
+    margin-right: 0.5em;
+    background: #ff3008;
+    color: white;
+    border-radius: 10px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.main-header .signup_in div:hover{
+    cursor: pointer;
+    background-color: #be2405;
+}
+
+.main-header .signup_in:first-child{
+    margin-right: 2em;
+}
+
+/*Banner*/
+.banner img{
+    margin-top: 80px;
+    width: 100%;
+}
+/*Delivery man*/
+.delivery-man{
+    background: url("../images/houses.jpg");
+    background-size: inherit; 
+    background-repeat: repeat-x;
+    overflow: hidden;
+    width: 100%;
+}
+.marquee{
+    padding-top: 12em;
+    width: 250px;
+    height: 200px;
+}
+.marquee {
+    animation: marquee 15s linear infinite;
+}
+@keyframes marquee {
+   from {transform: translateX(-100%);}
+    to {transform: translateX(650%);}
+}
+
+/*Article-Container*/
+section.article-container {
+    width: 90%;
+}
+section.article-container article {
+    text-align: justify;
+    width: 100%;
+    padding: 0 5%;
+    padding-top: 5%;
+    font-size: 1.1em;
+}
+
+/*Gallery*/
+/* .gallery > div > img {
+    padding-top: 5%;
+    display: block;
+    width: 20%;
+    margin: 1em auto;
+}
+.gallery div p{
+    width: 90%;
+    padding: 5%;
+    padding-top: 0;
+    text-align: justify;
+    font-size: 1.1em;
+}
+.gallery div{
+    background-color: rgb(252, 223, 189);
+} */
+
+/*Footer*/
+footer.main-footer{
+    background-color: #363635;
+    width: 100%;
+    text-align: center;
+    padding: 2% 0;
+    text-transform: uppercase;
+    color: white;
+    font-size: 1.1em;
+}
+
+.main-footer div img{
+    width: 3%;
+}
+
+/*Media queries*/
+@media(max-width : 768px){
+    .wrapper{
+    padding: 0;
+    }
+
+    .main-header .fastfoodfast,
+    .main-header nav,
+    .main-header .signup_in{
+        padding-left: 0;
+        padding-right: 0; 
+        float: none;
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .main-header .fastfoodfast{
+        width: 70%;
+        margin: 0 auto;
+        color: white;
+    }
+
+    .logo, .main-header .fff{
+        width: 5em;
+        display: block;
+        margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0; 
+    }
+
+    .main-header nav,
+    .main-header .signup_in {
+    padding-top: 0;
+    }
+
+    .main-header{
+        background: #363635;
+    }
+
+    .main-header nav li {
+        float: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .banner img{
+    padding-top: 250px;
+}
+
+    .current{
+    border-bottom: none;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 0;
+    }
+}
