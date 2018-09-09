@@ -1,0 +1,150 @@
+*{
+    font-family: Helvetica, Arial, sans-serif
+}
+.login-modal {
+    position: fixed;
+    z-index: 1;
+    display: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.signup-modal {
+    position: fixed;
+    display: none;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login-box {
+    width:25%;
+    min-width: 320px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.signup-box {
+    width:30%;
+    min-width: 320px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+}
+
+.login-modal .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px); 
+}
+
+.login-modal h1, .signup-box h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.login-box label, 
+.signup-box label{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.login-box input, 
+.signup-box input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.login-modal input[type="email"], 
+.login-modal input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.signup-modal input[type="email"], 
+.signup-modal input[type="password"], 
+.signup-modal input[type="text"],
+.signup-modal input[type="email"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.login-modal input[type="submit"],
+.signup-modal input[type="submit"] {
+    margin-top: 1em;
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #ff3008;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    transition-property: color background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.login-modal input[type="submit"]:hover,
+.signup-modal input[type="submit"]:hover
+{
+    cursor: pointer;
+    background-color: #cc2807;
+    color: wheat;
+}
+
+.login-box a, .signup-box a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+    transition-property: color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.login-box a:hover, .signup-box a:hover{
+    color: #ff9d22;
+}
+
+.times {
+    position: absolute;
+
+}

@@ -35,14 +35,15 @@ body{
     background-color: white;
 }
 /*Wrapper class*/
-.wrapper{
-    padding: 0 10%;
-}
+/* .wrapper{
+    padding: 0 1%;
+} */
+
 /*Main Header*/
 .main-header{
-    background-color: white;
+    background-color: rgb(255, 255, 255); 
     width: 100%;
-    border-bottom: 1px solid grey;
+    border-bottom: 2px groove grey;
     position: fixed;
 }
 .main-header .fff{
@@ -113,8 +114,28 @@ body{
 
 /*Banner*/
 .banner img{
-    padding-top: 85px;
+    margin-top: 80px;
     width: 100%;
+}
+/*Delivery man*/
+.delivery-man{
+    background: url("../images/houses.jpg");
+    background-size: inherit; 
+    background-repeat: repeat-x;
+    overflow: hidden;
+    width: 100%;
+}
+.marquee{
+    padding-top: 12em;
+    width: 250px;
+    height: 200px;
+}
+.marquee {
+    animation: marquee 15s linear infinite;
+}
+@keyframes marquee {
+   from {transform: translateX(-100%);}
+    to {transform: translateX(650%);}
 }
 
 /*Article-Container*/
@@ -130,7 +151,7 @@ section.article-container article {
 }
 
 /*Gallery*/
-.gallery > div > img {
+/* .gallery > div > img {
     padding-top: 5%;
     display: block;
     width: 20%;
@@ -145,17 +166,21 @@ section.article-container article {
 }
 .gallery div{
     background-color: rgb(252, 223, 189);
-}
+} */
 
 /*Footer*/
-.main-footer{
+footer.main-footer{
     background-color: #363635;
     width: 100%;
     text-align: center;
-    padding: 1em;
+    padding: 2% 0;
     text-transform: uppercase;
     color: white;
     font-size: 1.1em;
+}
+
+.main-footer div img{
+    width: 3%;
 }
 
 /*Media queries*/
