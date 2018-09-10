@@ -2,7 +2,7 @@
     font-family: Helvetica, Arial, sans-serif
 }
 
-.login-modal {
+.login-modal, .signup-modal {
     position: fixed;
     z-index: 1;
     display: none;
@@ -14,7 +14,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.signup-modal {
+ {
     position: fixed;
     display: none;
     z-index: 1;
