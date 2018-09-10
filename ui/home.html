@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
+    <link rel="stylesheet" type="text/css" href="./css/order.css" />
 
 </head>
 
@@ -24,10 +25,9 @@
 
     <div class="bg clearfix">
         <div id="center">
-            <img src="./images/smiley-deliveryman.png" class="smiley-deliveryman"/>
+            <img src="./images/smiley-deliveryman.png" class="smiley-deliveryman" />
             <aside>Place your order and have your Fast Food delivered to you <span>Fast</span>.
-                <br>
-                I deliver round the clock just in time. 
+                <br> I deliver round the clock just in time.
                 <br>
                 <p>CALL TO ORDER...</p>
                 <a href="tel: 08022222222">0802 222 2222</a>
@@ -37,32 +37,122 @@
 
     <section class="food-catalog">
         <h1>Meals and Combos</h1>
-        <img src="./images/fd1.jpg" alt="food-catalog">
-        <img src="./images/fd2.png" alt="food-catalog">
-        <img src="./images/fd3.png" alt="food-catalog">
-        <img src="./images/fd4.jpg" alt="food-catalog">
-        <img src="./images/fd5.jpg" alt="food-catalog">
-        <img src="./images/fd6.jpg" alt="food-catalog">
-        <img src="./images/fd7.jpg" alt="food-catalog">
-        <img src="./images/fd8.jpg" alt="food-catalog">
+        <div class="order-item"><img src="./images/fd1.jpg" alt="food-catalog">
+            <p>RICE & BEANS</p><label class="price">&dollar;2</label>
+        </div>
+        <div class="order-item"><img src="./images/fd2.png" alt="food-catalog">
+            <p>CITIZENS MEAL</p><label class="price">&dollar;4</label>
+        </div>
+        <div class="order-item"><img src="./images/fd3.png" alt="food-catalog">
+            <p>NAIJA 58 MEAL</p><label class="price">&dollar;3.5</label>
+        </div>
+        <div class="order-item"><img src="./images/fd4.jpg" alt="food-catalog">
+            <p>CHIEF BURGER</p><label class="price">&dollar;2.7</label>
+        </div>
+        <div class="order-item"><img src="./images/fd5.jpg" alt="food-catalog">
+            <p>ROTISSERIE CHICKEN</p><label class="price">&dollar;12</label>
+        </div>
+        <div class="order-item"><img src="./images/fd6.jpg" alt="food-catalog">
+            <p>SPICY CRUNCHY CHICKEN</p><label class="price">&dollar;1.6</label>
+        </div>
+        <div class="order-item"><img src="./images/fd7.jpg" alt="food-catalog">
+            <p>POT LOVERS MENU</p><label class="price">&dollar;18</label>
+        </div>
+        <div class="order-item"><img src="./images/fd8.jpg" alt="food-catalog">
+            <p>WRAP STAR MEAL</p><label class="price">&dollar;4.5</label>
+        </div>
     </section>
 
     <section class="drink-catalog">
         <h1>Drinks</h1>
-        <img src="./images/drinks1.jpg" alt="drink-catalog">
-        <img src="./images/drinks2.jpg" alt="drink-catalog">
-        <img src="./images/drinks3.jpg" alt="drink-catalog">
-        <img src="./images/drinks4.jpg" alt="drink-catalog">
-        <img src="./images/drinks5.jpg" alt="drink-catalog">
-        <img src="./images/drinks6.jpg" alt="drink-catalog">
+        <div class="order-item"><img src="./images/drinks1.jpg" alt="drink-catalog">
+            <p>EVA MINERAL WATER 75CL</p><label class="price">&dollar;0.8</label>
+        </div>
+        <div class="order-item"><img src="./images/drinks2.jpg" alt="drink-catalog">
+            <p>5 ALIVE PULPY ORANGE JUICE 40CL</p><label class="price">&dollar;1.3</label>
+        </div>
+        <div class="order-item"><img src="./images/drinks3.jpg" alt="drink-catalog">
+            <p>COCA-COLA 50CL</p><label class="price">&dollar;1</label>
+        </div>
+        <div class="order-item"><img src="./images/drinks4.jpg" alt="drink-catalog">
+            <p>COCA-COLA ZERO 50CL</p><label class="price">&dollar;1</label>
+        </div>
+        <div class="order-item"><img src="./images/drinks5.jpg" alt="drink-catalog">
+            <p>FANTA ORANGE 50CL</p><label class="price">&dollar;1</label>
+        </div>
+        <div class="order-item"><img src="./images/drinks6.jpg" alt="drink-catalog">
+            <p>FIVE ALIVE 1L</p><label class="price">&dollar;2</label>
+        </div>
     </section>
+
     <section class="order-modal">
-        <div class="order-box">
+        <div class="order-box clearfix">
+            <span id="close"> &times; </span>
             <h1>Place Order</h1>
-            <form>    
+            <div id="display">
+                <img src="./images/smiley-deliveryman.png" alt="3f delivery man" id="item-image">
+            </div>
+            <form>
+                <label>Meals</label>
+                <select>
+                    <option>
+                        Choose a Meal...
+                    </option>
+                    <option>
+                         RICE & BEANS
+                    </option>
+                    <option>
+                         CITIZENS MEAL
+                    </option>
+                    <option>
+                         NAIJA 58 MEAL
+                    </option>
+                    <option>
+                         CHIEF BURGER
+                    </option>
+                    <option>
+                         ROTISSERIE CHICKEN
+                    </option>
+                    <option>
+                         SPICY CRUNCHY CHICKEN
+                    </option>
+                    <option>
+                         POT LOVERS MENU
+                    </option>
+                    <option>
+                         WRAP STAR MEAL
+                    </option>
+                </select>
                 <label>Quantity</label>
-                <input type="number" name="quantity" placeholder="Enter quantity">
-                <input type="button" name="add-to-cart" value="Add To Cart">
+                <input type="number" name="meal-quantity" placeholder="Enter quantity of meal">
+
+                <label>Drinks</label>
+                <select>
+                    <option>
+                        Choose a drink...
+                    </option>
+                    <option>
+                        EVA MINERAL WATER 75CL
+                    </option>
+                    <option>
+                        5 ALIVE PULPY ORANGE JUICE 40CL
+                    </option>
+                    <option>
+                        COCA-COLA 50CL
+                    </option>
+                    <option>
+                        FIVE ALIVE 1L
+                    </option>
+                    <option>
+                        COCA-COLA ZERO 50CL
+                    </option>
+                </select>
+                <label>Quantity</label>
+                <input type="number" name="drink-quantity" placeholder="Enter quantity of drink">
+
+                <label>Price</label>
+                <label class="price">&dollar;0</label>
+                <input type="submit" name="add-to-cart" value="Add To Cart">
             </form>
         </div>
     </section>
