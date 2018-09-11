@@ -2,7 +2,25 @@ const orderItem = document.getElementsByClassName("order-item");
 const orderModal = document.getElementsByClassName("order-modal")[0];
 const orderBox = document.getElementsByClassName("order-box")[0];
 const close = document.getElementById("close");
+const banner = document.getElementById("banner");
+const logo = document.getElementById("logo");
 
+let count = 0, nextCount = 1, format = "png";
+
+function slideshow() {
+    if (nextCount === 12) {
+        format = "jpg";
+    } else {
+        format = "png";
+    }
+    banner.setAttribute("src", `./images/food${nextCount}.${format}`);
+    nextCount++;
+    if (nextCount === 14) {
+        nextCount = 1;
+    }
+}
+setInterval(slideshow, 90000);
+banner.addEventListener("click", slideshow);
 
 //Open modal for order
 window.onclick = function(){
@@ -26,3 +44,7 @@ window.addEventListener("click", closeOrderModal);
 close.addEventListener("click", () => {
     orderModal.style.display = "none";
 });
+
+logo.onclick = () => {
+    window.location.assign("./index.html");
+};

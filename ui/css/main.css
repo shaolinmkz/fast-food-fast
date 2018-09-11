@@ -52,18 +52,57 @@ body{
     padding: 1em 0 1em 0em;
     cursor: pointer;
 }
+/*---------Vertical menu starts here-----------*/
+/*-------------User ACCOUNT Begin------------------*/
+.main-header nav ul li > ul.menu{
+    width: 190px;
+    border: 1px solid #ff3008;
+    background: rgb(255, 255, 255);
+}
+.main-header nav ul li:nth-child(2){
+    position: relative;
+}
+.main-header nav ul li > ul.menu{
+    position: absolute;
+    bottom: 10000em;
+    right: -1em;
+    transition-property: bottom;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+.main-header nav ul li:hover > ul.menu{
+    bottom: -7.5em;
+} 
+.main-header .menu li{
+    width: 88%;
+    padding: 0.4em 0.8em 0.4em 0.8em;
+    margin: 0;
+    font-size: 0.9em;
+}
+/*---------------User ACCOUNT END------------------*/
+.main-header nav li > ul > li{
+    display: block;
+    width: 320px;
+}
+
+
+/*--------------------------*/
 .main-header nav li{
     float: left;
     padding: 1em;
 }
 .main-header nav li a{
     color: grey;
-    font-size: 1.1em;
+    font-size: 1em;
     transition-property: color;
     transition: ease-in-out;
     transition-duration: 0.2s;
 }
-.main-header nav li span img.cart{ /*Cart*/
+.main-header nav li span img.cart,
+.main-header nav li span img.avatar-icon,
+.main-header nav li span img.home-icon
+{ 
     width: 20px;
     height: 15px;
     display: inline-block;
@@ -117,7 +156,7 @@ body{
 
 /*Home body*/
 .bg{ /*body wrapper background*/
-    padding: 100px 0 0 50px;
+    padding: 50px 0 0 50px;
     background-image: url("../images/24hrs.png");
 }
 div.bg > div#center{
@@ -190,6 +229,7 @@ section.drink-catalog div{
     margin-right: 5%;
     margin-top: 2%;
     display: inline-block;
+    cursor: pointer;
 }
 section.food-catalog label, 
 section.food-catalog p,
@@ -198,6 +238,16 @@ section.drink-catalog p{
     padding-top: 5%; 
     display: block;
     font-size: 0.7em;
+}
+
+section.food-catalog p:hover,
+section.drink-catalog p:hover{
+    color: #363635;
+}
+section.food-catalog label:hover,
+section.drink-catalog label:hover{
+    text-decoration: underline;
+    cursor: not-allowed;
 }
 section.food-catalog p,
 section.drink-catalog p{
@@ -256,6 +306,7 @@ section.drink-catalog h1 {
 .banner img{
     margin-top: 80px;
     width: 100%;
+    cursor: pointer;
 }
 /*Delivery man*/
 .delivery-man{
@@ -296,7 +347,7 @@ footer.main-footer{
 /*Media queries*/
 @media(max-width : 768px){
     .bg{
-        padding-top: 300px;
+        padding-top: 0;
     }
     bg aside {
         float: none;
@@ -368,6 +419,7 @@ footer.main-footer{
 div.bg{
     padding-left: 0;
     margin-left: 0;
+    padding: 0;
 }
 
 /*FOOD catalog*/
@@ -385,7 +437,7 @@ section.drink-catalog img{
 }
 
 @media(max-width: 650px) {
-    /*Delivery guy in home*/
+    /*Delivery guy in home page*/
 .bg img.smiley-deliveryman{
     float: none;
     display: block;

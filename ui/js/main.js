@@ -5,6 +5,7 @@ const signupBox = document.getElementsByClassName("signup-box")[0];
 const login = document.getElementById("signin");
 const loginModal = document.getElementsByClassName("login-modal")[0];
 const loginBox = document.getElementsByClassName("login-box")[0];
+const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
 
 let count = 0, nextCount = 1, format = "png";
 
@@ -21,7 +22,8 @@ function slideshow() {
     }
 }
 
-setInterval(slideshow, 20000);
+setInterval(slideshow, 60000);
+banner.addEventListener("click", slideshow);
 
 //Open modal for sign up
 signup.addEventListener("click", () => {
@@ -48,3 +50,9 @@ function closeLoginModal(e) {
     }
 }
 window.addEventListener("click", closeLoginModal);
+
+//onclick fastfoodfast sitename direct me to home
+
+fastfoodfast.onclick = () => {
+    window.location.assign("./home.html");
+};

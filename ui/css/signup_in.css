@@ -87,6 +87,7 @@
 .signup-modal input[type="email"], 
 .signup-modal input[type="password"], 
 .signup-modal input[type="text"],
+.signup-modal input[type="tel"],
 .signup-modal input[type="email"]
 {
     border: none;

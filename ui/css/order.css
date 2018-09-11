@@ -93,7 +93,8 @@
     font-size: 0.6em;
 }
 
-.order-modal input[type="number"]
+.order-modal input[type="number"],
+.basket input[type="text"]
 {
     border: none;
     border-bottom: 1px solid rgb(201, 200, 200);
@@ -104,7 +105,9 @@
     font-size: 16px;
 }
 
-.order-modal input[type="submit"] {
+.order-modal input[type="submit"],
+.basket input[type="submit"],
+.basket input[type="button"] {
     margin-top: 1em;
     border: none;
     outline: none;
@@ -118,13 +121,57 @@
     transition-timing-function: ease-in-out;
 }
 
-.order-modal input[type="submit"]:hover {
+.order-modal input[type="submit"]:hover,
+.basket input[type="submit"]:hover,
+.basket input[type="button"]:hover {
     cursor: pointer;
     background-color: #cc2807;
     color: wheat;
 }
 
-.order-modal input[type="submit"]:active{
+.order-modal input[type="submit"]:active,
+.basket input[type="submit"]:active,
+.basket input[type="button"]:active{
     cursor: pointer;
     background-color: #fd4621;
+}
+
+/*---------Checkout----------*/
+.basket{
+    width: 250px;
+    padding: 10% 30px;
+    padding-top: 0;
+    border: 1px solid #ff3008;
+    background: rgb(255, 255, 255);
+}
+
+.basket h1{
+    background: #ff3008;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+.basket label{
+    display: inline-block;
+    padding: 2% 1% 1% 1%;
+}
+
+.basket input[type="submit"], 
+.basket input[type="text"],
+.basket input[type="button"]{
+    width: 100%;
+    margin-bottom:2%;
+}
+.main-header nav ul li > ul.isolate{
+    position: absolute;
+    bottom: 10000em;
+    right: -1em;
+    transition-property: bottom;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+.main-header nav ul li:hover > ul.isolate{
+    bottom: -25em;
 }
