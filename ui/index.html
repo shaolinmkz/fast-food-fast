@@ -12,7 +12,7 @@
 
 <body>
     <header class="main-header clearfix">
-        <img src="./images/3f-logo.png" class="logo fff" />
+        <img src="./images/3f-logo.png" id="logo" class="logo fff" />
         <img src="./images/fastfoodfast.png" class="fastfoodfast" />
         <div class="signup_in">
             <div id="signup">Sign up</div>
@@ -23,7 +23,9 @@
         <section class="banner">
             <img id="banner" src="./images/food1.png">
         </section>
-
+        <p class="fullwidth center"><span class="bold themecolor block size2em">Satisfy your cravings</span>
+             Experience a world of food, with your favorite restaurant at your fingertips.
+        </p>
         <section class="delivery-man">
             <img src="./images/delivery-man.png" class="marquee" />
         </section>
@@ -31,7 +33,7 @@
     <section class="signup-modal">
         <div class="signup-box">
             <h1>Sign up</h1>
-            <form>
+            <form action="./home.html">
                 <label>First name</label>
                 <input type="text" name="text" placeholder="Jane">
                 <label>Last name</label>
@@ -39,7 +41,7 @@
                 <label>Email</label>
                 <input type="email" name="email" placeholder="janedoe@testmail.com">
                 <label>Mobile number</label>
-                <input type="text" name="number" placeholder="080xxxxxxxx">
+                <input type="tel" name="number" placeholder="080xxxxxxxx">
                 <label>Password</label>
                 <input type="password" name="password" placeholder="Enter Password">
                 <label>Confirm password</label>
@@ -53,7 +55,7 @@
         <div class="login-box">
             <img src="./images/avatar.png" class="avatar" />
             <h1>Sign in</h1>
-            <form>
+            <form action="./home.html">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="janedoe@testmail.com">
 
@@ -67,7 +69,7 @@
     </section>
 
     <footer class="main-footer">
-        &copy; <label>FFF Template</label>
+        &copy; <label>3F Template</label>
         <div>
             <img src="./images/email.png" />
             <img src="./images/facebook.png" />

@@ -2,22 +2,11 @@
     font-family: Helvetica, Arial, sans-serif
 }
 
-.login-modal {
-    position: fixed;
-    z-index: 1;
-    display: none;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
+.login-modal, 
 .signup-modal {
     position: fixed;
-    display: none;
     z-index: 1;
+    display: none;
     left: 0;
     top: 0;
     height: 100%;
@@ -98,6 +87,7 @@
 .signup-modal input[type="email"], 
 .signup-modal input[type="password"], 
 .signup-modal input[type="text"],
+.signup-modal input[type="tel"],
 .signup-modal input[type="email"]
 {
     border: none;
