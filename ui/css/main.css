@@ -24,6 +24,11 @@ article, aside, footer, header, nav, section{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
 }
+.padding-helper{
+    display: block;
+    height: 6em;
+}
+
 .center{
     text-align: center;
 }
@@ -355,7 +360,7 @@ section.drink-catalog h1 {
 .billing{
     padding: 6em 5% 1% 5%; 
     background: #ff3108;
-    width: 60%;
+    width: 65%;
     margin: 0 auto;
     text-align: left;
 }
@@ -435,6 +440,34 @@ section.drink-catalog h1 {
     cursor: pointer;
 }
 
+/*-------------------HISTORY of order placed----------------------*/
+.history{
+    padding: 1% 10%
+}
+.history h1{
+    font-size: 150%;
+    padding: 5% 0 2% 0;
+}
+section.history div.grid{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    height: 500px;
+}
+
+section.history div.grid div{
+    border: 1px solid #ffffff;
+    font-size: 100%;
+    padding: 3%;
+}
+section.history div.grid div:nth-child(even){
+    background: #cacaca;
+}
+section.history div.grid div:nth-child(odd){
+    background: #fa6d51;
+}
+
+
+
 /*Footer*/
 footer.main-footer{
     background-color: #363635;
@@ -453,6 +486,10 @@ footer.main-footer{
 
 /*-----------Media queries------------*/
 @media(max-width : 768px){
+    .padding-helper{
+    display: block;
+    height: 14em;
+}
     .bg{
         padding-top: 0;
     }
@@ -559,6 +596,11 @@ section.drink-catalog img{
 .billing{
     padding-top: 15em;
 }
+.billing{
+        width: 80%;
+        padding-left: 2.5%;
+        padding-right: 2.5%; 
+    }
 }
 
 @media(max-width: 650px) {
@@ -584,13 +626,37 @@ section.drink-catalog img{
     width: 100%;
     margin: 0 auto;
 }
+.billing form input[type="submit"]{
+        width: 95%;
+    }
 }
 
 @media(max-width: 480px) and (min-width:320px){
+    .padding-helper{
+    display: block;
+    height: 13em;
+    }
+    section.history div.grid div,
+    section.history div.grid div span,
+    section.history div.grid div p{
+    padding: 5%;
+    font-size: 85%;
+    }
     .main-header nav li a,
     .main-header nav li{
         font-size: 0.9em;
         padding: 1%;
         margin: 1%;
+    }
+    .billing{
+        width: 95%;
+        padding-left: 2.5%;
+        padding-right: 2.5%; 
+    }
+    .billing form label{
+        font-size: 100%; 
+    }
+    .billing form input[type="submit"]{
+        width: 80%;
     }
 }
