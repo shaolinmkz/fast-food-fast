@@ -24,6 +24,29 @@ article, aside, footer, header, nav, section{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
 }
+.center{
+    text-align: center;
+}
+.block{
+    display: block;
+}
+.bold{
+    font-weight: bold;
+}
+.inline{
+    display: inline-block;
+}
+.size2em{
+    font-size: 3em;
+    font-family: 'Courier New', Courier, monospace;
+}
+.themecolor{
+    color: #ff3008;
+}
+.fullwidth{
+    width: 96%;
+    padding: 2%;
+}
 /*Logo*/
 .logo{
     width: 3em;
@@ -80,14 +103,14 @@ body{
     margin: 0;
     font-size: 0.9em;
 }
-/*---------------User ACCOUNT END------------------*/
-.main-header nav li > ul > li{
+/*---------------User ACCOUNT ENDS Here------------------*/
+
+.main-header nav li > ul > li{ /*not useful anymore BUT ignore*/
     display: block;
     width: 320px;
 }
-
-
 /*--------------------------*/
+
 .main-header nav li{
     float: left;
     padding: 1em;
@@ -110,8 +133,8 @@ body{
     padding: 0;
 }
 .main-header nav li a:hover{
-    color: grey;
-    text-decoration: underline;
+    color: rgb(65, 63, 63);
+    font-weight: bolder;
 }
 
 .main-header nav:last-child{
@@ -127,7 +150,7 @@ body{
 .main-header nav,
 .main-header .signup_in {
     float: right;
-    padding: 1em 0 1em 0;
+    padding: 1.8em 0 0.5em 0;
 }
 /*Signin and Signup nav button*/
 .main-header .signup_in{
@@ -328,6 +351,89 @@ section.drink-catalog h1 {
    from {transform: translateX(-100%);}
     to {transform: translateX(650%);}
 }
+/*----------------Billing or place-order------------------*/
+.billing{
+    padding: 6em 5% 1% 5%; 
+    background: #ff3108;
+    width: 60%;
+    margin: 0 auto;
+    text-align: left;
+}
+.billing form > h1{
+    color: white;
+    font-size: 1.2em;
+    padding: 2% 1% 2% 0;
+}
+
+.billing form label,
+.billing form p{
+    display: inline-block;
+    padding: 1% 0 0 0;
+    font-size: 100%;
+}
+.billing form p{
+    margin-top: 2%;
+}
+
+.billing form input[type="text"],
+.billing form input[type="number"]{
+    outline: none;
+    padding: 1%;
+    margin-bottom: 1%;
+    border-radius: 2em;
+    width: 50%;
+    font-size: 1em;
+    margin-top: 1%;
+}
+
+.billing form input[type="text"]:focus,
+.billing form input[type="number"]:focus{
+    background: rgb(250, 250, 137);
+}
+
+.billing form section.clearfix{
+    border: 1px solid white;
+    border-radius:0.2em;
+}
+
+.billing form section.clearfix div{
+    float: left;
+    width: 50%;
+}
+.billing form img{
+    margin: 2% 2% 2% 0;
+    width: 40%;
+    display: block;
+}
+   
+.billing form section.clearfix div ol li{
+    font-size: 100%;
+    padding: 1% 1% 1% 0;
+    background: #ff3c15;
+}
+.billing form section.clearfix div ol.list li{
+    padding-left: 5%;
+}
+.billing form section.clearfix div ol li:nth-child(even){
+    background: #fd4925;
+}
+
+.billing form input[type="submit"] {
+    display: block;
+    bottom: -35em; 
+    margin: 2% auto;
+    width: 7em;
+    background: rgb(252, 252, 75);
+    outline: none;
+    padding: 2% 0;
+    border-radius: 10em;
+    font-weight: bold;
+    text-transform: lowercase;
+}
+.billing form input[type="submit"]:hover{
+    background: rgb(245, 245, 51);
+    cursor: pointer;
+}
 
 /*Footer*/
 footer.main-footer{
@@ -344,7 +450,8 @@ footer.main-footer{
     width: 2.5%;
 }
 
-/*Media queries*/
+
+/*-----------Media queries------------*/
 @media(max-width : 768px){
     .bg{
         padding-top: 0;
@@ -369,6 +476,21 @@ footer.main-footer{
         text-align: center;
         width: 100%;
     }
+
+    .main-header nav li a:hover{
+    color: #fff;
+    font-weight: bolder;
+}
+
+.main-header nav li a,
+    .main-header nav li{
+        font-size: 1em;
+        padding: 1%;
+        margin: 1%;
+    }
+.main-header nav .current a:hover{
+    color: #000;
+}
 
     .main-header .fastfoodfast{
         width: 50%;
@@ -434,6 +556,9 @@ section.drink-catalog img{
 .main-footer div img{
     width: 5%;
 }
+.billing{
+    padding-top: 15em;
+}
 }
 
 @media(max-width: 650px) {
@@ -459,4 +584,13 @@ section.drink-catalog img{
     width: 100%;
     margin: 0 auto;
 }
+}
+
+@media(max-width: 480px) and (min-width:320px){
+    .main-header nav li a,
+    .main-header nav li{
+        font-size: 0.9em;
+        padding: 1%;
+        margin: 1%;
+    }
 }
