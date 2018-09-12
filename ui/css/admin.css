@@ -178,6 +178,68 @@ section.dashboard{
     cursor: pointer;
 }
 
+/*---------Order list---------*/
+
+body.bodycolor section.order-modal div.order-box h1{
+    background: rgb(44, 43, 43);
+    color: white;
+    position: relative;
+    left: 0;
+    top:0;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+body.bodycolor section.order-modal div.order-box #close{ 
+    top: 6px;
+}
+body.bodycolor section.order-modal div.order-box #display img{
+    width: 20%;
+    height: auto;
+    margin: 0 auto;
+}
+body.bodycolor section.order-modal div.order-box{
+    color: rgb(0, 0, 0);
+    padding: 0 10px;
+    width: 65%;
+}
+body.bodycolor section.order-modal div.order-box section > section div,
+body.bodycolor section.order-modal div.order-box section > div{
+    float: left;
+    width: 50%;
+}
+
+body.bodycolor section.order-modal div.order-box section > section div,
+body.bodycolor section.order-modal div.order-box section > div{
+    padding: 2% 0;
+}
+
+body.bodycolor section.order-modal div.order-box section > section div li,
+body.bodycolor section.order-modal div.order-box section > div li{
+    font-size: 100%; 
+    background: rgb(202, 202, 202);
+    padding: 0 5%;
+    line-height: 1.5em;
+    
+}
+body.bodycolor section.order-modal div.order-box section > div li{
+    font-size: 100%; 
+    padding: 0 4%;
+}
+body.bodycolor section.order-modal div.order-box section > section div li:nth-child(even),
+body.bodycolor section.order-modal div.order-box section > div li:nth-child(even){
+    background: rgb(160, 160, 160);
+}
+body.bodycolor section.order-modal div.order-box section > section div li:first-child,
+body.bodycolor section.order-modal div.order-box section > section div li:last-child{
+    background: rgb(68, 68, 68);
+    color: white;
+}
+body.bodycolor section.order-modal div.order-box section > div.iso ol li{
+    background: rgb(68, 68, 68);
+    color: white;
+}
+
 @media(max-width: 768px){
     .admin .grid{
     height: 150px;

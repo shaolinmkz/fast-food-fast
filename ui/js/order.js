@@ -23,6 +23,7 @@ setInterval(slideshow, 90000);
 banner.addEventListener("click", slideshow);
 
 //Open modal for order
+//Credit: Idea from Stackover flow
 window.onclick = function(){
     let index;
     for (index = 0; index < orderItem.length; ++index) {

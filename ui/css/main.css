@@ -591,7 +591,9 @@ body.bodycolor #main-header{
     .banner img{
     padding-top: 250px;
 }
-
+.banneriso img{
+    padding-top: 0; 
+}
     .current{
     border-bottom: none;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
