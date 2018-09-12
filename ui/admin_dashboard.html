@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
     <link rel="stylesheet" type="text/css" href="./css/order.css" />
-    <link rel="stylesheet" type="text/css" href="./css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/admin.css" />
 </head>
 
 <body class="bodycolor">
@@ -21,8 +21,166 @@
                                 class="home-icon"></span>DASHBOARD</a></li>
                 <li><a href="#"><span><img src="./images/avatar-icon.png" alt="avatar-icon" class="avatar-icon"></span>ADMIN</a></li>
     </header>
-    <section class="admin">
+
+    <section class="admin clearfix">
+        <div class="grid">
+            <div>SOLD TODAY</div>
+            <div>₦150000</div>
+            <div></div>
+        </div>
+
+        <div class="grid">
+            <div>ORDER TODAY</div>
+            <div>2</div>
+            <div>cancelled: 0 <br> rejected: 0</div>
+        </div>
+
+        <div class="grid">
+            <div>PENDING</div>
+            <div>2</div>
+            <div></div>
+        </div>
+    </section>
+
+    <section class="clearfix dashboard">
+        <div class="div-container clearfix">
+            <div>
+                <p class="bold">Order No.</p>
+
+            </div>
+            <div>
+                <p class="bold">Order Details</p>
+            </div>
+            <div>
+                <p class="bold">Order Status</p>
+            </div>
+            <div>
+                <p class="bold">Completed</p>
+            </div>
+        </div>
+
+        <div class="div-container new-container clearfix">
+            <div>
+                <p class="pad order-number">512465</p>
+                <p class="redbg white margin">Unpaid</p>
+
+            </div>
+            <div>
+                <p><span class="green bold">collection</span> <span class="pending">Pending</span></p>
+                <p><span class="blue bold">ordered on</span> 17/09/2018 &nbsp; 11:01:36</p>
+            </div>
+            <div>
+                <p class="bluebg white margin-auto">View Order</p>
+                <p class="redbg white margin-auto">Cancel</p>
+                <p class="greenbg white margin-auto">Acknowledge</p>
+            </div>
+            <div>
+                <input type="checkbox" title="check if oreder has been completed" class="checkbox" />
+                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
+            </div>
+        </div>
+
+        <div class="div-container new-container clearfix">
+            <div>
+                <p class="pad order-number">762912</p>
+                <p class="redbg white margin">Unpaid</p>
         
+            </div>
+            <div>
+                <p><span class="green bold">collection</span> <span class="pending">Pending</span></p>
+                <p><span class="blue bold">ordered on</span> 25/08/2018 &nbsp; 12:20:16</p>
+            </div>
+            <div>
+                <p class="bluebg white margin-auto">View Order</p>
+                <p class="redbg white margin-auto">Cancel</p>
+                <p class="greenbg white margin-auto">Acknowledge</p>
+            </div>
+            <div>
+                <input type="checkbox" title="check if oreder has been completed" class="checkbox" />
+                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
+            </div>
+        </div>
+
+        <div class="div-container new-container clearfix">
+            <div>
+                <p class="pad order-number">817262</p>
+                <p class="greenbg white margin alter-greenbg">Paid</p>
+
+            </div>
+            <div>
+                <p><span class="green bold">collection</span> 16/08/2018 &nbsp; 10:29:52</p>
+                <p><span class="blue bold">ordered on</span> 16/08/2018 &nbsp; 10:05:12</p>
+            </div>
+            <div>
+                <p class="bluebg white margin-auto">View Order</p>
+                <p class="redbg white margin-auto">Cancel</p>
+                <p class="greenbg white margin-auto">Acknowledge</p>
+            </div>
+            <div>
+                <input type="checkbox" title="check if oreder has been completed" class="checkbox" checked disabled/>
+                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
+            </div>
+        </div>
+
+        <div class="div-container new-container clearfix">
+            <div>
+                <p class="pad order-number">817231</p>
+                <p class="greenbg white margin alter-greenbg">Paid</p>
+
+            </div>
+            <div>
+                <p><span class="green bold">collection</span> 21/07/2018 &nbsp; 17:20:00</p>
+                <p><span class="blue bold">ordered on</span> 211/07/2018 &nbsp; 17:01:46</p>
+            </div>
+            <div>
+                <p class="bluebg white margin-auto">View Order</p>
+                <p class="redbg white margin-auto">Cancel</p>
+                <p class="greenbg white margin-auto">Acknowledge</p>
+            </div>
+            <div>
+                <input type="checkbox" title="check if oreder has been completed" class="checkbox" checked disabled />
+                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
+            </div>
+        </div>
+
+        <div class="div-container new-container clearfix">
+            <div>
+                <p class="pad order-number">637242</p>
+                <p class="greenbg white margin alter-greenbg">Paid</p>
+
+            </div>
+            <div>
+                <p><span class="green bold">collection</span> 15/07/2018 &nbsp; 15:45:15</p>
+                <p><span class="blue bold">ordered on</span> 15/07/2018 &nbsp; 15:01:06</p>
+            </div>
+            <div>
+                <p class="bluebg white margin-auto">View Order</p>
+                <p class="redbg white margin-auto">Cancel</p>
+                <p class="greenbg white margin-auto">Acknowledge</p>
+            </div>
+            <div>
+                <input type="checkbox" title="check if oreder has been completed" class="checkbox" checked disabled/>
+                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <section class="order-modal">
+        <div class="order-box clearfix">
+            <span id="close"> &times; </span>
+            <h1>Place Order</h1>
+
+            <div id="display">
+                <img src="./images/order-history.png" alt="order tracking" id="item-image">
+            </div>
+
+            <section>
+
+            </section>
+        </div>
     </section>
 
     <footer class="main-footer">
@@ -30,7 +188,7 @@
     </footer>
 
 
-    <!-- <script type="text/javascript" src="./js/order.js"></script> -->
+    <script type="text/javascript" src="./js/admin_dashboard.js"></script>
 </body>
 
 </html>

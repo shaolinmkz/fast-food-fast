@@ -2,7 +2,7 @@ const orderItem = document.getElementsByClassName("order-item");
 const orderModal = document.getElementsByClassName("order-modal")[0];
 const orderBox = document.getElementsByClassName("order-box")[0];
 const close = document.getElementById("close");
-const banner = document.getElementById("banner");
+const banner = document.getElementById("bannerImg");
 const logo = document.getElementById("logo");
 
 let count = 0, nextCount = 1, format = "png";

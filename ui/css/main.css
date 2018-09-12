@@ -539,7 +539,10 @@ footer.main-footer{
     background-color: rgb(34, 33, 33); 
     position: fixed;
 }
-
+body.bodycolor #main-header{
+    background-color: rgb(34, 33, 33); 
+    position: relative;
+}
     .main-header nav li a:hover{
     color: #fff;
     font-weight: bolder;

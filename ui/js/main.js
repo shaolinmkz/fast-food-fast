@@ -1,4 +1,4 @@
-const banner = document.getElementById("banner");
+const banner = document.getElementById("bannerImg");
 const signup = document.getElementById("signup");
 const signupModal = document.getElementsByClassName("signup-modal")[0];
 const signupBox = document.getElementsByClassName("signup-box")[0];
