@@ -1,33 +1,16 @@
-const orderItem = document.getElementsByClassName("order-item");
 const orderModal = document.getElementsByClassName("order-modal")[0];
 const orderBox = document.getElementsByClassName("order-box")[0];
 const close = document.getElementById("close");
-const banner = document.getElementById("bannerImg");
 const logo = document.getElementById("logo");
+const viewOrder = document.getElementsByClassName("view-order");
 
-let count = 0, nextCount = 1, format = "png";
 
-function slideshow() {
-    if (nextCount === 12) {
-        format = "jpg";
-    } else {
-        format = "png";
-    }
-    banner.setAttribute("src", `./images/food${nextCount}.${format}`);
-    nextCount++;
-    if (nextCount === 14) {
-        nextCount = 1;
-    }
-}
-setInterval(slideshow, 90000);
-banner.addEventListener("click", slideshow);
-
-//Open modal for order
+//Open modal to view order fro Admin
 //Credit: Idea from Stackover flow
-window.onclick = function(){
+window.onclick = function () {
     let index;
-    for (index = 0; index < orderItem.length; ++index) {
-        orderItem[index].onclick = function(){
+    for (index = 0; index < viewOrder.length; ++index) {
+        viewOrder[index].onclick = function () {
             orderModal.style.display = "block";
         };
     };
@@ -47,5 +30,5 @@ close.addEventListener("click", () => {
 });
 
 logo.onclick = () => {
-    window.location.assign("./index.html");
+    window.location.assign("./admin.html");
 };

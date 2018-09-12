@@ -1,0 +1,274 @@
+.admin .grid{
+    display: grid;
+    width: 20%;
+    height: 200px;
+    margin: 5% 3%;
+    float: left;
+}
+.admin .grid:first-child{
+    margin-left: 14%;
+}
+div.grid div{
+    text-align: center;
+    padding-top: 1em; 
+}
+.admin .grid div:nth-child(even){
+    background: rgb(214, 214, 214);
+}
+.admin .grid div:nth-child(odd){
+    background: rgb(180, 180, 180);
+}
+#main-header .current a{
+    color: rgb(206, 206, 206);
+}
+#main-header li a:hover{
+    color: rgb(192, 191, 191);
+}
+
+/*--------DASHBOARD-------*/
+section.dashboard{
+    width: 90%;
+    padding: 1% 4.5%;
+    /* border: 1px solid black; For Tracking */
+}
+
+.dashboard div.div-container{
+    width: 98%;
+    /* border: 1px solid rgb(255, 2, 2); For tracking */
+    border-bottom: 5px solid grey;
+    margin: 0 auto;
+    background: white;
+}
+
+.dashboard div.div-container:last-child{
+    border-bottom: none;
+}
+
+.dashboard div.div-container div{
+    float: left;
+    width: 24%;
+    /* border: 1px solid rgb(0, 0, 255); For tracking */
+    background: white;
+    font-size: 100%;
+}
+.dashboard div.div-container div > p.bold{
+    font-size: 100%;
+    padding: 2%;
+    width: 96%;
+    text-align: center;
+}
+.dashboard div.new-container div:nth-child(2){
+    text-align: center;
+    padding: 1%;
+    line-height: 130%;
+}
+
+.pad{
+    padding: 4% 0 2% 4%;
+    font-size: 100%;
+}
+.margin{
+    margin: 4% 0 2% 4%;
+    font-size: 100%;
+}
+.margin-auto{
+    margin: 4% auto;
+    font-size: 100%;
+}
+.green{
+    color: green;
+    font-size: 100%;
+}
+.pending{
+    color: rgb(77, 76, 74);
+    font-size: 100%;
+    -webkit-animation-name: colorChange;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: colorChange;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes colorChange {
+    0% {
+        color: rgb(0, 0, 0);
+    }
+    20% {
+        color: rgb(106, 106, 252);
+    }
+    40% {
+        color: rgb(0, 255, 0);
+    }
+    60% {
+        color: rgb(235, 12, 12);
+    }
+    80% {
+        color: rgb(255, 0, 200);
+    }
+
+    100% {
+        color: rgb(234, 238, 8);
+    }
+}
+.blue{
+    color: rgb(4, 116, 221);
+}
+.white{
+    color: rgb(255, 255, 255);
+    font-size: 100%;
+}
+.greenbg{
+    background: green;
+    border: 1px solid green;
+    border-radius: 0.5em;
+    font-size: 100%;
+    text-align: center;
+    width: 90%;
+    padding: 2% 0;
+    min-width: 85%;
+    max-width: 100%;
+}
+
+.alter-greenbg{
+    width: 75%;
+    padding: 2% 0;
+    min-width: 65%;
+    max-width: 85%;
+}
+.checkbox{
+    display: block;
+    width: 1.5em;
+    margin: 5% auto;
+    height: 1.2em;
+}
+.redbg{
+    background: rgb(255, 0, 0);
+    border: 1px solid rgb(255, 0, 0);
+    border-radius: 0.5em;
+    font-size: 100%;
+    text-align: center;
+    width: 60%;
+    padding: 2% 0;
+    min-width: 50%;
+    max-width: 70%;
+
+}
+.bluebg{
+    background: rgb(78, 174, 252);
+    border: 1px solid rgb(78, 174, 252);
+    border-radius: 0.5em;
+    font-size: 100%;
+    text-align: center;
+    width: 70%;
+    padding: 2% 0;
+    min-width: 60%;
+    max-width: 70%;
+}
+.bluebg:hover{
+    background: rgb(4, 116, 221);
+    cursor: pointer;
+}
+.redbg:hover{
+    background: rgb(211, 1, 1);
+    cursor: pointer;
+}
+.greenbg:hover{
+    background: rgb(1, 92, 1);
+    cursor: pointer;
+}
+
+/*---------Order list---------*/
+
+body.bodycolor section.order-modal div.order-box h1{
+    background: rgb(44, 43, 43);
+    color: white;
+    position: relative;
+    left: 0;
+    top:0;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+body.bodycolor section.order-modal div.order-box #close{ 
+    top: 6px;
+}
+body.bodycolor section.order-modal div.order-box #display img{
+    width: 20%;
+    height: auto;
+    margin: 0 auto;
+}
+body.bodycolor section.order-modal div.order-box{
+    color: rgb(0, 0, 0);
+    padding: 0 10px;
+    width: 65%;
+}
+body.bodycolor section.order-modal div.order-box section > section div,
+body.bodycolor section.order-modal div.order-box section > div{
+    float: left;
+    width: 50%;
+}
+
+body.bodycolor section.order-modal div.order-box section > section div,
+body.bodycolor section.order-modal div.order-box section > div{
+    padding: 2% 0;
+}
+
+body.bodycolor section.order-modal div.order-box section > section div li,
+body.bodycolor section.order-modal div.order-box section > div li{
+    font-size: 100%; 
+    background: rgb(202, 202, 202);
+    padding: 0 5%;
+    line-height: 1.5em;
+    
+}
+body.bodycolor section.order-modal div.order-box section > div li{
+    font-size: 100%; 
+    padding: 0 4%;
+}
+body.bodycolor section.order-modal div.order-box section > section div li:nth-child(even),
+body.bodycolor section.order-modal div.order-box section > div li:nth-child(even){
+    background: rgb(160, 160, 160);
+}
+body.bodycolor section.order-modal div.order-box section > section div li:first-child,
+body.bodycolor section.order-modal div.order-box section > section div li:last-child{
+    background: rgb(68, 68, 68);
+    color: white;
+}
+body.bodycolor section.order-modal div.order-box section > div.iso ol li{
+    background: rgb(68, 68, 68);
+    color: white;
+}
+
+@media(max-width: 768px){
+    .admin .grid{
+    height: 150px;
+    width: 25%;
+    margin: 5% 2%;
+}
+
+.admin .grid:first-child{
+    margin-left: 10%;
+}
+}
+
+@media(max-width: 600px){
+    *{
+        font-size: 0.95em;
+    }
+    .admin .grid{
+    height: 100px;
+}
+.admin .grid:first-child{
+    margin-left: 10%;
+}
+}
+
+@media(max-width: 480px){
+    *{
+        font-size: 0.9em;
+    }
+    .admin .grid:first-child{
+    margin-left: 10%;
+}
+}

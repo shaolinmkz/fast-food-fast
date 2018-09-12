@@ -73,7 +73,8 @@
 }
 
 .login-modal input[type="email"], 
-.login-modal input[type="password"]
+.login-modal input[type="password"],
+.login-modal input[type="text"]
 {
     border: none;
     border-bottom: 1px solid #fff;

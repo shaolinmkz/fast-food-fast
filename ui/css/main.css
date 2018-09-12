@@ -24,6 +24,9 @@ article, aside, footer, header, nav, section{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
 }
+.bodycolor{
+    background: #9c9c9c;
+}
 .padding-helper{
     display: block;
     height: 6em;
@@ -69,6 +72,12 @@ body{
     width: 100%;
     border-bottom: 2px groove grey;
     position: fixed;
+}
+#main-header{
+    background-color: rgb(34, 33, 33); 
+    width: 100%;
+    border-bottom: none;
+    position: relative;
 }
 .main-header .fff{
     padding: 1em 0 1em 2em;
@@ -336,6 +345,19 @@ section.drink-catalog h1 {
     width: 100%;
     cursor: pointer;
 }
+.wrapper > img{
+    width: 100%;
+    margin: 0 auto;
+}
+#banner{
+    margin-top: 10px;
+    width: 60%;
+    margin: 0 auto;
+    cursor: none;
+}
+#banner img{
+    cursor: auto;
+}
 /*Delivery man*/
 .delivery-man{
     background: url("../images/houses.jpg");
@@ -513,7 +535,14 @@ footer.main-footer{
         text-align: center;
         width: 100%;
     }
-
+    #main-header{
+    background-color: rgb(34, 33, 33); 
+    position: fixed;
+}
+body.bodycolor #main-header{
+    background-color: rgb(34, 33, 33); 
+    position: relative;
+}
     .main-header nav li a:hover{
     color: #fff;
     font-weight: bolder;
@@ -562,7 +591,9 @@ footer.main-footer{
     .banner img{
     padding-top: 250px;
 }
-
+.banneriso img{
+    padding-top: 0; 
+}
     .current{
     border-bottom: none;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
