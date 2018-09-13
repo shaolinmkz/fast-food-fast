@@ -62,6 +62,7 @@ export const orderValidation = (req, res, next) => {
             message: `Invalid input ${phone}. Should be a number data type`,
         });
     }
+
     if (typeof email !== "string") {
         return res.status(400).send({
             status: "Error",

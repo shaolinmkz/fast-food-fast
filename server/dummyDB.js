@@ -13,8 +13,8 @@ export const orders = [
                 state: "lagos state",
             },
         items: {
-                foods: ["Chief burger", "Rotisserie"],
-                drinks: ["Coca-cola 50cl", "Five alive 1L"],
+                foods: ["chief burger", "rotisserie"],
+                drinks: ["coca-cola 50cl", "five alive 1L"],
             },
         bill: {
             subtotal: 5550,
@@ -38,8 +38,8 @@ export const orders = [
             state: "Lagos state",
         },
         items: {
-            foods: ["Pot lovers menu", "Citizens meal"],
-            drinks: ["Coca-cola 50cl", "Five alive 1L"],
+            foods: ["pot lovers menu", "citizens meal"],
+            drinks: ["coca-cola 50cl", "fanta orange 50cl"],
         },
         bill: {
             subtotal: 7500,
@@ -49,6 +49,31 @@ export const orders = [
         },
         status: true //COMPLETED order
     },
+
+    {
+        id: 3,
+        shippingdetails: {
+            firstname: "Mark",
+            lastname: "Juliet",
+            email: "markjuliet@testmail.com",
+            phone: +2348039372235,
+            addressNo: 8,
+            address: "xyz street park beside indomie noodles",
+            lga: "somolu",
+            state: "Lagos state",
+        },
+        items: {
+            foods: ["wrapstar meal", "spicy crunchy"],
+            drinks: ["coca-cola zero 50cl", "eva mineral water 75cl"],
+        },
+        bill: {
+            subtotal: 14500,
+            discount: 725,
+            delivery: 500,
+            total: 14275,
+        },
+        status: true //COMPLETED order
+    }
 ];
 
 
