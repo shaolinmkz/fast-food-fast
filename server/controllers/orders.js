@@ -77,6 +77,22 @@ export default class Orders{
         }
     }
 
+    const convert = {
+        convertPhoneNumber() {
+            if (phone.length === 10) {
+                let temp = phone.toString();
+                return Number("+234" + temp);
+            } else if (phone.length === 11) {
+                let temp = phone.toString().slice(1, phone.length);
+                return Number("234" + temp);
+            } else {
+                return Number(phone);
+            }
+        },
+        convertAddressNo(){
+            return Number(addressNo);
+        }
+    }
 
         const orderContainer = {
             id,
@@ -84,8 +100,8 @@ export default class Orders{
                 firstname,
                 lastname,
                 email,
-                phone,
-                addressNo,
+                phone: convert.convertPhoneNumber(),
+                addressNo: convert.convertAddressNo(),
                 address,
                 lga,
                 state },
@@ -113,6 +129,14 @@ export default class Orders{
     }
 
     getAllOrders(req, res) {
+
+        if (!orders) {
+            return res.status(404).send({
+                status: "Error",
+                message: "That resource isn't available",
+            });
+        }
+
         if (orders.length < 1) {
             return res.status(404).send({
                 status: "Error",
@@ -123,7 +147,33 @@ export default class Orders{
         return res.status(200).send({
             status: "Success",
             message: "All pending orders delivered successfully",
-            orders,
+            orders: orders,
+        });
+    }
+
+    getAnOrder(req, res) {
+        const id = parseInt(req.params.id, 10);
+
+        const output = orders.filter((order) => order.id === id)[0];
+        
+        if (!output){
+            return res.status(404).send({
+                status: "Error",
+                message: "That resource isn't available"
+            });
+        }
+
+        if (output.length < 1) {
+            return res.status(404).send({
+                status: "Error",
+                message: "Order is not found"
+            });
+        }
+
+        return res.status(200).send({
+            status: "Success",
+            message: "Order delivered successfully",
+            order: output,
         });
     }
 }
