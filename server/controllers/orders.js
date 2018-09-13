@@ -111,4 +111,19 @@ export default class Orders{
                         orderDetails: orderContainer
                     });
     }
+
+    getAllOrders(req, res) {
+        if (orders.length < 1) {
+            return res.status(404).send({
+                status: "Error",
+                message: "No pending order available"
+            });
+        }
+
+        return res.status(200).send({
+            status: "Success",
+            message: "All pending orders delivered successfully",
+            orders,
+        });
+    }
 }
