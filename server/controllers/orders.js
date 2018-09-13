@@ -1,0 +1,114 @@
+import { orders, foodsDB, drinksDB } from "../dummyDB";
+
+export default class Orders{
+
+    placeOrder(req, res){
+        const {
+            firstname,
+            lastname,
+            email,
+            phone,
+            addressNo,
+            address,
+            lga,
+            state,            
+        } = req.body;
+
+        let { foods, drinks } = req.body;
+
+        const id = (orders.length + 1);
+    
+
+    const orderedMeals = {
+        displayDrinks() {
+
+            //If food item is array carry on
+            if (Array.isArray(drinks)) {
+                return drinks;
+            }
+                //If drink items is not an array create an array
+            if (typeof drinks === "string" || !Array.isArray(drinks)) {
+                    const newdrinks = drinks.split(",");
+                    return newdrinks;
+                }
+        },
+        displayFoods(){
+
+            //If food item is array carry on
+            if (Array.isArray(foods)) {
+                return foods;
+            }
+            //User needs to use comma's to separate multiple food items
+            //If food items is not an array create an array
+            if (!Array.isArray(foods) || typeof foods === "string") {
+                const newfoods = foods.split(",");
+                return newfoods;
+            }                   
+        }
+    }
+
+        //BILLING
+        const billing = {
+        subtotal() {
+            if ((orderedMeals.displayDrinks().length + orderedMeals.displayFoods().length) > 5 ) {
+                return ((500 * orderedMeals.displayDrinks().length) + (800 * orderedMeals.displayFoods().length ));
+            } else {
+                return ((600 * 3));
+            }
+        },
+        discount() { 
+            if (billing.subtotal() > 5000) {
+                const discount = 0.05 * billing.subtotal();
+                return discount;
+            } else {
+                return 0;
+            }
+        },
+        delivery() {
+            if ((orderedMeals.displayDrinks().length + orderedMeals.displayFoods().length) > 5) {
+                return 500;
+            } else {
+                return 250;
+            }
+        },
+        total() {
+            let total = ((billing.subtotal() - billing.discount()) + billing.delivery());
+            return total;
+        }
+    }
+
+
+        const orderContainer = {
+            id,
+            shippingdetails: {
+                firstname,
+                lastname,
+                email,
+                phone,
+                addressNo,
+                address,
+                lga,
+                state },
+            items:{
+                foods: orderedMeals.displayFoods(),
+                drinks: orderedMeals.displayDrinks()
+            },
+            bill: {
+                subtotal: `₦${billing.subtotal()}` ,
+                discount: `₦${billing.discount()}` ,
+                delivery: `₦${billing.delivery()}` ,
+                total: `₦${billing.total()}`
+                },
+                status: false,
+            }
+
+            orders.push(orderContainer);
+
+            return res.status(201)
+                    .json({
+                        status: "Success",
+                        message: "Order has been placed successfully",
+                        orderDetails: orderContainer
+                    });
+    }
+}
