@@ -7,4 +7,9 @@ Fast-Food-Fast​ is a food delivery service app for a restaurant where you can 
 * Navigate to Admin landing page using `host:port/fast-food-fast/ui/admin.html`
 * Navigate to Admin dashboard using `host:port/fast-food-fast/ui/admin_dashboard.html`
 
-#### Subpages are accessible by clicking on them
+## Use the link below to view the UI template
+* For Customers https://shaolinmkz.github.io/fast-food-fast/ui/
+* For Admin https://shaolinmkz.github.io/fast-food-fast/ui/admin.html
+
+
+#### Subpages are accessible by clicking on any active link
