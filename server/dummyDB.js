@@ -22,7 +22,7 @@ export const orders = [
             delivery: 450,
             total: 6000,
         },
-        status: false //PENDIND order fulfillment
+        status: "pending" //PENDIND order fulfillment
     },
 
     {
@@ -47,7 +47,7 @@ export const orders = [
             delivery: 500,
             total: 7750,
         },
-        status: true //COMPLETED order
+        status: "declined" //Declined order
     },
 
     {
@@ -72,7 +72,7 @@ export const orders = [
             delivery: 500,
             total: 14275,
         },
-        status: true //COMPLETED order
+        status: "completed" //COMPLETED order
     }
 ];
 

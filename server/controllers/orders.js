@@ -115,7 +115,7 @@ export default class Orders{
                 delivery: `₦${billing.delivery()}` ,
                 total: `₦${billing.total()}`
                 },
-                status: false,
+                status: "pending",
             }
 
             orders.push(orderContainer);
@@ -174,6 +174,39 @@ export default class Orders{
             status: "Success",
             message: "Order delivered successfully",
             order: output,
+        });
+    }
+
+    updateStatus(req, res) {
+        const { status } = req.body;
+        const id = parseInt(req.params.id, 10);
+
+        const output = orders.filter((order) => order.id === id)[0];
+
+        if (!output) {
+            return res.status(404).send({
+                status: "Error",
+                message: "That resource isn't available"
+            });
+        }
+
+        if (output.length < 1) {
+            return res.status(404).send({
+                status: "Error",
+                message: "Order is not found"
+            });
+        }
+
+        if (output.status === "pending") {
+            output["status"] = status;
+        }
+
+        output.status = status;
+
+        return res.status(200).send({
+            status: "Updated",
+            message: "Status has been updated",
+            output
         });
     }
 }
