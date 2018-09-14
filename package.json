@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": " nyc mocha --compilers js:babel-core/register --exit",
-    "start": "nodemon --watch server --exec babel-node server.js",
+    "start": "nodemon --watch server --exec babel-node ./server.js",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "author": "Nwabuzor C Obiora",
