@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
-import { orderRoutes } from "./routes";
+import { orderRoutes } from "./server/routes";
 
 const app = express();
 app.use(logger("dev"));
