@@ -113,3 +113,16 @@ export const orderValidation = (req, res, next) => {
 
     return next();
 }
+
+export const statusValidation = (req, res, next) => {
+    const { status } = req.body;    
+
+    if (typeof status === "string") {
+        return next();
+    }
+
+    return res.status(400).send({
+        status: "Error",
+        message: `Invalid input ${status}. Should be a string data type`,
+    });
+}

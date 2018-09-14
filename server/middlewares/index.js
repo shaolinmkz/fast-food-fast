@@ -1,3 +1,3 @@
-import { orderValidation } from "./orderValidation";
+import { orderValidation, statusValidation } from "./orderValidation";
 
-export { orderValidation };
+export { orderValidation, statusValidation };
