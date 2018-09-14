@@ -203,7 +203,7 @@ export default class Orders{
 
         output.status = status;
 
-        return res.status(200).send({
+        return res.status(201).send({
             status: "Updated",
             message: "Status has been updated",
             output

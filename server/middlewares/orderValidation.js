@@ -37,13 +37,6 @@ export const orderValidation = (req, res, next) => {
         }  
     }
 
-    if (!firstname || !lastname || !email || !phone || !addressNo || !address || !lga || !state || !foods || !drinks) {
-        return res.status(400).send({
-            status: "Error",
-            message: "One or more input fields are empty",
-        });
-    }
-
     if (typeof firstname !== "string") {
         return res.status(400).send({
             status: "Error",
@@ -108,6 +101,13 @@ export const orderValidation = (req, res, next) => {
         return res.status(400).send({
             status: "Error",
             message: `Invalid input ${drinks}. Should be an Array object or a string data type`,
+        });
+    }
+
+    if (!firstname || !lastname || !email || !phone || !addressNo || !address || !lga || !state || !foods || !drinks) {
+        return res.status(400).send({
+            status: "Error",
+            message: "One or more input fields are empty",
         });
     }
 
