@@ -11,5 +11,10 @@ Fast-Food-Fast​ is a food delivery service app for a restaurant where you can 
 * For Customers https://shaolinmkz.github.io/fast-food-fast/ui/
 * For Admin https://shaolinmkz.github.io/fast-food-fast/ui/admin.html
 
-
 #### Subpages are accessible by clicking on any active link
+
+## Currently working endpoints
+* GET `/api/v1/orders`
+* GET `/api/v1/orders/<orderid>`
+* POST `/api/v1/orders`
+* PUT `/api/v1/orders/<orderid>`
