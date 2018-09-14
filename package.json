@@ -21,8 +21,6 @@
     "mocha": "^5.2.0",
     "morgan": "^1.9.1",
     "supertest": "^3.3.0",
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
@@ -33,6 +31,8 @@
     "babel-register": "^6.26.0",
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.1",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
