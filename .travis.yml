@@ -4,3 +4,7 @@ node_js:
 cache:
   directories:
     - "node_modules"
+    - npm i nyc --save-dev
+    - npm install codeclimate-test-reporter istanbul -g
+after_success:
+  - npm run coveralls
