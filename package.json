@@ -7,15 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": " nyc mocha --compilers js:babel-core/register --exit",
+    "test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register ./test --timeout 10000 --exit",
     "start": "nodemon --watch server --exec babel-node ./server.js",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "babel-node": "babel-node --presets=env",
-    "start:dev": "npm run babel-node -- ./server.js",
-    "build": "babel src -d dist",
-    "mocha": "nyc mocha --compilers js:babel-register",
-    "start:test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register --recursive ./**/**/*.test.js  --timeout=3000 --exit",
-    "test-watch": "nodemon --exec 'npm test'",
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Nwabuzor C Obiora",
