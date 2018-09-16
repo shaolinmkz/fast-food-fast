@@ -1,128 +1,90 @@
+import { orders } from "../dummyDB";
+
+var i = 0;
+
 export const orderValidation = (req, res, next) => {
-    let inputs;
-    const {
-        firstname,
-        lastname,
-        email,
-        phone,
-        addressNo,
-        address,
-        lga,
-        state,
-        foods,
-        drinks
-    } = req.body;
+	const { firstname, lastname, email, phone, addressNo,
+		address, lga, state, foods, drinks } = req.body;
 
-    for (inputs in req.body) {
+	const reqArray = [firstname, lastname, email, phone, 
+		addressNo, address, lga, state, foods, drinks];
+		
+	for (i in reqArray) {
+		if (!reqArray[i]) {
+			return res.status(400).send({
+				status: "Error",
+				message: "One or more input fields are empty or has invalid input",
+			});
+		}
+		i++;
+	}
 
-        if (!req.body[inputs]) {
-            return res.status(400).send({
-                status: "Error",
-                message: `${inputs} field is not defined`
-            });
-        } 
+	const strings = [firstname, lastname, email, address, lga, state];
+	for(i in strings) {
+		if (typeof strings[i] !== "string") {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${strings[i]}. Should be a string data type`,
+			});
+		}
+		i++;
+	} 
 
-        if (typeof req.body[inputs] === undefined) {
-            return res.status(400).send({
-                status: "Error",
-                message: `${inputs} field is not defined`,
-            });
-        }
+	const numStr = [phone, addressNo];
+	for(i in numStr) {
+		if (typeof numStr[i] !== "number" && typeof numStr[i] !== "string") {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${numStr[i]}. Should be a number data type`,
+			});
+		}
+		i++;
+	}
 
-        if (req.body[inputs] === "") {
-            return res.status(400).send({
-                status: "Error",
-                message: `${inputs} field is empty`,
-            });
-        }  
-    }
+	const objStr = [foods, drinks];
+	for (i in objStr) {
+		if (typeof objStr[i] !== "string" && !Array.isArray(objStr[i])) {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${objStr[i]}. Should be an Array object or a string data type`,
+			});
+		}
+		i++;
+	}
 
-    if (typeof firstname !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${firstname}. Should be a string data type`,
-        });
-    }
-    if (typeof lastname !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${lastname}. Should be a string data type`,
-        });
-    }
-    if (typeof phone !== "number" && typeof phone !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${phone}. Should be a number data type`,
-        });
-    }
-
-    if (typeof email !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${email}. Should be a string data type`,
-        });
-    }
-    if (typeof addressNo !== "number" && typeof addressNo !== "string") { 
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${addressNo}. Should be a number data type`,
-        });
-    }
-
-    if (typeof address !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${address}. Should be a string data type`,
-        });
-    }
-
-    if (typeof lga !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${lga}. Should be a string data type`,
-        });
-    }
-
-    if (typeof state !== "string") {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${state}. Should be a string data type`,
-        });
-    }
-
-    if (typeof foods !== "string" && !Array.isArray(foods)) {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${foods}. Should be an Array object or a string data type`,
-        });
-    }
-
-    if (typeof drinks !== "string" && !Array.isArray(drinks)) {
-        return res.status(400).send({
-            status: "Error",
-            message: `Invalid input ${drinks}. Should be an Array object or a string data type`,
-        });
-    }
-
-    if (!firstname || !lastname || !email || !phone || !addressNo || !address || !lga || !state || !foods || !drinks) {
-        return res.status(400).send({
-            status: "Error",
-            message: "One or more input fields are empty",
-        });
-    }
-
-    return next();
-}
+	return next();
+};
 
 export const statusValidation = (req, res, next) => {
-    const { status } = req.body;    
+	const { status } = req.body;    
 
-    if (typeof status === "string") {
-        return next();
-    }
+	if (typeof status === "string") {
+		return next();
+	}
 
-    return res.status(400).send({
-        status: "Error",
-        message: `Invalid input ${status}. Should be a string data type`,
-    });
-}
+	return res.status(400).send({
+		status: "Error",
+		message: `Invalid input ${status}. Should be a string data type`,
+	});
+};
+
+export const getOrderErrorHandler = (req, res, next) => {
+	const id = parseInt(req.params.id, 10);
+
+	const output = orders.filter((order) => order.id === id)[0];
+
+	if (!output) {
+		return res.status(404).send({
+			status: "Error",
+			message: "That resource isn't available"
+		});
+	}
+
+	if (output.length < 1) {
+		return res.status(404).send({
+			status: "Error",
+			message: "Order is not found"
+		});
+	}
+	next();
+};

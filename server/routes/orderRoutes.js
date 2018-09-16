@@ -1,13 +1,19 @@
 import express from "express";
-import { Orders } from "../controllers";
-import { orderValidation, statusValidation } from "../middlewares";
+import { Orders, Menus } from "../controllers";
+import { orderValidation, statusValidation, getOrderErrorHandler } from "../middlewares";
 
 const orders = new Orders();
+const menus = new Menus();
+
 const orderRoutes = express.Router();
 
 orderRoutes.post("/api/v1/orders", orderValidation, orders.placeOrder);
 orderRoutes.get("/api/v1/orders", orders.getAllOrders);
-orderRoutes.get("/api/v1/orders/:id", orders.getAnOrder);
+orderRoutes.get("/api/v1/orders/:id", getOrderErrorHandler, orders.getAnOrder);
 orderRoutes.put("/api/v1/orders/:id", statusValidation, orders.updateStatus);
+orderRoutes.get("/api/v1/orders/menus/foods", menus.getAllFoods);
+orderRoutes.get("/api/v1/orders/menus/drinks", menus.getAllDrinks);
+orderRoutes.get("/api/v1/orders/menus/foods/:id", menus.getFood);
+orderRoutes.get("/api/v1/orders/menus/drinks/:id", menus.getDrink);
 
 export default orderRoutes;
