@@ -1,14 +1,14 @@
 import { orders } from "../dummyDB";
 
-var i = 0;
+let i = 0;
 
 export const orderValidation = (req, res, next) => {
 	const { firstname, lastname, email, phone, addressNo,
 		address, lga, state, foods, drinks } = req.body;
 
-	const reqArray = [firstname, lastname, email, phone, 
+	const reqArray = [firstname, lastname, email, phone,
 		addressNo, address, lga, state, foods, drinks];
-		
+
 	for (i in reqArray) {
 		if (!reqArray[i]) {
 			return res.status(400).send({
@@ -19,7 +19,9 @@ export const orderValidation = (req, res, next) => {
 		i++;
 	}
 
-	const strings = [firstname, lastname, email, address, lga, state];
+	const strings = [firstname, lastname, email,
+		address, lga, state];
+
 	for(i in strings) {
 		if (typeof strings[i] !== "string") {
 			return res.status(400).json({
@@ -28,7 +30,7 @@ export const orderValidation = (req, res, next) => {
 			});
 		}
 		i++;
-	} 
+	}
 
 	const numStr = [phone, addressNo];
 	for(i in numStr) {
@@ -56,7 +58,7 @@ export const orderValidation = (req, res, next) => {
 };
 
 export const statusValidation = (req, res, next) => {
-	const { status } = req.body;    
+	const { status } = req.body;
 
 	if (typeof status === "string") {
 		return next();

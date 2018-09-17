@@ -32,9 +32,9 @@ export class Billings {
 		} else {
 			return ((600 * 3));
 		}
-	} 
+	}
 	discount(drinks, foods) {
-		const billing = new Billings();   
+		const billing = new Billings();
 		if (billing.subtotal(drinks, foods) > 5000) {
 			const discount = 0.05 * billing.subtotal();
 			return discount;
@@ -53,8 +53,8 @@ export class Billings {
 	total(drinks, foods) {
 		const billing = new Billings();
 		let total = (
-			(billing.subtotal(drinks, foods) - 
-            billing.discount(drinks, foods)) + 
+			(billing.subtotal(drinks, foods) -
+            billing.discount(drinks, foods)) +
             billing.delivery(drinks, foods));
 		return total;
 	}

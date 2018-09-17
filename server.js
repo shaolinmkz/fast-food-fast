@@ -12,7 +12,7 @@ app.use(bodyParser.json({ type: "application/json" }));
 
 app.use(orderRoutes);
 
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
 	res.status(200).send(
 		"Welcome to Fast-Food-Fast {F-cube}, Andela 21 Level-Up Project");
 });

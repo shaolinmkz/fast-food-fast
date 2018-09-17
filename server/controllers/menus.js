@@ -40,7 +40,7 @@ export class Menus {
 			menus: drinksDB,
 		});
 	}
-    
+
 	getFood(req, res) {
 		const id = parseInt(req.params.id, 10);
 

@@ -125,8 +125,8 @@ You can host this application on any server that is compatible with Nodejs apps.
 
 ## UI/UX Template
 
-* [Customers](https://shaolinmkz.github.io/fast-food-fast/ui/) - html and css
-* [Administrator](https://shaolinmkz.github.io/fast-food-fast/ui/admin.html) - html and css
+* [Customers](https://shaolinmkz.github.io/fast-food-fast/ui/) - HTML, CSS and Javascript
+* [Administrator](https://shaolinmkz.github.io/fast-food-fast/ui/admin.html) - HTML, CSS and Javascript
 
 ## Versioning
 Git-Hub 
