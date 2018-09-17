@@ -6,7 +6,7 @@ const viewOrder = document.getElementsByClassName("view-order");
 
 //Open modal to view order fro Admin
 //Credit: Idea from Stackover flow
-window.onclick = function () {
+window.onclick = () => {
 	let index;
 	for (index = 0; index < viewOrder.length; ++index) {
 		viewOrder[index].onclick = function () {
@@ -16,11 +16,11 @@ window.onclick = function () {
 };
 
 // close modal onclick outside for signup
-function closeOrderModal(m) {
+const closeOrderModal = (m) => {
 	if (m.target === orderModal) {
 		orderModal.style.display = "none";
 	}
-}
+};
 window.addEventListener("click", closeOrderModal);
 
 // close modal onclick the close button

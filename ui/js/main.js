@@ -7,7 +7,7 @@ const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
 
 let nextCount = 1, format = "png";
 
-function slideshow() {
+const slideshow = () => {
 	if (nextCount === 12) {
 		format = "jpg";
 	} else {
@@ -18,7 +18,7 @@ function slideshow() {
 	if (nextCount === 14) {
 		nextCount = 1;
 	}
-}
+};
 
 setInterval(slideshow, 60000);
 banner.addEventListener("click", slideshow);
@@ -29,11 +29,11 @@ signup.addEventListener("click", () => {
 });
 
 // close modal onclick outside for signup
-function closeSignupModal (m) {
+const closeSignupModal = (m) => {
 	if (m.target === signupModal) {
 		signupModal.style.display = "none";
 	}
-}
+};
 window.addEventListener("click", closeSignupModal);
 
 //Open modal for Login
@@ -42,11 +42,11 @@ login.addEventListener("click", () => {
 });
 
 // close modal onclick outside for Login
-function closeLoginModal(e) {
+const closeLoginModal = (e) => {
 	if (e.target === loginModal) {
 		loginModal.style.display = "none";
 	}
-}
+};
 window.addEventListener("click", closeLoginModal);
 
 //onclick fastfoodfast sitename direct me to home

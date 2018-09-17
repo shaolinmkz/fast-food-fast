@@ -6,7 +6,7 @@ const logo = document.getElementById("logo");
 
 let nextCount = 1, format = "png";
 
-function slideshow() {
+const slideshow = () => {
 	if (nextCount === 12) {
 		format = "jpg";
 	} else {
@@ -17,13 +17,13 @@ function slideshow() {
 	if (nextCount === 14) {
 		nextCount = 1;
 	}
-}
+};
 setInterval(slideshow, 90000);
 banner.addEventListener("click", slideshow);
 
 //Open modal for order
 //Credit: Idea from Stackover flow
-window.onclick = function(){
+window.onclick = () => {
 	let index;
 	for (index = 0; index < orderItem.length; ++index) {
 		orderItem[index].onclick = function(){
@@ -33,11 +33,11 @@ window.onclick = function(){
 };
 
 // close modal onclick outside for signup
-function closeOrderModal(m) {
+const closeOrderModal = (m) => {
 	if (m.target === orderModal) {
 		orderModal.style.display = "none";
 	}
-}
+};
 window.addEventListener("click", closeOrderModal);
 
 // close modal onclick the close button

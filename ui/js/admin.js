@@ -10,11 +10,11 @@ signup.addEventListener("click", () => {
 });
 
 // close modal onclick outside for signup
-function closeSignupModal(m) {
+const closeSignupModal = (m) => {
 	if (m.target === signupModal) {
 		signupModal.style.display = "none";
 	}
-}
+};
 window.addEventListener("click", closeSignupModal);
 
 //Open modal for Login
@@ -23,11 +23,11 @@ login.addEventListener("click", () => {
 });
 
 // close modal onclick outside for Login
-function closeLoginModal(e) {
+const closeLoginModal = (e) => {
 	if (e.target === loginModal) {
 		loginModal.style.display = "none";
 	}
-}
+};
 window.addEventListener("click", closeLoginModal);
 
 //onclick fastfoodfast name it directs user to index
