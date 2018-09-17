@@ -1,18 +1,28 @@
 import { orders } from "../dummyDB";
 import { OrderedMeals, Billings, PhoneConverts } from "../middlewares";
 
+/**
+ * @class \{{{object}}\} {{OrderedMeals}}{{new instance - orderedMeals}}
+ * @class \{{{object}}\} {{Billings}}{{new instance - billing}}
+ * @class \{{{object}}\} {{PhoneConverts}}{{new instance - convert}}
+ */
 const orderedMeals = new OrderedMeals();
 const billing = new Billings();
 const convert = new PhoneConverts();
 
-/** Class that handles request from end users. */
+/**
+ * @class \{{{object}}\} {{Orders}}{{Class that handles request from the client side.}}
+ */
 export default class Orders{
-
 	/**
    * Uses information from the end user to create a bill for orders placed.
    * The users information is saved to a dummyDB.
-	 * @param  {object} req - Contains the body of the request.
-	 * @param  {object} res - Contains the returned bill.
+	 * @param  { object } req - Contains the body of the request.
+   * @param  { string } { firstname, lastname, email, address, lga, state, phone, addressNo, foods, drinks }
+   * @param  { number } { phone, addressNo, id } - id is generated automatically
+   * @param  { array }  { foods, drinks }
+	 * @param  { object } res
+   * @return { object } returns JSON format for placed order
 	 */
 	placeOrder(req, res){
 		const { firstname, lastname, email, phone,
@@ -50,9 +60,10 @@ export default class Orders{
 	/**
    * Gets all orders in the dummyDB.
    * Checks if any resource exists in the dummyDB
-	 * @param  {empty} req - req is empty because this method handle a get request
-	 * @param  {object} res - The object containining data
-   * @param  {object} orders - The placed order from the dummyDB
+	 * @param  { empty } req - req is empty because this method handle a get request
+	 * @param  { object } res - The object containining data
+   * @param  { object } orders - The placed order from the dummyDB
+   * @return { object } returns a JSON format for get all orders
 	 */
 	getAllOrders(req, res) {
 		if (!orders) {
@@ -72,16 +83,16 @@ export default class Orders{
 			message: "All pending orders delivered successfully",
 			orders: orders,
 		});
-	}
+  }
 
 	/**
    * Get a specific order in the dummyDB using its id,
    * and returns the order
-	 * @param  { object} req - body request from client side
-	 * @param  { object} res - response to body request
-   * @param  { number} id - Resource id
+	 * @param  { object } req - body request from client side
+	 * @param  { object } res - response to body request
+   * @param  { number } id - Resource id
    * @param  { object } order - This will be saved in an array(output) if true.
-   * @return { object } JSON format of specific order
+   * @return { object } returns a JSON format of specific order
 	 */
 	getAnOrder(req, res) {
 		const id = parseInt(req.params.id, 10);
@@ -91,13 +102,14 @@ export default class Orders{
 			message: "Order delivered successfully",
 			order: output,
 		});
-	}
+  }
+
 	/**
    * Updates the status of an order placed by a customer
 	 * @param  { object } req - body request from client side
 	 * @param  { object } res - response to body request
 	 * @param  { string } status - The string containing order status
-   * @return { object } JSON format of updated order status
+   * @return { object } returns JSON format of updated order status
 	 */
 	updateStatus(req, res) {
 		const { status } = req.body;

@@ -1,4 +1,6 @@
-//Order
+/**
+ * @module \{{{object}}\} {{orders}}{{dummy database data structure for client side orders}}
+ */
 export const orders = [
 	{
 		id: 1,
@@ -17,10 +19,10 @@ export const orders = [
 			drinks: ["coca-cola 50cl", "five alive 1L"],
 		},
 		bill: {
-			subtotal: 5550,
-			discount: 0,
-			delivery: 450,
-			total: 6000,
+			subtotal: `₦${5550}`,
+			discount: `₦${0}`,
+			delivery: `₦${450}`,
+			total: `₦${6000}`,
 		},
 		status: "pending" //PENDIND order fulfillment
 	},
@@ -42,10 +44,10 @@ export const orders = [
 			drinks: ["coca-cola 50cl", "fanta orange 50cl"],
 		},
 		bill: {
-			subtotal: 7500,
-			discount: 250,
-			delivery: 500,
-			total: 7750,
+			subtotal: `₦${7500}`,
+			discount: `₦${250}`,
+			delivery: `₦${500}`,
+			total: `₦${7750}`,
 		},
 		status: "declined" //Declined order
 	},
@@ -67,17 +69,18 @@ export const orders = [
 			drinks: ["coca-cola zero 50cl", "eva mineral water 75cl"],
 		},
 		bill: {
-			subtotal: 14500,
-			discount: 725,
-			delivery: 500,
-			total: 14275,
+			subtotal: `₦${14500}`,
+			discount: `₦${725}`,
+			delivery: `₦${500}`,
+			total: `₦${14275}`,
 		},
 		status: "completed" //COMPLETED order
 	}
 ];
 
-
-//Menus
+/**
+ * @module \{{{object}}\} {{foodsDB}}{{dummy database data structure for food menus and prices}}
+ */
 export const foodsDB = [
 	{ id: 1, name: "rice and beans", price: 600 },
 	{ id: 2, name: "citizens meal", price: 1350 },
@@ -89,6 +92,9 @@ export const foodsDB = [
 	{ id: 8, name: "wrapstar meal", price: 1500 }
 ];
 
+/**
+ * @module \{{{object}}\} {{drinksDB}}{{dummy database data structure for drinks menu and prices}}
+ */
 export const drinksDB = [
 	{ id: 1, name: "eva mineral water 75cl", price: 250 },
 	{ id: 2, name: "five alive pulpy orange 40cl", price: 400 },

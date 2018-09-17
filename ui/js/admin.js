@@ -4,12 +4,20 @@ const login = document.getElementById("signin");
 const loginModal = document.getElementsByClassName("login-modal")[0];
 const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
 
-//Open modal for sign up
+/**
+ * Open modal for sign up
+ * @event { click }
+ * @function {{Anonymous function}}
+ */
 signup.addEventListener("click", () => {
 	signupModal.style.display = "block";
 });
 
-// close modal onclick outside for signup
+/**
+ * Close modal onclick outside create admin box
+ * @event { click }
+ * @function {{closeSignupModal}}
+ */
 const closeSignupModal = (m) => {
 	if (m.target === signupModal) {
 		signupModal.style.display = "none";
@@ -17,12 +25,20 @@ const closeSignupModal = (m) => {
 };
 window.addEventListener("click", closeSignupModal);
 
-//Open modal for Login
+/**
+ * Open modal for Login
+ * @event { click }
+ * @function {{Anonymous function}}
+ */
 login.addEventListener("click", () => {
 	loginModal.style.display = "block";
 });
 
-// close modal onclick outside for Login
+/**
+ * Close modal onclick outside for Login
+ * @event { click }
+ * @function {{closeLoginModal}}
+ */
 const closeLoginModal = (e) => {
 	if (e.target === loginModal) {
 		loginModal.style.display = "none";
@@ -30,8 +46,11 @@ const closeLoginModal = (e) => {
 };
 window.addEventListener("click", closeLoginModal);
 
-//onclick fastfoodfast name it directs user to index
-
+/**
+ * Navigates user to the index or landing page
+ * @event { onclick }
+ * @function {{Anonymous function}}{{Click event that targets the HTML class "fastfoodfast"}}
+ */
 fastfoodfast.onclick = () => {
 	window.location.assign("./admin.html");
 };

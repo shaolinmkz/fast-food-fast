@@ -14,7 +14,7 @@
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
-  "author": "Nwabuzor C Obiora",
+  "author": "Nwabuzor Chukwuemeka Obiora",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",

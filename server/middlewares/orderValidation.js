@@ -2,6 +2,16 @@ import { orders } from "../dummyDB";
 
 let i = 0;
 
+/**
+ * Validates users input for strings, object, Array or numbers data type and handles errors
+ * @function { object } { orderValidation }
+ * @param  { object } req - Contains the body of the request.
+ * @param  { string } { firstname, lastname, email, address, lga, state, phone, addressNo, foods, drinks }
+ * @param  { number } { phone, addressNo, id } - id is generated automatically
+ * @param  { array }  { foods, drinks }
+ * @return { object } res - Contains the returned response.
+ * @function  { next } - Proceeds to the next method on the route
+ */
 export const orderValidation = (req, res, next) => {
 	const { firstname, lastname, email, phone, addressNo,
 		address, lga, state, foods, drinks } = req.body;
@@ -57,6 +67,14 @@ export const orderValidation = (req, res, next) => {
 	return next();
 };
 
+/**
+ * Checks if the users status input is a string and handles errors
+ * @function { object } { statusValidation }
+ * @param  { object } req - Contains the body of the request.
+ * @param  { string } { status }
+ * @return { object } res - Contains the returned response object.
+ * @function  { next } - Proceeds to the next method on the route
+ */
 export const statusValidation = (req, res, next) => {
 	const { status } = req.body;
 
@@ -70,6 +88,15 @@ export const statusValidation = (req, res, next) => {
 	});
 };
 
+/**
+ * Handles error for get a specific order route
+ * @function { object } { getOrderErrorHandler }
+ * @param  { object } req - Contains the body of the request.
+ * @param  { array } output - result of the filtered orders dummyDB
+ * @param  { number } id - specific order resource identifier
+ * @return { object } res - Contains the returned response object.
+ * @function  { next } - Proceeds to the next method on the route.
+ */
 export const getOrderErrorHandler = (req, res, next) => {
 	const id = parseInt(req.params.id, 10);
 
@@ -88,5 +115,5 @@ export const getOrderErrorHandler = (req, res, next) => {
 			message: "Order is not found"
 		});
 	}
-	next();
+	return next();
 };

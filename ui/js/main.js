@@ -7,6 +7,11 @@ const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
 
 let nextCount = 1, format = "png";
 
+/**
+ * Switches images every 1 minute or 60 seconds
+ * @event { click }
+ * @function {{slideshow}}
+ */
 const slideshow = () => {
 	if (nextCount === 12) {
 		format = "jpg";
@@ -23,12 +28,20 @@ const slideshow = () => {
 setInterval(slideshow, 60000);
 banner.addEventListener("click", slideshow);
 
-//Open modal for sign up
+/**
+ * Open modal for sign up
+ * @event { click }
+ * @function {{Anonymous Function}}
+ */
 signup.addEventListener("click", () => {
 	signupModal.style.display = "block";
 });
 
-// close modal onclick outside for signup
+/**
+ * close modal onclick outside for signup
+ * @event { click }
+ * @function {{closeSignupModal}}
+ */
 const closeSignupModal = (m) => {
 	if (m.target === signupModal) {
 		signupModal.style.display = "none";
@@ -36,12 +49,20 @@ const closeSignupModal = (m) => {
 };
 window.addEventListener("click", closeSignupModal);
 
-//Open modal for Login
+/**
+ * Open modal for Login
+ * @event { click }
+ * @function {{Anonymous Function}}
+ */
 login.addEventListener("click", () => {
 	loginModal.style.display = "block";
 });
 
-// close modal onclick outside for Login
+/**
+ * Close modal onclick outside for Login
+ * @event { click }
+ * @function {{closeLoginModal}}
+ */
 const closeLoginModal = (e) => {
 	if (e.target === loginModal) {
 		loginModal.style.display = "none";
@@ -49,8 +70,11 @@ const closeLoginModal = (e) => {
 };
 window.addEventListener("click", closeLoginModal);
 
-//onclick fastfoodfast sitename direct me to home
-
+/**
+ * Navigates user to the index or landing page
+ * @event { onclick }
+ * @function {{Anonymous function}}{{Click event that targets the HTML class "fastfoodfast"}}
+ */
 fastfoodfast.onclick = () => {
 	window.location.assign("./home.html");
 };
