@@ -1,3 +1,4 @@
 import Orders from "./orders";
+import { Menus } from "./menus";
 
-export { Orders };
+export { Orders, Menus };

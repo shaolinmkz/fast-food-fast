@@ -7,18 +7,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": " nyc mocha --compilers js:babel-core/register --exit",
-    "start": "nodemon --watch server --exec babel-node ./server.js",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "babel-node": "babel-node --presets=env",
-    "start:dev": "npm run babel-node -- ./server.js",
-    "build": "babel src -d dist",
-    "mocha": "nyc mocha --compilers js:babel-register",
-    "start:test": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register --recursive ./**/**/*.test.js  --timeout=3000 --exit",
-    "test-watch": "nodemon --exec 'npm test'",
+    "test": "cross-env NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require babel-register --timeout 10000 ./test/*.js --exit",
+    "start": "babel-node ./server.js",
+    "start:dev": "nodemon --watch server --exec babel-node ./server.js",
+    "test:dev": "nyc --reporter=html --reporter=text mocha --compilers js:babel-register ./test --timeout 20000 --exit",
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
-  "author": "Nwabuzor C Obiora",
+  "author": "Nwabuzor Chukwuemeka Obiora",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -39,9 +35,11 @@
     "babel-preset-stage-0": "^6.24.1"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "jsdoc": "^3.5.5",
     "nyc": "^13.0.1"
   }
 }
