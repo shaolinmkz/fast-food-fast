@@ -12,18 +12,6 @@ export class Menus {
    * @return { object } returns JSON object format
 	 */
 	getAllFoods(req,res) {
-		if (!foodsDB) {
-			return res.status(404).send({
-				status: "Error",
-				message: "This food menu isn't available",
-			});
-		}
-		if (foodsDB.length < 1) {
-			return res.status(404).send({
-				status: "Error",
-				message: "No menu available"
-			});
-		}
 		return res.status(200).send({
 			status: "Success",
 			message: "All meals have been delivered successfully",
@@ -39,18 +27,6 @@ export class Menus {
    * @return { object } returns JSON object format
 	 */
 	getAllDrinks(req,res) {
-		if (!drinksDB) {
-			return res.status(404).send({
-				status: "Error",
-				message: "This drinks menu isn't available",
-			});
-		}
-		if (drinksDB.length < 1) {
-			return res.status(404).send({
-				status: "Error",
-				message: "No drinks available"
-			});
-		}
 		return res.status(200).send({
 			status: "Success",
 			message: "All drinks have been delivered successfully",
@@ -70,23 +46,16 @@ export class Menus {
 		const id = parseInt(req.params.id, 10);
 
 		const output = foodsDB.filter((food) => food.id === id)[0];
-
-		if (!output) {
-			return res.status(400).send({
-				status: "Error",
-				message: "That food menu isn't available"
+		if (output) {
+			return res.status(200).send({
+				status: "Success",
+				message: "Food menu delivered successfully",
+				food_menu: output,
 			});
 		}
-		if (output.length < 1) {
-			return res.status(404).send({
-				status: "Error",
-				message: "Food is not found"
-			});
-		}
-		return res.status(200).send({
-			status: "Success",
-			message: "Food menu delivered successfully",
-			food_menu: output,
+		return res.status(404).send({
+			status: "Error",
+			message: "That food menu isn't available"
 		});
 	}
 
@@ -102,23 +71,17 @@ export class Menus {
 		const id = parseInt(req.params.id, 10);
 
 		const output = drinksDB.filter((drink) => drink.id === id)[0];
+		if (output) {
+			return res.status(200).send({
+				status: "Success",
+				message: "Drink menu delivered successfully",
+				drink_menu: output,
+			});
+		}
 
-		if (!output) {
-			return res.status(404).send({
-				status: "Error",
-				message: "That drink menu isn't available"
-			});
-		}
-		if (output.length < 1) {
-			return res.status(404).send({
-				status: "Error",
-				message: "Drink is not found"
-			});
-		}
-		return res.status(200).send({
-			status: "Success",
-			message: "Drink menu delivered successfully",
-			drink_menu: output,
+		return res.status(404).send({
+			status: "Error",
+			message: "That drink menu isn't available"
 		});
 	}
 }

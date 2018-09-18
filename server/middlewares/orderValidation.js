@@ -108,12 +108,5 @@ export const getOrderErrorHandler = (req, res, next) => {
 			message: "That resource isn't available"
 		});
 	}
-
-	if (output.length < 1) {
-		return res.status(404).send({
-			status: "Error",
-			message: "Order is not found"
-		});
-	}
 	return next();
 };

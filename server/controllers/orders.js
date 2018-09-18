@@ -55,7 +55,7 @@ export default class Orders{
 				message: "Order has been placed successfully",
 				orderDetails: orderContainer
 			});
-  }
+	}
 
 	/**
    * Gets all orders in the dummyDB.
@@ -66,24 +66,12 @@ export default class Orders{
    * @return { object } returns a JSON format for get all orders
 	 */
 	getAllOrders(req, res) {
-		if (!orders) {
-			return res.status(404).send({
-				status: "Error",
-				message: "That resource isn't available",
-			});
-		}
-		if (orders.length < 1) {
-			return res.status(404).send({
-				status: "Error",
-				message: "No pending order available"
-			});
-		}
 		return res.status(200).send({
 			status: "Success",
 			message: "All pending orders delivered successfully",
 			orders: orders,
 		});
-  }
+	}
 
 	/**
    * Get a specific order in the dummyDB using its id,
@@ -102,7 +90,7 @@ export default class Orders{
 			message: "Order delivered successfully",
 			order: output,
 		});
-  }
+	}
 
 	/**
    * Updates the status of an order placed by a customer
@@ -122,15 +110,7 @@ export default class Orders{
 				message: "That resource isn't available"
 			});
 		}
-		if (output.length < 1) {
-			return res.status(404).send({
-				status: "Error",
-				message: "Order is not found"
-			});
-		}
-		if (output.status === "pending") {
-			output["status"] = status;
-		}
+		output["status"] = status;
 		output.status = status;
 		return res.status(201).send({
 			status: "Updated",

@@ -12,8 +12,7 @@ export class OrderedMeals {
 	displayDrinks(drinks) {
 		if (Array.isArray(drinks)) {
 			return drinks;
-		}
-		if (typeof drinks === "string" || !Array.isArray(drinks)) {
+		}else {
 			const newdrinks = drinks.split(",");
 			return newdrinks;
 		}
@@ -28,8 +27,7 @@ export class OrderedMeals {
 	displayFoods(foods) {
 		if (Array.isArray(foods)) {
 			return foods;
-		}
-		if (!Array.isArray(foods) || typeof foods === "string") {
+		}else {
 			const newfoods = foods.split(",");
 			return newfoods;
 		}
@@ -50,7 +48,7 @@ export class Billings {
 	subtotal(drinks, foods) {
 		const orderedMeals = new OrderedMeals();
 		if ((orderedMeals.displayDrinks(drinks).length + orderedMeals.displayFoods(foods).length) > 5) {
-			return ((500 * orderedMeals.displayDrinks(drinks).length) + (800 * orderedMeals.displayFoods(foods).length));
+			return ((500 * orderedMeals.displayDrinks(drinks).length) + (1000 * orderedMeals.displayFoods(foods).length));
 		} else {
 			return ((600 * 3));
 		}
@@ -65,7 +63,7 @@ export class Billings {
 	discount(drinks, foods) {
 		const billing = new Billings();
 		if (billing.subtotal(drinks, foods) > 5000) {
-			const discount = 0.05 * billing.subtotal();
+			const discount = 0.05 * billing.subtotal(drinks, foods);
 			return discount;
 		} else {
 			return 0;
@@ -116,9 +114,9 @@ export class PhoneConverts {
    * @return { number } phone
 	 */
 	convertPhoneNumber(phone) {
-		if (phone.length === 10) {
+		if (phone.toString().length === 10) {
 			let temp = phone.toString();
-			return Number("+234" + temp);
+			return Number("234" + temp);
 		} else if (phone.length === 11) {
 			let temp = phone.toString().slice(1, phone.length);
 			return Number("234" + temp);
