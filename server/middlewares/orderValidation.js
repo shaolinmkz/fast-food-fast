@@ -1,5 +1,5 @@
 import { orders } from "../dummyDB";
-
+import {OrderedMeals} from "../middlewares";
 let i = 0;
 
 /**
@@ -13,11 +13,10 @@ let i = 0;
  * @function  { next } - Proceeds to the next method on the route
  */
 export const orderValidation = (req, res, next) => {
-	const { firstname, lastname, email, phone, addressNo,
-		address, lga, state, foods, drinks } = req.body;
+	const { userId, addressNo, address, lga, state } = req.body;
+	let { foodsQuantity, drinksQuantity, foods, drinks } = req.body;
 
-	const reqArray = [firstname, lastname, email, phone,
-		addressNo, address, lga, state, foods, drinks];
+	const reqArray = [userId, addressNo, address, lga, state, foods, drinks, foodsQuantity, drinksQuantity];
 
 	for (i in reqArray) {
 		if (!reqArray[i]) {
@@ -26,11 +25,9 @@ export const orderValidation = (req, res, next) => {
 				message: "One or more input fields are empty or has invalid input",
 			});
 		}
-		i++;
 	}
 
-	const strings = [firstname, lastname, email,
-		address, lga, state];
+	const strings = [address, lga, state];
 
 	for(i in strings) {
 		if (typeof strings[i] !== "string") {
@@ -39,30 +36,65 @@ export const orderValidation = (req, res, next) => {
 				message: `Invalid input ${strings[i]}. Should be a string data type`,
 			});
 		}
-		i++;
 	}
 
-	const numStr = [phone, addressNo];
-	for(i in numStr) {
-		if (typeof numStr[i] !== "number" && typeof numStr[i] !== "string") {
+
+	const quantityNum = [drinksQuantity, foodsQuantity];
+	for (i in quantityNum) {
+		if (!Array.isArray(quantityNum[i])) {
 			return res.status(400).json({
 				status: "Error",
-				message: `Invalid input ${numStr[i]}. Should be a number data type`,
+				message: `Invalid input data type ${quantityNum[i]}. Should be an Array`,
 			});
 		}
-		i++;
+	}
+
+	let k;
+	for (i = 0; i < quantityNum.length; i++) {
+		for (k = 0; k < quantityNum[i].length; k++) {
+			if (typeof quantityNum[i][k] !== "number") {
+				return res.status(400).json({
+					status: "Error",
+					message: `Invalid input [${quantityNum[i]}] ==> ${quantityNum[i][k]}. Should be a number data type`,
+				});
+			}
+		}
 	}
 
 	const objStr = [foods, drinks];
-	for (i in objStr) {
+	for (i = 0; i < objStr.length; i++) {
 		if (typeof objStr[i] !== "string" && !Array.isArray(objStr[i])) {
 			return res.status(400).json({
 				status: "Error",
 				message: `Invalid input ${objStr[i]}. Should be an Array object or a string data type`,
 			});
 		}
-		i++;
 	}
+
+	const convertToArray = new OrderedMeals();
+
+	const newDrinks = convertToArray.displayDrinks(drinks);
+	const newFoods = convertToArray.displayFoods(foods);
+
+	const quantity = [foodsQuantity, newFoods, drinksQuantity, newDrinks];
+	if ((quantity[0].length !== quantity[1].length) || (quantity[2].length !== quantity[3].length) ) {
+		return res.status(400).json({
+			status: "Error",
+			massage: "Quantity or Meal item isn't specified, Please specify quantity and meal item"
+		});
+	}
+
+	const num = [userId, addressNo];
+	for(i in num) {
+		if (typeof num[i] !== "number") {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${i} ==> ${num[i]}. Should be a number data type`,
+			});
+		}
+	}
+
+
 
 	return next();
 };
@@ -100,7 +132,7 @@ export const statusValidation = (req, res, next) => {
 export const getOrderErrorHandler = (req, res, next) => {
 	const id = parseInt(req.params.id, 10);
 
-	const output = orders.filter((order) => order.id === id)[0];
+	const output = orders.filter(order => order.orderId === id)[0];
 
 	if (!output) {
 		return res.status(404).send({
