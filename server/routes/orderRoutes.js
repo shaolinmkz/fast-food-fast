@@ -6,7 +6,7 @@ const orders = new Orders();
 const menus = new Menus();
 
 const orderRoutes = express.Router();
-
+/**DUMMY DATABASE ROUTES**/
 orderRoutes.post("/api/v1/orders", orderValidation, orders.placeOrder);
 orderRoutes.get("/api/v1/orders", orders.getAllOrders);
 orderRoutes.get("/api/v1/orders/:id", getOrderErrorHandler, orders.getAnOrder);

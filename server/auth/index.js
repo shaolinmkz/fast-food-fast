@@ -1,3 +1,3 @@
-import { auth } from "./auth";
+import { auth, Helper } from "./auth";
 
-export { auth };
+export { auth, Helper };

@@ -1,18 +1,37 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-// export default (req, res, next) => {
-// 	try {
-// 		const token = req.headers["x-access-token"] || req.body.token;
-// 		const decoded = jwt.verify(token, process.env.JWT_KEY);
-// 		req.userData = decoded;
-// 		next();
-// 	}
-// 	catch (error) {
-// 		return res.status(401).json({
-// 			message: "User Not logged in!"
-// 		});
-// 	}
-// };
+export class Helper {
+	// hint from code mentor tutorials @OlawaleAladeusi
+
+	//Hash Password Method
+	static hashPassword(password) {
+		return bcrypt.hashSync(password, 10);
+	}
+
+	//comparePassword
+	static comparePassword(hashPassword, password, callback) {
+		return bcrypt.compare(password, hashPassword, callback);
+	}
+
+	//isValidEmail helper method
+	static isValidEmail(email) {
+		return /\S+@\S+\.\S+/.test(email);
+	}
+
+	//Generate Token
+	static generateToken(id, email, password) {
+		const token = jwt.sign({
+			userId: id,
+			email: email,
+			password: password
+		},
+		process.env.SECRET_KEY, { expiresIn: "1d" }
+		);
+		return token;
+	}
+}
+
 
 /**
  * JWT- JSON WEB TOKEN AUTHENTICATION (Asynchronous call)
@@ -28,6 +47,7 @@ export const auth = ((req, res, next) => {
 		jwt.verify(token, process.env.SECRET_KEY, (err, decod) => {
 			if (err) {
 				res.status(403).json({
+					status: "Error",
 					message: "No Token, access denied!"
 				});
 			}
@@ -40,8 +60,10 @@ export const auth = ((req, res, next) => {
 	}
 	else {
 		res.status(401).json({
-			status: "User Error",
-			message: "Not logged in"
+			status: "Error",
+			message: "User not signed in, Please login"
 		});
 	}
 });
+// localStorage.setItem('token', token);
+// localStorage.getItem('token');
