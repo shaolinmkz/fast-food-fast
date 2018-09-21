@@ -1,7 +1,9 @@
 import { foodsDB, drinksDB } from "../server/dummyDB";
 import app from "../server";
 import supertest from "supertest";
-const { expect, assert } = require("chai");
+import chai from "chai";
+const expect = chai.expect;
+const assert = chai.assert;
 
 const request = supertest.agent(app);
 

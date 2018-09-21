@@ -4,19 +4,11 @@ import { Pool } from "pg";
 
 dotenv.config();
 
-// let connectionString;
 
-// if (process.env.NODE_ENV === "test") {
-// 	connectionString = process.env.PGTEST_URL;
-// } else if ( process.NODE_ENV === "development") {
-// 	connectionString = process.env.PGADMIN_URL;
-// } else {
-// 	connectionString = process.env.ELEPHANT_DB_URL;
-// }
-const connectionString = process.env.PGTEST_URL || process.env.PGADMIN_URL || process.env.ELEPHANT_DB_URL;
+const connectionString = process.env.PGADMIN_URL || process.env.PGTEST_URL || process.env.ELEPHANT_DB_URL;
 
 const createTable = () => {
-  const pool = new Pool({ connectionString });
+	const pool = new Pool({ connectionString });
 	pool.connect();
 
 	const query =

@@ -4,12 +4,19 @@ import jwt from "jsonwebtoken";
 
 export class Users {
 
+	/**
+   * GET ALL USERS
+   * @param { object } req - request body
+   * @param { object } res - response body
+   * @return \{{{object}}\} {{JSON object}}{{for testing purposes}}
+   */
 	fetchUsers (req, res) {
 		db.any("SELECT * FROM users")
 			.then(users => {
 				return res.status(200)
 					.json({
-						status: 200,
+						status: "Success",
+						message: "All users received successfully",
 						users
 					});
 			})
@@ -20,8 +27,13 @@ export class Users {
 				}));
 	}
 
+	/**
+   * SIGNUP USER
+   * @param { object } req - request body
+   * @param { object } res - response body
+   * @return \{{{object}}\} {{JSON object}}
+   */
 	createNewUsers (req, res) {
-
 		const {
 			firstname,
 			lastname,
@@ -69,7 +81,12 @@ export class Users {
 			});
 	}
 
-
+	/**
+   * LOGIN USER
+   * @param { object } req - request body
+   * @param { object } res - response body
+   * @return \{{{object}}\} {{JSON object}}
+   */
 	loginUser(req, res) {
 		// const {id, email} = req.decoded;
 		const { email, password } = req.body;
@@ -101,14 +118,24 @@ export class Users {
 						}
 					});
 				} else {
-					return res.status(400).json({ status: 400, message: "User doesn't exit, create user!" });
+					return res.status(400).json({
+						status: "Error",
+						message: "User doesn't exit, create user!"
+					});
 				}
 			})
-			.catch(error => res.status(500).json({ status: 500, error }));
+			.catch(error => res.status(500).json({
+				status: "Error",
+				error
+			}));
 	}
 
 
-
+	/**
+   * LOGOUT USER
+   * @param { object } req - request body
+   * @param { object } res - response body
+   */
 	logoutUser(req, res) {
 
 		const { email } = req.body;
@@ -120,21 +147,24 @@ export class Users {
 						id: user[0].id,
 						email
 					}, process.env.SECRET_KEY, { expiresIn: "1s" });
-
-					return res.status(200).json({
-						status: "Success",
-						message: "User Logged out Successfully",
-						logged_in: user[0].logged_in,
-						tokenMessage: "Token Expired",
-						token
-					});
+					if (token) {
+						return res.status(200).json({
+							status: "Success",
+							message: "User Logged out Successfully",
+							logged_in: user[0].logged_in,
+							tokenMessage: "Token Expired",
+						});
+					}
 				} else {
 					return res.status(400).json({
-						status: 400,
+						status: "Error",
 						message: "Invalid User!" });
 				}
 			})
-			.catch(error => res.status(500).json({ status: 500, error }));
+			.catch(error => res.status(500).json({
+				status: 500,
+				error
+			}));
 	}
 
 }
