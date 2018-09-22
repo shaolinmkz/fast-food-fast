@@ -42,8 +42,8 @@ export class Users {
 
 		let { phone } = req.body;
 
-		const fullname = `${lastname}, ${firstname}`;
-		phone = phone.toString();
+		const fullname = `${lastname.trim()}, ${firstname.trim()}`;
+		phone = phone.toString().trim();
 		const hash = bcrypt.hashSync(password, 10);
 
 		db.none("INSERT INTO users(fullname, email, phone, password, logged_in)" +
@@ -166,5 +166,4 @@ export class Users {
 				error
 			}));
 	}
-
 }

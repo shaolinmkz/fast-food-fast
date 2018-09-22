@@ -6,8 +6,10 @@ const expect = chai.expect;
 const request = supertest.agent(app);
 
 
-//signup Validation
-describe("SignUp Validation for users", () => {
+/**
+ * signup User
+ */
+describe("SignUp users route", () => {
 
 	it("should return 400 if all fields are empty", (done) => {
 		request.post("/api/v2/auth/signup")
@@ -99,6 +101,152 @@ describe("SignUp Validation for users", () => {
 			});
 	});
 
+	it("should return 400 if firstname has an invalid character", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "E>e8ka",
+				lastname: "Obiora",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067443245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.message).to.eql("Invalid input E>e8ka. All characters must be alphabets");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+	it("should catch 500 error if firstname has an invalid character", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "Emeka*",
+				lastname: "Obiora",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067443245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(500);
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+	it("should catch 500 errors if lastname has an invalid character", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "Emeka",
+				lastname: "Ob)(iora",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067443245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(500);
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+	it("should return 400 if lastname has an invalid character", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "Emeka",
+				lastname: "Obiora8",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067443245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.message).to.eql("Invalid input Obiora8. All characters must be alphabets");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+  it("should return 400 if phone number has spaces", (done) => {
+    request.post("/api/v2/auth/signup")
+      .send({
+        firstname: "Emeka",
+        lastname: "Obiora",
+        email: "nwabuzor.obiora@gmail.com",
+        phone: "07067 43245",
+        password: "asdfghj",
+        confirmPassword: "asdfghj"
+      })
+      .end((err, res) => {
+        expect(res.status).to.eql(400);
+        expect(res.body.message).to.eql("Invalid input 07067 43245. Spaces are not required");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
+  it("should return 400 if phone number is not a Number", (done) => {
+    request.post("/api/v2/auth/signup")
+      .send({
+        firstname: "Emeka",
+        lastname: "Obiora",
+        email: "nwabuzor.obiora@gmail.com",
+        phone: "0Z067P43245",
+        password: "asdfghj",
+        confirmPassword: "asdfghj"
+      })
+      .end((err, res) => {
+        expect(res.status).to.eql(400);
+        expect(res.body.message).to.eql("Invalid input 0Z067P43245. All characters must be number");
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
+  it("should catch 500 errors if phone number is not a Number", (done) => {
+    request.post("/api/v2/auth/signup")
+      .send({
+        firstname: "Emeka",
+        lastname: "Obiora",
+        email: "nwabuzor.obiora@gmail.com",
+        phone: "0*067P43245",
+        password: "asdfghj",
+        confirmPassword: "asdfghj"
+      })
+      .end((err, res) => {
+        expect(res.status).to.eql(500);
+        if (err) { return done(err); }
+        done();
+      });
+  });
+
+
+	it("should return 400 if lastname has an invalid character", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "Emeka",
+				lastname: "Obiora",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067423434243444325345435443245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+        expect(res.body.message).to.eql("Invalid phone number length 07067423434243444325345435443245. It should be 11 digits");
+				if (err) { return done(err); }
+				done();
+			});
+  });
+
+
 	it("should return 201 if user details are correct", (done) => {
 		request.post("/api/v2/auth/signup")
 			.send({
@@ -116,6 +264,25 @@ describe("SignUp Validation for users", () => {
 				done();
 			});
 	});
+
+	it("should return 400 if user names has a length less than 2", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "a",
+				lastname: "b",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067443245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.message).to.eql("A vaild name starts with at least 2 characters");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
 
 	it("should return 409 if user exists", (done) => {
 		request.post("/api/v2/auth/signup")
@@ -135,9 +302,12 @@ describe("SignUp Validation for users", () => {
 			});
 	});
 
-	/**
+});
+
+/**
    * USER LOGIN TEST
    */
+describe("Signin Users route", () => {
 
 	it("should return 400 if login inputs are not strings", (done) => {
 		request.post("/api/v2/auth/login")
@@ -208,23 +378,13 @@ describe("SignUp Validation for users", () => {
 				done();
 			});
 	});
+});
 
-	/**
- * GET ALL USER
- */
-	it("should return 200 if all users exist", (done) => {
-		request.get("/api/v2/auth/users")
-			.end((err, res) => {
-				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("All users received successfully");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	/**
+/**
    * LOGOUT USER
    */
+describe("Signout Users route", () => {
+
 	it("should return 200 when user signs out", (done) => {
 		request.post("/api/v2/auth/logout")
 			.send({
@@ -253,5 +413,21 @@ describe("SignUp Validation for users", () => {
 				done();
 			});
 	});
-
 });
+
+/**
+ * GET ALL USER
+ */
+describe("Fetch all users route", () => {
+
+	it("should return 200 if all users exist", (done) => {
+		request.get("/api/v2/auth/users")
+			.end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.message).to.eql("All users received successfully");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+});
+

@@ -1,8 +1,5 @@
 import { db } from "../db";
 import { Helper } from "../auth";
-import { LoopHelper } from "../Helper";
-
-const loopHelper = new LoopHelper();
 
 let i;
 
@@ -44,14 +41,12 @@ export const signupValidation = (req, res, next) => {
 		}
 	}
 
-	// for (i = 0; i < email.length; i++){
-	// 	if (email[i] !== " ") {
-	// 		return res.status(400).json({
-	// 			status: "Error",
-	// 			message: "There should be no spaces"
-	// 		});
-	// 	}
-	// }
+	if (firstname.length < 2 || lastname.length < 2) {
+		return res.status(400).json({
+			status: "Error",
+			message: "A vaild name starts with at least 2 characters"
+		});
+	}
 
 	if (!Helper.isValidEmail(email)) {
 		return res.status(400).json({
@@ -60,22 +55,86 @@ export const signupValidation = (req, res, next) => {
 		});
 	}
 
-	// if (typeof phone !== "string" && typeof phone !== "number"){
-	// 	return res.status(400).json({
-	// 		status: "Error",
-	// 		message: `Invalid data type ${typeof phone}. It should be a string data type`
-	// 	});
-	// }
+	//Namescheck
+	let j;
+	const alpha = "abcdefjhijklmnopqrstuvwxyz";
 
-	// loopHelper.errorLooper(firstname, "string", "Invalid firstname character, must be a string");
-	// for (i = 0; i < firstname.length; i++) {
-	//   if (typeof firstname[i] !== "string") {
-	//     return res.status(400).json({
-	//       status: "Error",
-	//       message: "Invalid firstname character, must be a string"
-	//     });
-	//   }
-	// }
+	try{
+		for (i = 0; i < firstname.toString().length; i++) {
+			for (j = 0; j < alpha.length; j++) {
+				let put = RegExp(`${firstname.toLowerCase().charAt(i)}`);
+				if (!(put.test(alpha))) {
+					return res.status(400).json({
+						status: "Error",
+						message: `Invalid input ${firstname}. All characters must be alphabets`
+					});
+				}
+			}
+		}
+	} catch (err) {
+		return res.status(500).json({
+			status: "Error",
+			message: err
+		});
+	}
+
+	try{
+		for (i = 0; i < lastname.toString().length; i++) {
+			for (j = 0; j < alpha.length; j++) {
+				let put = RegExp(lastname.toLowerCase().charAt(i));
+				if (!(put.exec(alpha))) {
+					return res.status(400).json({
+						status: "Error",
+						message: `Invalid input ${lastname}. All characters must be alphabets`
+					});
+				}
+			}
+		}
+	} catch (err) {
+		return res.status(500).json({
+			status: "Error",
+			message: err
+		});
+	}
+
+	for (i = 0; i < phone.length; i++) {
+		if (phone.toString().charAt(i) === " ") {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${phone}. Spaces are not required`
+			});
+		}
+	}
+
+	try{
+		const tel = "1234567890";
+		for (i = 0; i < phone.toString().length; i++) {
+			for (j = 0; j < tel.length; j++) {
+				let put = RegExp(phone.toLowerCase().charAt(i));
+				if (!(put.exec(tel))) {
+					return res.status(400).json({
+						status: "Error",
+						message: `Invalid input ${phone}. All characters must be number`
+					});
+				}
+			}
+		}
+	} catch (err) {
+		return res.status(500).json({
+			status: "Error",
+			message: err
+		});
+	}
+
+
+
+	if (phone.length !== 11) {
+		return res.status(400).json({
+			status: "Error",
+			message: `Invalid phone number length ${phone}. It should be 11 digits`
+		});
+	}
+
 
 	if (firstname && lastname && email && phone && password) {
 		db.any("SELECT * FROM users WHERE email = $1 OR phone = $2", [email, phone])
@@ -114,26 +173,3 @@ export const loginValidation = (req, res, next) => {
 	}
 	next();
 };
-
-// export const setLoggedInFalse = (req, res, next) => {
-
-// 	const { email } = req.body;
-
-// 	db.any("UPDATE users SET logged_in = false WHERE email = $1 RETURNING *", [email])
-// 		.then(user => {
-// 			if (user.length > 0) {
-
-// 				return next();
-
-// 			} else {
-// 				return res.status(400).json({
-// 					status: 400,
-// 					message: "Invalid User!"
-// 				});
-// 			}
-// 		})
-// 		.catch(error => res.status(500).json({
-// 			status: "Error",
-// 			error
-// 		}));
-// };

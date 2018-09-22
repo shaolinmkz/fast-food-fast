@@ -1,10 +1,10 @@
-// import express from "express";
+import express from "express";
 
-// const adminRoutes = express.Router();
+const adminRoutes = express.Router();
 
-// adminRoutes.get("/api/v2/orders");
-// adminRoutes.get("/api/v2/orders/:id");
-// adminRoutes.put("/api/v2/orders/:id");
-// adminRoutes.post("/api/v2/orders/menu");
+adminRoutes.get("/api/v2/orders");
+adminRoutes.get("/api/v2/orders/:id");
+adminRoutes.put("/api/v2/orders/:id");
+adminRoutes.post("/api/v2/orders/menu");
 
-// export default adminRoutes;
+export default adminRoutes;
