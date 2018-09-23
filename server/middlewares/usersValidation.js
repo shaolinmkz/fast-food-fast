@@ -123,6 +123,7 @@ export const signupValidation = (req, res, next) => {
 
 	/**Move to next middleware function if username is defined */
 	if(username || email) {
+    console.log("end of second validator", "****************************");
 		next();
 	}
 };

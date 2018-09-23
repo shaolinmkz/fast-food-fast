@@ -27,8 +27,6 @@ export class Admins{
 				}));
 	}
 
-
-
 	/**
    * Represents signup admins
    * @param { object } req - request body
@@ -44,22 +42,22 @@ export class Admins{
 			password } = req.body;
 
 		let { phone } = req.body;
-
-		if (adminToken === process.env.ADMIN_TOKEN) {
+		console.log("before token check", "****************************");
+		if (adminToken !== process.env.ADMIN_TOKEN) {
 			return res.status(400).json({
 				status: "Error",
 				message: "Invalid token, check and try again"
 			});
 		}
-
-		const fullname = `${lastname.trim()}, ${firstname.trim()}`;
+		console.log("after token check", "****************************");
+		const fullname = `${lastname.trim()} ${firstname.trim()}`;
 		phone = phone.toString().trim();
 		const hash = bcrypt.hashSync(password, 10);
 
 		db.none("INSERT INTO admins(username, fullname, email, phone, password, logged_in)" +
-      "VALUES ($1, $2, $3, $4, $5, $6)", [username, fullname, email, phone, hash, true])
+      "VALUES ($1, $2, $3, $4, $5, $6)", [username, fullname, email, phone, hash, "true"])
 			.then(() => {
-				db.any("SELECT * FROM admins WHERE email = $1", [username])
+				db.any("SELECT * FROM admins WHERE username = $1", [username])
 					.then(data => {
 						const admin = data[0];
 						const token = jwt.sign({
@@ -68,7 +66,7 @@ export class Admins{
 							username: username,
 							phone: phone
 						}, process.env.ADMIN_ONLY, { expiresIn: "1d" });
-
+						console.log("Inside body", "****************************");
 						return res.status(201).json({
 							status: "Success",
 							message: `Admin created Successfully, Welcome Admin ${admin.username}`,
@@ -106,6 +104,12 @@ export class Admins{
 
 		db.any("SELECT * FROM admins WHERE username = $1", [username])
 			.then((admin) => {
+				if (admin.length < 0) {
+					return res.status(400).json({
+						status: "Error",
+						message: "Admin doesn't exist"
+					});
+				}
 				if (admin.length > 0) {
 					bcrypt.compare(password, admin[0].password, (error, result) =>{
 						if (error) {
@@ -117,7 +121,7 @@ export class Admins{
 						if (!result) {
 							return res.status(400).json({
 								status: "Error",
-								message: "Invalid admin"
+								message: "wrong password, please check and try again"
 							});
 						}
 						if (result) {
@@ -132,7 +136,7 @@ export class Admins{
 										return res.status(200).json({
 											status: "Success",
 											message: `Admin ${admin2[0].username} Logged in successfully`,
-											logged_in: admin2[0].logg_in,
+											logged_in: admin2[0].logged_in,
 											token: token
 										});
 									}

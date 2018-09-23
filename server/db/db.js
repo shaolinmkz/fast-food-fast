@@ -64,10 +64,10 @@ const createTable = () => {
 
         CREATE TABLE IF NOT EXISTS admins(
             id SERIAL PRIMARY KEY,
-            fullname VARCHAR(225) NOT NULL,
-            username VARCHAR(255) UNIQUE NOT NULL,
-            email VARCHAR(255) UNIQUE NOT NULL,
-            phone INT UNIQUE NOT NULL,
+            fullname TEXT NOT NULL,
+            username TEXT UNIQUE NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            phone TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
             logged_in TEXT,
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP

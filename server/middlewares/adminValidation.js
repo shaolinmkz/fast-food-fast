@@ -8,7 +8,7 @@ import { db } from "../db";
  */
 export const adminSignupValidation = (req, res, next) => {
 	const { username, email, phone } = req.body;
-
+  console.log("Here", "****************************");
 
 	if (!username) {
 		return res.status(400).json({
@@ -24,7 +24,7 @@ export const adminSignupValidation = (req, res, next) => {
 		});
 	}
 
-
+  console.log("There", "****************************");
 	if (username.length < 4) {
 		return res.status(400).json({
 			status: "Error",
@@ -32,16 +32,17 @@ export const adminSignupValidation = (req, res, next) => {
 			example: "Tony is acceptable NOT Ton OR Ony"
 		});
 	}
-
+  console.log("Its here!!!", "****************************");
 	if (username && email && phone) {
-		db.any("SELECT * FROM users WHERE username = $1 OR email = $2 OR phone = $3", [username, email, phone])
+		db.any("SELECT * FROM admins WHERE username = $1 OR email = $2 OR phone = $3", [username, email, phone])
 			.then((admin) => {
 				if (admin.length > 0) {
 					return res.status(409).json({
 						status: "Error",
 						message: "Admin already exists"
 					});
-				}
+        }
+        console.log("end of adminValidator", "****************************");
 				next();
 			})
 			.catch((err) => {

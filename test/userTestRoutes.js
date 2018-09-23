@@ -17,7 +17,7 @@ describe("SignUp users route", () => {
 			.send({
 				firstname: "Emeka",
 				lastname: "Obiora",
-				email: "nwabuzor.obiora@gmailcom",
+				email: "nwabuzor.obiora@gmail.com",
 				phone: "07067443245",
 				password: "zxcvbn74824",
 				confirmPassword: "dhja7c"
@@ -41,7 +41,7 @@ describe("SignUp users route", () => {
 			.send({
 				firstname: "Emeka",
 				lastname: "Obiora",
-				email: "nwabuzor.obiora@gmailcom",
+				email: "nwabuzor.obiora@gmail.com",
 				phone: "07067443245",
 				password: "1234",
 				confirmPassword: "1234"
@@ -88,7 +88,7 @@ describe("SignUp users route", () => {
 			.send({
 				firstname: 1323123,
 				lastname: "Obiora",
-				email: "nwabuzor.obiora@gmailcom",
+				email: "nwabuzor.obiora@gmail.com",
 				phone: 7067443245,
 				password: "asdfghj",
 				confirmPassword: "asdfghj"
