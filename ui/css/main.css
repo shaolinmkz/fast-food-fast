@@ -584,6 +584,26 @@ section.history div.grid div:nth-child(odd){
     background: url("../images/food-Background.png")
 }
 
+/*Products picture styles*/
+.products{
+    display: block;
+    width: 100%;
+
+}
+.product-item img{
+    border: 1em ridge #be2405;
+}
+.product-item img{
+    display: block;
+    width: 50%;
+    margin: 1% auto;
+}
+.products .product-item p{
+width: 100%;
+font-size: 200%;
+text-align: center;
+}
+
 
 /*Footer*/
 footer.main-footer{
