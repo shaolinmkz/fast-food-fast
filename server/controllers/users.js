@@ -2,13 +2,15 @@ import { db } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+/**
+ * @class \{{{object}}\} {{Users}}{{Contains methods users session}}
+ */
 export class Users {
 
 	/**
-   * GET ALL USERS
-   * @param { object } req - request body
-   * @param { object } res - response body
-   * @return \{{{object}}\} {{JSON object}}{{for testing purposes}}
+   * Represents a get all user function
+   * @param { object } req - body request
+   * @param { object } res - body response
    */
 	fetchUsers (req, res) {
 		db.any("SELECT * FROM users")
@@ -28,10 +30,9 @@ export class Users {
 	}
 
 	/**
-   * SIGNUP USER
+   * Represents signup user
    * @param { object } req - request body
    * @param { object } res - response body
-   * @return \{{{object}}\} {{JSON object}}
    */
 	createNewUsers (req, res) {
 		const {
@@ -82,13 +83,12 @@ export class Users {
 	}
 
 	/**
-   * LOGIN USER
-   * @param { object } req - request body
-   * @param { object } res - response body
-   * @return \{{{object}}\} {{JSON object}}
+   * Method to login users
+   * @param { object } req - body request
+   * @param { object } res - body response
    */
 	loginUser(req, res) {
-		// const {id, email} = req.decoded;
+
 		const { email, password } = req.body;
 
 		db.any("SELECT * FROM users WHERE email = $1", [email])
@@ -132,9 +132,9 @@ export class Users {
 
 
 	/**
-   * LOGOUT USER
-   * @param { object } req - request body
-   * @param { object } res - response body
+   * Method to logout users
+   * @param { object } req - body request
+   * @param { object } res - body response
    */
 	logoutUser(req, res) {
 

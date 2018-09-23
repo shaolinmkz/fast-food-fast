@@ -2,9 +2,10 @@ import app from "../server";
 import supertest from "supertest";
 import chai from "chai";
 const expect = chai.expect;
+import "chai/register-should";
+const should = chai.should();
 
 const request = supertest.agent(app);
-
 
 /**
  * signup User
@@ -24,6 +25,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Password didn't match");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -42,6 +49,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Password length must be greater than 6");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -60,7 +73,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Required field empty");
-				if (err) { return done(err); }
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				done();
 			});
 	});
@@ -78,7 +96,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid data type number. It should be a String data type");
-				if (err) { return done(err); }
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				done();
 			});
 	});
@@ -96,6 +119,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("The email nwabu zor.obi ora@gmailcom is invalid");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -114,44 +143,17 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid input E>e8ka. All characters must be alphabets");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
 	});
 
-	it("should catch 500 error if firstname has an invalid character", (done) => {
-		request.post("/api/v2/auth/signup")
-			.send({
-				firstname: "Emeka*",
-				lastname: "Obiora",
-				email: "nwabuzor.obiora@gmail.com",
-				phone: "07067443245",
-				password: "asdfghj",
-				confirmPassword: "asdfghj"
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(500);
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should catch 500 errors if lastname has an invalid character", (done) => {
-		request.post("/api/v2/auth/signup")
-			.send({
-				firstname: "Emeka",
-				lastname: "Ob)(iora",
-				email: "nwabuzor.obiora@gmail.com",
-				phone: "07067443245",
-				password: "asdfghj",
-				confirmPassword: "asdfghj"
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(500);
-				if (err) { return done(err); }
-				done();
-			});
-	});
 
 	it("should return 400 if lastname has an invalid character", (done) => {
 		request.post("/api/v2/auth/signup")
@@ -166,67 +168,66 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid input Obiora8. All characters must be alphabets");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
 	});
 
 
-  it("should return 400 if phone number has spaces", (done) => {
-    request.post("/api/v2/auth/signup")
-      .send({
-        firstname: "Emeka",
-        lastname: "Obiora",
-        email: "nwabuzor.obiora@gmail.com",
-        phone: "07067 43245",
-        password: "asdfghj",
-        confirmPassword: "asdfghj"
-      })
-      .end((err, res) => {
-        expect(res.status).to.eql(400);
-        expect(res.body.message).to.eql("Invalid input 07067 43245. Spaces are not required");
-        if (err) { return done(err); }
-        done();
-      });
-  });
+	it("should return 400 if phone number has spaces", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "Emeka",
+				lastname: "Obiora",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "07067 43245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.message).to.eql("Invalid input 07067 43245. Spaces are not required");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
 
 
-  it("should return 400 if phone number is not a Number", (done) => {
-    request.post("/api/v2/auth/signup")
-      .send({
-        firstname: "Emeka",
-        lastname: "Obiora",
-        email: "nwabuzor.obiora@gmail.com",
-        phone: "0Z067P43245",
-        password: "asdfghj",
-        confirmPassword: "asdfghj"
-      })
-      .end((err, res) => {
-        expect(res.status).to.eql(400);
-        expect(res.body.message).to.eql("Invalid input 0Z067P43245. All characters must be number");
-        if (err) { return done(err); }
-        done();
-      });
-  });
-
-
-  it("should catch 500 errors if phone number is not a Number", (done) => {
-    request.post("/api/v2/auth/signup")
-      .send({
-        firstname: "Emeka",
-        lastname: "Obiora",
-        email: "nwabuzor.obiora@gmail.com",
-        phone: "0*067P43245",
-        password: "asdfghj",
-        confirmPassword: "asdfghj"
-      })
-      .end((err, res) => {
-        expect(res.status).to.eql(500);
-        if (err) { return done(err); }
-        done();
-      });
-  });
-
+	it("should return 400 if phone number is not a Number", (done) => {
+		request.post("/api/v2/auth/signup")
+			.send({
+				firstname: "Emeka",
+				lastname: "Obiora",
+				email: "nwabuzor.obiora@gmail.com",
+				phone: "0Z067P43245",
+				password: "asdfghj",
+				confirmPassword: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.message).to.eql("Invalid input 0Z067P43245. All characters must be numbers");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
 
 	it("should return 400 if lastname has an invalid character", (done) => {
 		request.post("/api/v2/auth/signup")
@@ -240,11 +241,17 @@ describe("SignUp users route", () => {
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
-        expect(res.body.message).to.eql("Invalid phone number length 07067423434243444325345435443245. It should be 11 digits");
+				expect(res.body.message).to.eql("Invalid phone number length 07067423434243444325345435443245. It should be 11 digits");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
-  });
+	});
 
 
 	it("should return 201 if user details are correct", (done) => {
@@ -260,7 +267,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(201);
 				expect(res.body.message).to.eql("User created Successfully, Welcome Obiora, Emeka to f-cube");
-				if (err) { return done(err); }
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");if (err) { return done(err); }
 				done();
 			});
 	});
@@ -278,6 +290,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("A vaild name starts with at least 2 characters");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -297,6 +315,12 @@ describe("SignUp users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(409);
 				expect(res.body.message).to.eql("User already exists");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -318,6 +342,12 @@ describe("Signin Users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Email and Passord must be a string datatype");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -332,6 +362,12 @@ describe("Signin Users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("email or password is not defined");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -346,7 +382,12 @@ describe("Signin Users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid Password!");
-				if (err) { return done(err); }
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");if (err) { return done(err); }
 				done();
 			});
 	});
@@ -360,6 +401,12 @@ describe("Signin Users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("User doesn't exit, create user!");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -374,6 +421,12 @@ describe("Signin Users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.message).to.eql("User Logged in Successfully, Welcome Obiora, Emeka");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -395,6 +448,12 @@ describe("Signout Users route", () => {
 				expect(res.status).to.eql(200);
 				expect(res.body.message).to.eql("User Logged out Successfully");
 				expect(res.body.tokenMessage).to.eql("Token Expired");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -409,6 +468,12 @@ describe("Signout Users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid User!");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});
@@ -425,6 +490,12 @@ describe("Fetch all users route", () => {
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.message).to.eql("All users received successfully");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
 				if (err) { return done(err); }
 				done();
 			});

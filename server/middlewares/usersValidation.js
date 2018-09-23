@@ -2,7 +2,12 @@ import { db } from "../db";
 import { Helper } from "../auth";
 
 let i;
-
+/**
+ * Represents a Signup form validator
+ * @param {object} req - The body request
+ * @param {object} res - The body response
+ * @param {object} next - function to execute next middleware
+ */
 export const signupValidation = (req, res, next) => {
 	const { firstname, lastname, email, phone, password, confirmPassword  } = req.body;
 
@@ -31,7 +36,7 @@ export const signupValidation = (req, res, next) => {
 
 		if (typeof checkArr[i] !== "string") {
 			if (checkArr[i] === checkArr[3]) {
-				//skips phone number
+				/**skips phone number*/
 				continue;
 			}
 			return res.status(400).json({
@@ -55,21 +60,14 @@ export const signupValidation = (req, res, next) => {
 		});
 	}
 
-	//Namescheck
-	let j;
-	const alpha = "abcdefjhijklmnopqrstuvwxyz";
+	/**Namescheck*/
 
-	try{
-		for (i = 0; i < firstname.toString().length; i++) {
-			for (j = 0; j < alpha.length; j++) {
-				let put = RegExp(`${firstname.toLowerCase().charAt(i)}`);
-				if (!(put.test(alpha))) {
-					return res.status(400).json({
-						status: "Error",
-						message: `Invalid input ${firstname}. All characters must be alphabets`
-					});
-				}
-			}
+	try {
+		if (!(Helper.isValidAlphabet(firstname.toString().toLowerCase()))) {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${firstname}. All characters must be alphabets`
+			});
 		}
 	} catch (err) {
 		return res.status(500).json({
@@ -79,16 +77,11 @@ export const signupValidation = (req, res, next) => {
 	}
 
 	try{
-		for (i = 0; i < lastname.toString().length; i++) {
-			for (j = 0; j < alpha.length; j++) {
-				let put = RegExp(lastname.toLowerCase().charAt(i));
-				if (!(put.exec(alpha))) {
-					return res.status(400).json({
-						status: "Error",
-						message: `Invalid input ${lastname}. All characters must be alphabets`
-					});
-				}
-			}
+		if (!(Helper.isValidAlphabet(lastname.toString().toLowerCase()))) {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${lastname}. All characters must be alphabets`
+			});
 		}
 	} catch (err) {
 		return res.status(500).json({
@@ -107,17 +100,11 @@ export const signupValidation = (req, res, next) => {
 	}
 
 	try{
-		const tel = "1234567890";
-		for (i = 0; i < phone.toString().length; i++) {
-			for (j = 0; j < tel.length; j++) {
-				let put = RegExp(phone.toLowerCase().charAt(i));
-				if (!(put.exec(tel))) {
-					return res.status(400).json({
-						status: "Error",
-						message: `Invalid input ${phone}. All characters must be number`
-					});
-				}
-			}
+		if (!(Helper.isValidNumber(phone.toString()))) {
+			return res.status(400).json({
+				status: "Error",
+				message: `Invalid input ${phone}. All characters must be numbers`
+			});
 		}
 	} catch (err) {
 		return res.status(500).json({
@@ -125,7 +112,6 @@ export const signupValidation = (req, res, next) => {
 			message: err
 		});
 	}
-
 
 
 	if (phone.length !== 11) {
@@ -156,6 +142,12 @@ export const signupValidation = (req, res, next) => {
 	}
 };
 
+/**
+ * Represents a login form validator
+ * @param {object} req - The body request
+ * @param {object} res - The body response
+ * @param {object} next - function to execute next middleware
+ */
 export const loginValidation = (req, res, next) => {
 	const {email, password} = req.body;
 
