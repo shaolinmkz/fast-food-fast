@@ -9,7 +9,7 @@ let i;
  * @param {object} next - function to execute next middleware
  */
 export const signupValidation = (req, res, next) => {
-	const { firstname, lastname, email, phone, password, confirmPassword  } = req.body;
+	const { firstname, lastname, email, phone, password, confirmPassword, username  } = req.body;
 
 	if (password !== confirmPassword) {
 		return res.status(400).json({
@@ -121,6 +121,18 @@ export const signupValidation = (req, res, next) => {
 		});
 	}
 
+	/**Move to next middleware function if username is defined */
+	if(username || email) {
+		next();
+	}
+};
+
+
+
+
+export const userExists = (req, res, next) => {
+	const { firstname, lastname, email, phone, password} = req.body;
+
 
 	if (firstname && lastname && email && phone && password) {
 		db.any("SELECT * FROM users WHERE email = $1 OR phone = $2", [email, phone])
@@ -133,7 +145,7 @@ export const signupValidation = (req, res, next) => {
 				}
 				next();
 			})
-			.catch( (err) => {
+			.catch((err) => {
 				return res.status(400).json({
 					status: "Error",
 					message: err
@@ -141,6 +153,7 @@ export const signupValidation = (req, res, next) => {
 			});
 	}
 };
+
 
 /**
  * Represents a login form validator

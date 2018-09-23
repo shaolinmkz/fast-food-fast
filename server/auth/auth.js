@@ -2,8 +2,6 @@
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
  */
 export class Helper {
-
-
 	/**
    * Validates an email field
    * @param {string} email - users email

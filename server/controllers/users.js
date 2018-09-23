@@ -24,7 +24,7 @@ export class Users {
 			})
 			.catch(error => res.status(500)
 				.json({
-					status: 500,
+					status: "Error",
 					error
 				}));
 	}
@@ -162,7 +162,7 @@ export class Users {
 				}
 			})
 			.catch(error => res.status(500).json({
-				status: 500,
+				status: "Error",
 				error
 			}));
 	}
