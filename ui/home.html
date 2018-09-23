@@ -11,42 +11,47 @@
     <link rel="icon" href="./images/3f-logo.png" />
 </head>
 
-<body>
+<body class="home-body">
+    <div class="food-bg-covering">
     <header class="main-header clearfix">
         <img src="./images/3f-logo.png" id="logo" class="logo fff" />
         <img src="./images/fastfoodfast.png" class="fastfoodfast" />
-        <nav>
+        <nav class="clearfix">
             <ul>
                 <li class="current"><a href="./home.html"><span><img src="./images/home-icon.png" alt="home-icon" class="home-icon"></span>HOME</a></li>
-                <li><a href="#"><span><img src="./images/services.png" alt="avatar-icon" class="avatar-icon"></span>ABOUT US</a></li>
-                <li><a href="#"><span><img src="./images/products.png" alt="avatar-icon" class="avatar-icon"></span>PRODUCTS</a></li>
-                <li><a href="#"><span><img src="./images/deliver-food-services.png" alt="avatar-icon" class="avatar-icon"></span>SERVICES</a></li>
-                <li><a href="#"><span><img src="./images/avatar-icon.png" alt="avatar-icon" class="avatar-icon"></span>ACCOUNT</a>
-                    <ul class="menu">
+                
+                <li><a href="./about_us.html"><span><img src="./images/services.png" alt="avatar-icon" class="avatar-icon"></span>ABOUT US</a></li>
+                
+                <li><a href="./products.html"><span><img src="./images/products.png" alt="avatar-icon" class="avatar-icon"></span>PRODUCTS/
+                    <span><img src="./images/deliver-food-services.png" alt="avatar-icon" class="avatar-icon">SERVICES</a></li>
+
+                <li id="account"><a href="#"><span><img src="./images/avatar-icon.png" alt="avatar-icon" class="avatar-icon"></span>ACCOUNT</a>
+                    <ul class="menu clearfix whitebg">
                         <li><a href="#"><span><img src="./images/track-order.png" alt="track-order-icon" class="home-icon"></span>TRACK
                                 ORDER</a></li>
                         <li><a href="./history.html"><span><img src="./images/order-history.png" alt="order-history-icon" class="home-icon"></span>ORDER
                                 HISTORY</a></li>
                         <li><a href="#"><span><img src="./images/profile-icon.png" alt="profile-icon" class="home-icon"></span>PROFILE</a></li>
-                        <li><a href="#"><span><img src="./images/sign-out.png" alt="sign-out-icon" class="home-icon"></span>SIGN-OUT</a></li>
+                        <li><a href="./index.html"><span><img src="./images/sign-out.png" alt="sign-out-icon" class="home-icon"></span>SIGN-OUT</a></li>
                     </ul>
                 </li>
+
                 <li class="cart"><a href="#"><span><img src="./images/cart.png" alt="cart" class="cart"></span>CART</a>
-                    <ul class="isolate">
+                    <!-- <ul class="isolate">
                         <li>
                             <section class="basket-box">
                                 <form action="./placeorder.html" class="basket">
                                     <h1>YOUR ORDER</h1>
-
+                    
                                     <label>Rotisserie &nbsp;</label>: <label>₦3900</label><br>
                                     <label>Chief burger &nbsp;</label>: <label>₦1050</label><br>
                                     <label>Five alive &nbsp;</label>: <label>600</label>
                                     <hr>
-
+                    
                                     <label>Subtotal &nbsp;</label>: <label>₦5550</label><br>
                                     <label>Delivery &nbsp;</label>: <label>₦450</label><br>
                                     <label>Total &nbsp;</label>: <label>₦6000</label>
-
+                    
                                     <input type="submit" value="PROCEED TO CHECKOUT">
                                     <label>Discount Code? Apply it here</label>
                                     <input type="text" placeholder="Enter your code">
@@ -54,13 +59,13 @@
                                 </form>
                             </section>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
             </ul>
         </nav>
     </header>
 
-    <section class="banner">
+    <section class="banner" style="display:none">
         <img id="bannerImg" src="./images/food2.png">
     </section>
     <div class="bg clearfix">
@@ -69,8 +74,9 @@
             <aside>Place your order and have your Fast Food delivered to you <span>Fast</span>.
                 <br> I deliver round the clock just in time.
                 <br>
-                <p>CALL TO ORDER...</p>
+                <p>Click the food items below to add to cart. You call us on</p>
                 <a href="tel:08022222222">0802 222 2222</a>
+                to place a quick order
             </aside>
         </div>
     </div>
@@ -124,6 +130,28 @@
             <p>FIVE ALIVE 1L</p><label class="price">₦600</label>
         </div>
     </section>
+
+    <div class="isolate cart-modal">
+        <section class="basket-box cart-box clearfix">
+            <form action="./placeorder.html" class="basket">
+                <h1>CART</h1>
+
+                <label>Rotisserie &nbsp;</label>: <label>₦3900</label><br>
+                <label>Chief burger &nbsp;</label>: <label>₦1050</label><br>
+                <label>Five alive &nbsp;</label>: <label>600</label>
+                <hr>
+
+                <label>Subtotal &nbsp;</label>: <label>₦5550</label><br>
+                <label>Delivery &nbsp;</label>: <label>₦450</label><br>
+                <label>Total &nbsp;</label>: <label>₦6000</label>
+
+                <input type="submit" value="PROCEED TO CHECKOUT">
+                <label>Discount Code? Apply it here</label>
+                <input type="text" placeholder="Enter your code">
+                <input type="button" value="APPLY" />
+            </form>
+        </section>
+    </div>
 
     <section class="order-modal">
         <div class="order-box clearfix">
@@ -198,15 +226,18 @@
     </section>
 
     <footer class="main-footer">
-        &copy; <label>3F Template</label>
+         &copy; <label>F-cube</label>
         <div>
             <img src="./images/email.png" />
             <img src="./images/facebook.png" />
             <img src="./images/twitter.png" />
             <img src="./images/instagram.png" />
         </div>
+        <div>
+            <p>23, abc street victoria island Lagos</p>
+            <p>P.O.Box 4351</p>
     </footer>
-
+</div>
 
     <script type="text/javascript" src="./js/order.js"></script>
 </body>

@@ -1,3 +1,48 @@
+/*Signin and Signup nav button*/
+.main-header .signup_in, 
+.main-header .index_signup_in{
+    margin-top: 1em;
+    padding: 0em 2.5em 1em 0;
+}
+.main-header #signup{
+    margin-left: 0.5em;
+}
+.bodycolor{
+    background: url("../images/food-Background.png");
+    background-size: cover;
+}
+
+.main-header .signup_in div,
+.main-header .index_signup_in div{
+    display: inline-block;
+    padding: 0.35em;
+    margin-right: 0.5em;
+    background: #ff3008;
+    color: white;
+    border-radius: 10px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.main-header .signup_in div:hover, 
+.main-header .index_signup_in div:hover{
+    cursor: pointer;
+    background-color: #be2405;
+}
+
+.main-header .signup_in:first-child, 
+.main-header .index_signup_in:first-child{
+    margin-right: 2em;
+}
+#banner img{
+    width: 0;
+    height: 0;
+}
+#banner img{
+    width: 100%;
+    height: 100%;
+}
 .admin .grid{
     display: grid;
     width: 20%;

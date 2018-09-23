@@ -36,6 +36,7 @@ setInterval(slideshow, 3000);
  */
 signup.addEventListener("click", () => {
 	signupModal.style.display = "block";
+	loginModal.style.display = "none";
 });
 
 /**
@@ -57,6 +58,7 @@ window.addEventListener("click", closeSignupModal);
  */
 login.addEventListener("click", () => {
 	loginModal.style.display = "block";
+	signupModal.style.display = "none";
 });
 
 /**

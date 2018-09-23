@@ -51,6 +51,12 @@ article, aside, footer, header, nav, section{
 .themecolor{
     color: #ff3008;
 }
+.white{
+    color: white;
+}
+.whitebg{
+    background: rgb(255, 255, 255);
+}
 .fullwidth{
     width: 96%;
     padding: 2%;
@@ -68,11 +74,11 @@ body{
 
 /*Main Header*/
 .main-header{
-    z-index: 1000;
     background-color: rgb(255, 255, 255); 
     width: 100%;
-    border-bottom: 2px groove grey;
-    position: fixed;
+    /* border-bottom: 2px groove grey; */
+    /* position: fixed; */
+    background-image: url("../images/mainheader.png");
 }
 #main-header{
     background-color: rgb(34, 33, 33); 
@@ -90,11 +96,14 @@ body{
     padding: 1em 0 1em 0em;
     cursor: pointer;
 }
+
+
 /*---------Vertical menu starts here-----------*/
 /*-------------User ACCOUNT Begin------------------*/
 .main-header nav ul li > ul.menu{
+    z-index: 40;
     width: 190px;
-    border: 1px solid #ff3008;
+    /* border: 1px solid #ff3008; */
     background: rgb(255, 255, 255);
 }
 .main-header nav ul li:nth-child(2){
@@ -103,21 +112,59 @@ body{
 .main-header nav ul li > ul.menu{
     position: absolute;
     bottom: 10000em;
-    right: -1em;
+    /* right: 4em; */
     transition-property: bottom;
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
 }
+#account{
+    position: relative;
+}
+#account ul li a:hover{
+    color: #000;
+    border: none;
+}
 
 .main-header nav ul li:hover > ul.menu{
-    bottom: -7.5em;
+    top: 25px;
 } 
-.main-header .menu li{
+.main-header .menu li a{
     width: 88%;
     padding: 0.4em 0.8em 0.4em 0.8em;
     margin: 0;
     font-size: 0.9em;
+    color: black;
+    background: white;
+
 }
+.food-bg-covering{
+    background: rgba(255, 255, 255, 0.7);
+}
+.pands, .about{
+    padding: 0 2em 2em 2em;
+    line-height: 2em;
+    text-align: justify;
+    /* background: rgba(255, 255, 255, 0.8); */
+}
+.products-body{
+    background: url("../images/food-Background.png")
+}
+.pands a{
+    color: #ff3008;
+}
+.history-body{
+    background: url("../images/food-Background.png")
+}
+.home-body{
+    background: url("../images/food-Background.png")
+}
+/* .main-header nav li ul li a:hover{
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    border-bottom: none
+    color: #ff3008 
+} */
+
 /*---------------User ACCOUNT ENDS Here------------------*/
 
 .main-header nav li > ul > li{ /*not useful anymore BUT ignore*/
@@ -131,7 +178,7 @@ body{
     padding: 0.5em;
 }
 .main-header nav li a{
-    color: grey;
+    color: rgb(255, 255, 255);
     font-size: 1em;
     transition-property: color;
     transition: ease-in-out;
@@ -148,33 +195,39 @@ body{
     padding: 0;
 }
 .main-header nav li a:hover{
-    color: rgb(65, 63, 63);
+    color: rgb(255, 255, 255);
     font-weight: bolder;
+    border-bottom: #ff3008 solid 0.1em;
+    /* color: #ff3008 */
 }
 
-.main-header nav:last-child{
-    padding-right: 2em;
+.main-header nav li:last-child{
+    padding-right: 3em;
 }
-.main-header nav:first-child{
+/* .main-header nav:first-child{
     padding-left: 2em;
-}
+} */
 .main-header nav li.current > a{
-    color: rgb(0, 0, 0);
+    border-bottom: #ff3008 solid 0.1em;
     font-weight: bold;
 }
 .main-header nav,
-.main-header .signup_in {
+.main-header .signup_in,
+.main-header .index_signup_in {
     float: right;
     padding: 1.8em 0 0.5em 0;
 }
+
 /*Signin and Signup nav button*/
-.main-header .signup_in{
+.main-header .signup_in, 
+.main-header .index_signup_in{
     padding: 0em 2.5em 1em 0;
 }
 .main-header #signup{
     margin-left: 0.5em;
 }
-.main-header .signup_in div{
+.main-header .signup_in div,
+.main-header .index_signup_in div{
     display: inline-block;
     padding: 0.35em;
     margin-right: 0.5em;
@@ -186,14 +239,34 @@ body{
     transition-timing-function: ease-in-out;
 }
 
-.main-header .signup_in div:hover{
+.main-header .signup_in div:hover, 
+.main-header .index_signup_in div:hover{
     cursor: pointer;
     background-color: #be2405;
 }
 
-.main-header .signup_in:first-child{
+.main-header .signup_in:first-child, 
+.main-header .index_signup_in:first-child{
     margin-right: 2em;
 }
+
+/*Index Body*/
+.landingDetails{
+    text-align: center;
+    padding: 1em 1em;
+    background: rgba(255, 255, 255, 0.5); 
+    font-size: 16pt;
+}
+.site-description{
+    font-size: 150%;
+    font: bolder;
+    width: 90%;
+    padding: 2.5% 5%;
+    text-align: center;
+    color: #313131;
+    /* border: 1px black solid; */
+    margin: 0 auto;
+}  
 
 /*Home body*/
 .bg{ /*body wrapper background*/
@@ -205,6 +278,7 @@ div.bg > div#center{
     margin: 0 auto;
     padding: 0 1%;
 }
+
 
 /*Smiling Delivery guy at home-page*/
 .bg img.smiley-deliveryman{
@@ -262,6 +336,13 @@ section.drink-catalog div{
     margin-top: 2%;
     display: inline-block;
     cursor: pointer;
+    transition-property: width;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+}
+section.food-catalog div:hover,
+section.drink-catalog div:hover{
+    width: 25%;
 }
 section.food-catalog label, 
 section.food-catalog p,
@@ -279,7 +360,6 @@ section.drink-catalog p:hover{
 section.food-catalog label:hover,
 section.drink-catalog label:hover{
     text-decoration: underline;
-    cursor: not-allowed;
 }
 section.food-catalog p,
 section.drink-catalog p{
@@ -329,7 +409,7 @@ section.drink-catalog h1 {
     display: block;
     width: 400px;
     height: 300px;
-    margin: 80px auto 0 auto;
+    margin: 0px auto 0 auto;
 }
 .banner{
     position: relative;
@@ -337,13 +417,19 @@ section.drink-catalog h1 {
 .wrapper .banner p{
     display: none;
 }
-.wrapper .banner h1{
-    position: absolute;
-    font-size: 1.5em;
-    left: 2em;
-    top: 1em;
+div.wrapper div.banner #quotes{
+    width: 100%;
+    height: 100%;
+    font-size: 100%;
+    padding: 1em 0;
+    color: rgb(255, 255, 255);
+    background: rgba(0, 0, 0, 0.5);
+    font-family: 'Courier New', Courier, monospace;
     text-transform: capitalize;
+    text-align: center;
+    /* border: 1px solid black; */
 }
+
 .wrapper > img{
     width: 100%;
     margin: 0 auto;
@@ -484,18 +570,31 @@ section.history div.grid div:nth-child(even){
 section.history div.grid div:nth-child(odd){
     background: #fa6d51;
 }
-
+.products-services, .about-us{
+    width: 100%;
+    padding: 5% 0 0 0;
+    text-align: center;
+    font-size: 150%;
+    color: #ff3008;
+    border-bottom: 0.05em solid #ff3008;
+    margin-bottom: 2%;
+}
+/*About US*/
+.abouts-body{
+    background: url("../images/food-Background.png")
+}
 
 
 /*Footer*/
 footer.main-footer{
-    background-color: #363635;
+    /* background-color: #363635; */
     width: 100%;
     text-align: center;
     padding: 2% 0;
     text-transform: uppercase;
     color: white;
     font-size: 1.1em;
+    background-image: url("../images/wood.jpg");
 }
 
 .main-footer div img{
@@ -504,18 +603,42 @@ footer.main-footer{
 
 
 /*-----------Media queries------------*/
+@media(max-width: 1055px) {
+
+    .main-header nav,
+    .main-header .signup_in, 
+    .main-header .index_signup_in{
+        padding-left: 1.5em;
+        padding-right: 0; 
+        float: none;
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+    /* .main-header nav li:last-child{
+    padding-right: 0;
+}
+    .main-header nav:last-child, 
+    .main-header nav .index_signup_in {
+    padding-right: none;
+} */
+}
+
 @media(max-width : 768px){
+    body footer.main-footer{
+     background: url("../images/768px.png");
+    }
     .padding-helper{
     display: block;
-    height: 14em;
+    height: 10em;
     }
     .helper{
         display: block;
-        height: 20em;
+        height: 13em;
     }
 /*Banner*/
 .banner img{
-    width: 100%;
+    width: 70%;
 }
     .slider figure div p{
     z-index: 50;
@@ -525,6 +648,10 @@ footer.main-footer{
     width: 20%;
     padding-top: 100px;
     color: white;
+}
+.site-description{
+    background: #363635;
+    color: #ffffff;
 }
     .bg{
         padding-top: 0;
@@ -541,7 +668,8 @@ footer.main-footer{
 
     .main-header .fastfoodfast,
     .main-header nav,
-    .main-header .signup_in{
+    .main-header .signup_in, 
+    .main-header .index_signup_in{
         padding-left: 0;
         padding-right: 0; 
         float: none;
@@ -563,12 +691,13 @@ body.bodycolor #main-header{
 }
 
 .main-header nav li a,
-    .main-header nav li{
+.main-header nav li{
         font-size: 1em;
         min-width: 8em;
         padding: 0.4em 0.2em;
         margin: 1%;
     }
+
 .main-header nav .current a:hover{
     color: #000;
 }
@@ -587,6 +716,14 @@ body.bodycolor #main-header{
         padding-right: 0;
         padding-bottom: 0; 
     }
+    .main-header nav:last-child, 
+    .main-header nav .index_signup_in {/*___________________*/
+    padding-right: none;
+}
+
+.main-header nav li:last-child{
+    padding-right: 0;
+}
 
     .main-header nav,
     .main-header .signup_in {
@@ -594,7 +731,7 @@ body.bodycolor #main-header{
     }
 
     .main-header{
-        background: #363635;
+        background: url("../images/768px.png");
     }
 
     .main-header nav li {
@@ -604,20 +741,25 @@ body.bodycolor #main-header{
     }
 
     .banner img{
-    padding-top: 250px;
+        padding-top: 50px;
 }
-.banneriso img{
-    padding-top: 0; 
-}
-    .current{
+    .banneriso img{
+        padding-top: 0; 
+    }
+    .current {
     border-bottom: none;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     padding: 0;
     }
 
+    .main-header nav li.current > a{
+    border-bottom: none;
+    font-weight: bold;
+    }
+
     /*Smiling delivery man*/
-    div.bg > div#center{
+    div.bg > div#center {
     width: 100%;
     margin: 0 auto;
 }
@@ -647,6 +789,33 @@ section.drink-catalog img{
         padding-left: 2.5%;
         padding-right: 2.5%; 
     }
+    .main-header nav:last-child {
+    padding-right: none;
+}
+
+/*------User Account Nav------*/
+.main-header nav ul li > ul.menu{
+    z-index: 40;
+    width: 190px;
+    /* border: 1px solid #ff3008;
+    background: rgba(255, 255, 255, 0.699); */
+}
+
+
+.main-header .menu li{
+    width: 88%;
+    padding: 0.4em 0.8em 0.4em 0.8em;
+    margin: 0;
+    font-size: 0.9em;
+}
+.main-header nav ul li#account:hover > ul.menu a{ 
+background: white;
+
+}
+.main-header .menu li a:hover{
+    color: black;
+}
+
 }
 
 @media(max-width: 650px) {
@@ -680,7 +849,7 @@ section.drink-catalog img{
 @media(max-width: 480px) and (min-width:320px){
     .padding-helper{
     display: block;
-    height: 13em;
+    height: 10em;
     }
     section.history div.grid div,
     section.history div.grid div span,
@@ -705,4 +874,8 @@ section.drink-catalog img{
     .billing form input[type="submit"]{
         width: 80%;
     }
+    .main-header nav li.current > a{
+    font-weight: bold;
 }
+}
+

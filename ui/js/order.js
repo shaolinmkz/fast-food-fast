@@ -1,5 +1,7 @@
 const orderItem = document.getElementsByClassName("order-item");
 const orderModal = document.getElementsByClassName("order-modal")[0];
+const cartModal = document.getElementsByClassName("cart-modal")[0];
+const cart = document.getElementsByClassName("cart")[0];
 const close = document.getElementById("close");
 const banner = document.getElementById("bannerImg");
 const logo = document.getElementById("logo");
@@ -39,6 +41,29 @@ window.onclick = () => {
 		};
 	}
 };
+
+/**
+ * Open modal to see items in cart
+ * @event { click }
+ * @function {{displayCart}}
+ */
+const displayCart = () => {
+	cartModal.style.display = "block";
+}
+
+cart.addEventListener("click", displayCart);
+
+/**
+ * close modal onclick outside Cart box
+ * @event { click }
+ * @function {{closeCartModal}}
+ */
+const closeCartModal = (c) => {
+	if (c.target === cartModal) {
+		cartModal.style.display = "none";
+	}
+};
+window.addEventListener("click", closeCartModal);
 
 /**
  * close modal onclick outside item selection (add to cart)

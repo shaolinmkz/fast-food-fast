@@ -11,6 +11,7 @@ const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
  */
 signup.addEventListener("click", () => {
 	signupModal.style.display = "block";
+	loginModal.style.display = "none";
 });
 
 /**
@@ -21,6 +22,7 @@ signup.addEventListener("click", () => {
 const closeSignupModal = (m) => {
 	if (m.target === signupModal) {
 		signupModal.style.display = "none";
+		
 	}
 };
 window.addEventListener("click", closeSignupModal);
@@ -32,6 +34,7 @@ window.addEventListener("click", closeSignupModal);
  */
 login.addEventListener("click", () => {
 	loginModal.style.display = "block";
+	signupModal.style.display = "none";
 });
 
 /**
