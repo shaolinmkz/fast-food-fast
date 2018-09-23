@@ -1,4 +1,4 @@
-/* reset margins */
+/**reset margins */
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, form, label, 
 article, aside, footer, header, nav, section{
     margin: 0;
@@ -6,7 +6,7 @@ article, aside, footer, header, nav, section{
     border: 0;
 }
 
-/* clear fix */
+/**clear fix */
 .clearfix:before, .clearfix:after {
   content: "";
   display: table;
@@ -15,7 +15,7 @@ article, aside, footer, header, nav, section{
   clear: both;
 }
 
-/*global style*/
+/**global style*/
 *{
     padding: 0;
     margin: 0;
@@ -76,8 +76,6 @@ body{
 .main-header{
     background-color: rgb(255, 255, 255); 
     width: 100%;
-    /* border-bottom: 2px groove grey; */
-    /* position: fixed; */
     background-image: url("../images/mainheader.png");
 }
 #main-header{
@@ -103,7 +101,6 @@ body{
 .main-header nav ul li > ul.menu{
     z-index: 40;
     width: 190px;
-    /* border: 1px solid #ff3008; */
     background: rgb(255, 255, 255);
 }
 .main-header nav ul li:nth-child(2){
@@ -112,7 +109,6 @@ body{
 .main-header nav ul li > ul.menu{
     position: absolute;
     bottom: 10000em;
-    /* right: 4em; */
     transition-property: bottom;
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
@@ -144,7 +140,6 @@ body{
     padding: 0 2em 2em 2em;
     line-height: 2em;
     text-align: justify;
-    /* background: rgba(255, 255, 255, 0.8); */
 }
 .products-body{
     background: url("../images/food-Background.png")
@@ -158,12 +153,6 @@ body{
 .home-body{
     background: url("../images/food-Background.png")
 }
-/* .main-header nav li ul li a:hover{
-    color: rgb(0, 0, 0);
-    font-weight: bolder;
-    border-bottom: none
-    color: #ff3008 
-} */
 
 /*---------------User ACCOUNT ENDS Here------------------*/
 
@@ -198,15 +187,12 @@ body{
     color: rgb(255, 255, 255);
     font-weight: bolder;
     border-bottom: #ff3008 solid 0.1em;
-    /* color: #ff3008 */
 }
 
 .main-header nav li:last-child{
     padding-right: 3em;
 }
-/* .main-header nav:first-child{
-    padding-left: 2em;
-} */
+
 .main-header nav li.current > a{
     border-bottom: #ff3008 solid 0.1em;
     font-weight: bold;
@@ -264,7 +250,6 @@ body{
     padding: 2.5% 5%;
     text-align: center;
     color: #313131;
-    /* border: 1px black solid; */
     margin: 0 auto;
 }  
 
@@ -427,7 +412,6 @@ div.wrapper div.banner #quotes{
     font-family: 'Courier New', Courier, monospace;
     text-transform: capitalize;
     text-align: center;
-    /* border: 1px solid black; */
 }
 
 .wrapper > img{
@@ -607,7 +591,6 @@ text-align: center;
 
 /*Footer*/
 footer.main-footer{
-    /* background-color: #363635; */
     width: 100%;
     text-align: center;
     padding: 2% 0;
@@ -635,13 +618,6 @@ footer.main-footer{
         text-align: center;
         width: 100%;
     }
-    /* .main-header nav li:last-child{
-    padding-right: 0;
-}
-    .main-header nav:last-child, 
-    .main-header nav .index_signup_in {
-    padding-right: none;
-} */
 }
 
 @media(max-width : 768px){
@@ -737,7 +713,7 @@ body.bodycolor #main-header{
         padding-bottom: 0; 
     }
     .main-header nav:last-child, 
-    .main-header nav .index_signup_in {/*___________________*/
+    .main-header nav .index_signup_in {
     padding-right: none;
 }
 
@@ -817,8 +793,6 @@ section.drink-catalog img{
 .main-header nav ul li > ul.menu{
     z-index: 40;
     width: 190px;
-    /* border: 1px solid #ff3008;
-    background: rgba(255, 255, 255, 0.699); */
 }
 
 
@@ -898,4 +872,3 @@ background: white;
     font-weight: bold;
 }
 }
-

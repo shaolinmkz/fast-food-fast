@@ -74,12 +74,10 @@ div.grid div{
 section.dashboard{
     width: 90%;
     padding: 1% 4.5%;
-    /* border: 1px solid black; For Tracking */
 }
 
 .dashboard div.div-container{
     width: 98%;
-    /* border: 1px solid rgb(255, 2, 2); For tracking */
     border-bottom: 5px solid grey;
     margin: 0 auto;
     background: white;
@@ -92,7 +90,6 @@ section.dashboard{
 .dashboard div.div-container div{
     float: left;
     width: 24%;
-    /* border: 1px solid rgb(0, 0, 255); For tracking */
     background: white;
     font-size: 100%;
 }
