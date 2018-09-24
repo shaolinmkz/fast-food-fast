@@ -381,7 +381,7 @@ describe("Signin Users route", () => {
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("Invalid Password!");
+				expect(res.body.message).to.eql("wrong password, please check and try again");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(5);
 				expect(res.body).to.have.property("status").with.lengthOf(5);
@@ -400,7 +400,7 @@ describe("Signin Users route", () => {
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("User doesn't exit, create user!");
+				expect(res.body.message).to.eql("User doesn't exist, create user!");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(5);
 				expect(res.body).to.have.property("status").with.lengthOf(5);
@@ -420,7 +420,7 @@ describe("Signin Users route", () => {
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("User Logged in Successfully, Welcome Obiora, Emeka");
+				expect(res.body.message).to.eql("User logged in successfully, Welcome Obiora, Emeka");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(7);
 				expect(res.body).to.have.property("status").with.lengthOf(7);

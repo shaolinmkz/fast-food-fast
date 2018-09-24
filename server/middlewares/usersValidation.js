@@ -123,28 +123,33 @@ export const signupValidation = (req, res, next) => {
 
 	/**Move to next middleware function if username is defined */
 	if(username || email) {
-    console.log("end of second validator", "****************************");
 		next();
 	}
 };
 
 
 
-
+/**
+ * Represents a middleware validator to check if a particular user exists
+ * @param {object} req - The body request
+ * @param {object} res - The body response
+ * @param {object} next - function to execute next middleware
+ */
 export const userExists = (req, res, next) => {
 	const { firstname, lastname, email, phone, password} = req.body;
 
 
 	if (firstname && lastname && email && phone && password) {
 		db.any("SELECT * FROM users WHERE email = $1 OR phone = $2", [email, phone])
-			.then((data) => {
+			.then(data => {
 				if (data.length > 0) {
 					return res.status(409).json({
 						status: "Error",
 						message: "User already exists"
 					});
+				} else{
+					next();
 				}
-				next();
 			})
 			.catch((err) => {
 				return res.status(400).json({
@@ -152,6 +157,10 @@ export const userExists = (req, res, next) => {
 					message: err
 				});
 			});
+	} else{ return res.status(400).json({
+		status: "Error",
+		message: "Empty input field, can't read inputs"
+	});
 	}
 };
 
@@ -171,7 +180,7 @@ export const loginValidation = (req, res, next) => {
 			message: "email or password is not defined"
 		});
 	}
-	if (typeof email !== "string" && typeof password !== "string") {
+	if (typeof email !== "string" || typeof password !== "string") {
 		return res.status(400).json({
 			status: "Error",
 			message: "Email and Passord must be a string datatype"
@@ -179,3 +188,5 @@ export const loginValidation = (req, res, next) => {
 	}
 	next();
 };
+
+

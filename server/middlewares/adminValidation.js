@@ -8,7 +8,6 @@ import { db } from "../db";
  */
 export const adminSignupValidation = (req, res, next) => {
 	const { username, email, phone } = req.body;
-  console.log("Here", "****************************");
 
 	if (!username) {
 		return res.status(400).json({
@@ -20,11 +19,10 @@ export const adminSignupValidation = (req, res, next) => {
 	if (typeof username !== "string") {
 		return res.status(400).json({
 			status: "Error",
-			message: `Invalid data type ${typeof username}. It should be a String data type`
+			message: `Invalid data type ${typeof(username)}. It should be a String data type`
 		});
 	}
 
-  console.log("There", "****************************");
 	if (username.length < 4) {
 		return res.status(400).json({
 			status: "Error",
@@ -32,7 +30,7 @@ export const adminSignupValidation = (req, res, next) => {
 			example: "Tony is acceptable NOT Ton OR Ony"
 		});
 	}
-  console.log("Its here!!!", "****************************");
+
 	if (username && email && phone) {
 		db.any("SELECT * FROM admins WHERE username = $1 OR email = $2 OR phone = $3", [username, email, phone])
 			.then((admin) => {
@@ -41,8 +39,7 @@ export const adminSignupValidation = (req, res, next) => {
 						status: "Error",
 						message: "Admin already exists"
 					});
-        }
-        console.log("end of adminValidator", "****************************");
+				}
 				next();
 			})
 			.catch((err) => {
@@ -67,13 +64,13 @@ export const adminLoginValidation = (req, res, next) => {
 		if (!username || !password) {
 			return res.status(400).json({
 				status: "Error",
-				message: "email or password is not defined"
+				message: "username or password is not defined"
 			});
 		}
-		if (typeof username !== "string" && typeof username !== "string") {
+		if (typeof username !== "string" || typeof password !== "string") {
 			return res.status(400).json({
 				status: "Error",
-				message: "Email and Passord must be a string datatype"
+				message: "username and Passord must be a string datatype"
 			});
 		}
 		return next();
@@ -85,3 +82,4 @@ export const adminLoginValidation = (req, res, next) => {
 	}
 
 };
+

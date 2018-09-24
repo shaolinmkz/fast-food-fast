@@ -88,47 +88,61 @@ export class Users {
    * @param { object } res - body response
    */
 	loginUser(req, res) {
-
 		const { email, password } = req.body;
-
 		db.any("SELECT * FROM users WHERE email = $1", [email])
 			.then(user => {
 				if (user.length > 0) {
 					bcrypt.compare(password, user[0].password, (error, result) => {
 						if (error) {
-							return res.status(400).json({ status: "Error", message: "invalid user!" });
-						}
-						if (!result){
-							return res.status(400).json({ status: "Error", message: "Invalid Password!" });
-						}
-						if (result) {
-							const token = jwt.sign({
-								id: user[0].id,
-								email
-							}, process.env.SECRET_KEY, { expiresIn: "1d" });
-
-							return res.status(200).json({
-								status: "Success",
-								message: `User Logged in Successfully, Welcome ${user[0].fullname}`,
-								token,
-								fullname: user[0].fullname,
-								mobile_number: "+234" + Number( user[0].phone),
-								logged_in: `${user[0].logged_in}`
+							return res.status(400).json({
+								status: "Error",
+								message: "invalid user!"
 							});
+						}
+
+						if (!result) {
+							return res.status(400).json({
+								status: "Error",
+								message: "wrong password, please check and try again"
+							});
+						}
+						else {
+							db.any("UPDATE users SET logged_in = true WHERE email = $1 RETURNING *", [email])
+								.then((user2) => {
+									const token = jwt.sign({
+										id: user2[0].id,
+										email: user2[0].email,
+										fullname: user2[0].fullname
+									}, process.env.SECRET_KEY, { expiresIn: "1d" });
+									if (token) {
+										return res.status(200).json({
+											status: "Success",
+											message: `User logged in successfully, Welcome ${user2[0].fullname}`,
+											mobile_number: "+234" + Number(user2[0].phone),
+											logged_in: user2[0].logged_in,
+											token: token
+										});
+									}
+								})
+								.catch(err => res.status(500).json({
+									status: "Error",
+									err
+								}));
 						}
 					});
 				} else {
 					return res.status(400).json({
 						status: "Error",
-						message: "User doesn't exit, create user!"
+						message: "User doesn't exist, create user!"
 					});
 				}
 			})
-			.catch(error => res.status(500).json({
+			.catch (err => res.status(500).json({
 				status: "Error",
-				error
+				err
 			}));
 	}
+
 
 
 	/**
