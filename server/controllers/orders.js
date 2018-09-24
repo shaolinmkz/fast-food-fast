@@ -1,5 +1,5 @@
-import { orders } from "../dummyDB";
-import { OrderedMeals, Billings, PhoneConverts } from "../middlewares";
+import { orders, usersData } from "../dummyDB";
+import { OrderedMeals, Billings } from "../middlewares";
 
 /**
  * @class \{{{object}}\} {{OrderedMeals}}{{new instance - orderedMeals}}
@@ -8,7 +8,6 @@ import { OrderedMeals, Billings, PhoneConverts } from "../middlewares";
  */
 const orderedMeals = new OrderedMeals();
 const billing = new Billings();
-const convert = new PhoneConverts();
 
 /**
  * @class \{{{object}}\} {{Orders}}{{Class that handles request from the client side.}}
@@ -25,27 +24,45 @@ export default class Orders{
    * @return { object } returns JSON format for placed order
 	 */
 	placeOrder(req, res){
-		const { firstname, lastname, email, phone,
-			addressNo, address, lga, state } = req.body;
+		const { userId, addressNo, address, lga, state,
+			foodsQuantity, drinksQuantity } = req.body;
+
 		let { foods, drinks } = req.body;
-		const id = (orders.length + 1);
+
+		const orderId = (orders.length + 1);
+
+		const userInfo = usersData.filter((elem)=>{
+			if (elem.usersId === userId) {
+				return elem;
+			}
+		})[0];
+
+		if (!userInfo) {
+			return res.status(400).json({
+				status: "Error",
+				message: "User doesn't exist"
+			});
+		}
+
+		userInfo.addressNo = addressNo;
+		userInfo.address = address;
+		userInfo.lga = lga;
+		userInfo.state = state;
 
 		const orderContainer = {
-			id,
-			shippingdetails: { firstname, lastname, email,
-				phone: convert.convertPhoneNumber(phone),
-				addressNo: convert.convertAddressNo(addressNo),
-				address, lga, state },
+			orderId,
+			shippingdetails: userInfo,
 			items:{
 				foods: orderedMeals.displayFoods(foods),
 				drinks: orderedMeals.displayDrinks(drinks)
 			},
 			bill: {
-				subtotal: `₦${billing.subtotal(drinks, foods)}` ,
-				discount: `₦${billing.discount(drinks, foods)}` ,
+				subtotal: `₦${billing.subtotal(drinks, foods, foodsQuantity, drinksQuantity)}` ,
+				discount: `₦${billing.discount(drinks, foods, foodsQuantity, drinksQuantity)}` ,
 				delivery: `₦${billing.delivery(drinks, foods)}` ,
-				total: `₦${billing.total(drinks, foods)}`
+				total: `₦${billing.total(drinks, foods, foodsQuantity, drinksQuantity)}`
 			},
+			orderedDateTime: Date(),
 			status: "pending",
 		};
 		orders.push(orderContainer);
@@ -68,7 +85,7 @@ export default class Orders{
 	getAllOrders(req, res) {
 		return res.status(200).send({
 			status: "Success",
-			message: "All pending orders delivered successfully",
+			message: "All orders received successfully",
 			orders: orders,
 		});
 	}
@@ -84,10 +101,10 @@ export default class Orders{
 	 */
 	getAnOrder(req, res) {
 		const id = parseInt(req.params.id, 10);
-		const output = orders.filter((order) => order.id === id)[0];
+		const output = orders.filter(order => order.orderId === id)[0];
 		return res.status(200).send({
 			status: "Success",
-			message: "Order delivered successfully",
+			message: "Order received successfully",
 			order: output,
 		});
 	}
@@ -100,9 +117,10 @@ export default class Orders{
    * @return { object } returns JSON format of updated order status
 	 */
 	updateStatus(req, res) {
+		// const { accept, decline, completed } = req.body;
 		const { status } = req.body;
 		const id = parseInt(req.params.id, 10);
-		const output = orders.filter((order) => order.id === id)[0];
+		const output = orders.filter((order) => order.orderId === id)[0];
 
 		if (!output) {
 			return res.status(404).send({
@@ -110,7 +128,6 @@ export default class Orders{
 				message: "That resource isn't available"
 			});
 		}
-		output["status"] = status;
 		output.status = status;
 		return res.status(201).send({
 			status: "Updated",

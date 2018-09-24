@@ -1,62 +1,14 @@
 import { foodsDB, drinksDB } from "../server/dummyDB";
 import app from "../server";
 import supertest from "supertest";
-const { expect, assert } = require("chai");
+import chai from "chai";
+const expect = chai.expect;
+const assert = chai.assert;
 
 const request = supertest.agent(app);
 
 //Test for place an order
 describe("Place an order route", () => {
-	it("should return 400 if firstname field is undefined", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				firstname: ""
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("One or more input fields are empty or has invalid input");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-	it("should return 400 if lastname field is undefined", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				lastname: ""
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("One or more input fields are empty or has invalid input");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return 400 if email field is undefined", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				email: ""
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("One or more input fields are empty or has invalid input");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return 400 if phone field is undefined", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				phone: ""
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("One or more input fields are empty or has invalid input");
-				if (err) { return done(err); }
-				done();
-			});
-	});
 
 	it("should return 400 if addressNo field is undefined", (done) => {
 		request.post("/api/v1/orders")
@@ -136,84 +88,6 @@ describe("Place an order route", () => {
 			});
 	});
 
-	it("should return 400 if firstname is not a string", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				firstname: 24,
-				lastname: "Doe",
-				email: "janedoe@testmail.com",
-				phone: 2347067443245,
-				addressNo: 23,
-				address: "xyz road behind maggi cube",
-				lga: "lagos Island",
-				state: "lagos state",
-				foods: ["chief burger", "rotisserie chicken"],
-				drinks: ["coca cola 50cl", "five alive 1L"]
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("Invalid input 24. Should be a string data type");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return 400 if lastname is not a string", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				firstname: "Jane",
-				lastname: 9456,
-				email: "janedoe@testmail.com",
-				phone: 2347067443245,
-				addressNo: 23,
-				address: "xyz road behind maggi cube",
-				lga: "lagos Island",
-				state: "lagos state",
-				foods: ["chief burger", "rotisserie chicken"],
-				drinks: ["coca cola 50cl", "five alive 1L"]
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("Invalid input 9456. Should be a string data type");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return 400 if phone is not a string or number", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				firstname: "Jane",
-				lastname: "Doe",
-				email: "janedoe@testmail.com",
-				phone: [2347067443245],
-				addressNo: 23,
-				address: "xyz road behind maggi cube",
-				lga: "lagos Island",
-				state: "lagos state",
-				foods: ["chief burger", "rotisserie chicken"],
-				drinks: ["coca cola 50cl", "five alive 1L"]
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("Invalid input 2347067443245. Should be a number data type");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return 400 if email is not a string", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				email: 2131
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
 	it("should return 400 if addressNo is not a number", (done) => {
 		request.post("/api/v1/orders")
 			.send({
@@ -262,19 +136,18 @@ describe("Place an order route", () => {
 			});
 	});
 
-	it("should return 400 if foods is not a string", (done) => {
+	it("should return 400 if foods is not a string or Array", (done) => {
 		request.post("/api/v1/orders")
 			.send({
-				firstname: "Jane",
-				lastname: "Doe",
-				email: "janedoe@testmail.com",
-				phone: 2347067443245,
+				userId: 2,
 				addressNo: 23,
 				address: "xyz road behind maggi cube",
 				lga: "lagos Island",
 				state: "lagos state",
 				foods: true,
-				drinks: ["coca cola 50cl", "five alive 1L"]
+				foodsQuantity: [1, 3],
+				drinks: ["coca cola 50cl", "five alive 1L"],
+				drinksQuantity: [4, 2]
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
@@ -299,21 +172,19 @@ describe("Place an order route", () => {
 	it("should return 201 if all inputs passes validation", (done) => {
 		request.post("/api/v1/orders")
 			.send({
-				firstname: "Jane",
-				lastname: "Doe",
-				email: "janedoe@testmail.com",
-				phone: "07067443333",
+				userId: 3,
 				addressNo: 23,
 				address: "xyz road behind maggi cube",
 				lga: "lagos Island",
 				state: "lagos state",
 				foods: ["chief burger", "rotisserie chicken"],
-				drinks: ["coca cola 50cl", "five alive 1L"]
+				foodsQuantity : [1, 3],
+				drinks: ["coca cola 50cl", "five alive 1L"],
+				drinksQuantity: [4, 2]
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(201);
 				expect(res.body.message).to.eql("Order has been placed successfully");
-				expect(res.body.orderDetails.shippingdetails.phone).to.eql(2347067443333);
 				if (err) { return done(err); }
 				done();
 			});
@@ -322,52 +193,21 @@ describe("Place an order route", () => {
 	it("should convert strings to array for foods and drinks", (done) => {
 		request.post("/api/v1/orders")
 			.send({
-				firstname: "Jane",
-				lastname: "Doe",
-				email: "janedoe@testmail.com",
-				phone: 7067443333,
+				userId: 1,
 				addressNo: 23,
 				address: "xyz road behind maggi cube",
 				lga: "lagos Island",
 				state: "lagos state",
 				foods: "chief burger, rotisserie chicken",
+				foodsQuantity: [1, 3],
 				drinks: "coca cola 50cl, five alive 1L",
+				drinksQuantity: [1, 2]
 			})
 			.end((err, res) => {
-				expect(res.body.orderDetails.items.drinks).to.be.a("array");
-				expect(res.body.orderDetails.items.foods).to.be.a("array");
-				expect(res.body.orderDetails.items.drinks).to.eql(["coca cola 50cl", " five alive 1L"]);
-				expect(res.body.orderDetails.shippingdetails.phone).to.eql(2347067443333);
+				expect(res.status).to.eql(201);
 				if (err) { return done(err); }
 				done();
 			});
-	});
-
-	it("should convert strings to array for foods and drinks", (done) => {
-		request.post("/api/v1/orders")
-			.send({
-				firstname: "Jane",
-				lastname: "Doe",
-				email: "janedoe@testmail.com",
-				phone: 2347067443245,
-				addressNo: 23,
-				address: "xyz road behind maggi cube",
-				lga: "lagos Island",
-				state: "lagos state",
-				foods: "chief burger, pot lovers, rotisserie chicken, crunchy chicken",
-				drinks: "coca cola 50cl, five alive 1L, coca-cola zero 50cl",
-			})
-			.end((err, res) => {
-				expect(res.body.orderDetails.bill.subtotal).to.be.a("string");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return the created order in JSON format", (done) => {
-		request.post("/api/v1/orders")
-			.expect("content-type", /json/)
-			.end(done);
 	});
 });
 
@@ -381,16 +221,10 @@ describe("GET all orders endpoint", () => {
 			.expect(200)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("All pending orders delivered successfully");
+				expect(res.body.message).to.eql("All orders received successfully");
 				if (err) { return done(err); }
 				done();
 			});
-	});
-
-	it("should return all orders in JSON format", (done) => {
-		request.get("/api/v1/orders")
-			.expect("content-type", /json/)
-			.end(done);
 	});
 });
 
@@ -404,7 +238,7 @@ describe("GET an order endpoint", () => {
 			.expect(200)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("Order delivered successfully");
+				expect(res.body.message).to.eql("Order received successfully");
 				if (err) { return done(err); }
 				done();
 			});
@@ -420,12 +254,6 @@ describe("GET an order endpoint", () => {
 				if (err) { return done(err); }
 				done();
 			});
-	});
-
-	it("should return all orders in JSON format", (done) => {
-		request.get("/api/v1/orders/1")
-			.expect("content-type", /json/)
-			.end(done);
 	});
 });
 
@@ -472,12 +300,6 @@ describe("Update order status endpoint", () => {
 				done();
 			});
 	});
-
-	it("should return the created order in JSON format", (done) => {
-		request.put("/api/v1/orders/3")
-			.expect("content-type", /json/)
-			.end(done);
-	});
 });
 
 //Test to get all food menus
@@ -495,12 +317,6 @@ describe("GET all food end point", () => {
 				if (err) { return done(err); }
 				done();
 			});
-	});
-
-	it("should return all food menus in JSON format", (done) => {
-		request.get("/api/v1/orders/menus/foods")
-			.expect("content-type", /json/)
-			.end(done);
 	});
 });
 
@@ -520,13 +336,6 @@ describe("GET all drinks end point", () => {
 				if (err) { return done(err); }
 				done();
 			});
-	});
-
-
-	it("should return all food menus in JSON format", (done) => {
-		request.get("/api/v1/orders/menus/drinks")
-			.expect("content-type", /json/)
-			.end(done);
 	});
 });
 
@@ -559,12 +368,6 @@ describe("GET a food endpoint", () => {
 				done();
 			});
 	});
-
-	it("should return food in JSON format", (done) => {
-		request.get("/api/v1/orders/menus/foods/4")
-			.expect("content-type", /json/)
-			.end(done);
-	});
 });
 
 //Test to get a specific drink
@@ -595,12 +398,6 @@ describe("GET a drink endpoint", () => {
 				if (err) { return done(err); }
 				done();
 			});
-	});
-
-	it("should return drink in JSON format", (done) => {
-		request.get("/api/v1/orders/menus/drinks/1")
-			.expect("content-type", /json/)
-			.end(done);
 	});
 });
 

@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
-import { orderRoutes } from "./server/routes";
+import { orderRoutes, userRoutes, adminRoutes } from "./server/routes";
 
 const app = express();
 app.use(logger("dev"));
@@ -11,6 +11,8 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/json" }));
 
 app.use(orderRoutes);
+app.use(userRoutes);
+app.use(adminRoutes);
 
 app.get("/", (req, res) => {
 	res.status(200).json({

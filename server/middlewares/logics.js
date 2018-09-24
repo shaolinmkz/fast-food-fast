@@ -1,3 +1,5 @@
+import { foodsDB, drinksDB } from "../dummyDB";
+
 /**
  * @class \{{{object}}\} {{OrderedMeals}}{{Class that handles request from the client side.}}
  */
@@ -35,36 +37,77 @@ export class OrderedMeals {
 }
 
 /**
- * @class \{{{object}}\} {{Billings}}{{Has methods that bills customer when other is placed}}
+ * @class \{{{object}}\} {{Billings}}{{Has methods that bills customer when order is placed}}
  */
 export class Billings {
 
 	/**
    * Calculates the subtotal.
-	 * @param  { object } foods - An array object of foods.
-   * @param  { object } drinks - An array of drinks.
+	 * @param  { object } foods - An array object of strings.
+   * @param  { object } drinks - An array of strings.
+   * @param  { object } foodsQuantity - An array of numbers
+   * @param  { object } drinksQuantity - An array of numbers
    * @return { number }
 	 */
-	subtotal(drinks, foods) {
+	subtotal(drinks, foods, foodsQuantity, drinksQuantity) {
+		const bill = new Billings();
+		const sub = ((bill.getFoodsPrice(foods, foodsQuantity)) + (bill.getDrinksPrice(drinks, drinksQuantity)));
+		return sub;
+	}
+	/**
+   * Calculates the total price of foods.
+	 * @param  { object } foods - An array object of strings.
+   * @param  { object } foodsQuantity - An array of strings.
+   * @return { number }
+	 */
+	getFoodsPrice(foods, foodsQuantity) {
+		let i, j, cost = 0;
 		const orderedMeals = new OrderedMeals();
-		if ((orderedMeals.displayDrinks(drinks).length + orderedMeals.displayFoods(foods).length) > 5) {
-			return ((500 * orderedMeals.displayDrinks(drinks).length) + (1000 * orderedMeals.displayFoods(foods).length));
-		} else {
-			return ((600 * 3));
+		const foodsCheck = orderedMeals.displayDrinks(foods);
+
+		for (i = 0; i < foodsCheck.length; i++) {
+			for (j = 0; j < foodsDB.length; j++) {
+				if (foodsCheck[i] === foodsDB[j].name) {
+					cost += (foodsDB[i].price * foodsQuantity[i]);
+				}
+			}
 		}
+		return cost;
 	}
 
+	/**
+   * Calculates the total price of drinks.
+	 * @param  { object } drinks - An array object of drinks.
+   * @param  { object } drinksQuantity - An array of numbers.
+   * @return { number }
+	 */
+	getDrinksPrice(drinks, drinksQuantity) {
+		let i, j, cost = 0;
+		const orderedMeals = new OrderedMeals();
+		const drinksCheck = orderedMeals.displayFoods(drinks);
+
+		for (i = 0; i < drinksCheck.length; i++) {
+			for (j = 0; j < drinksDB.length; j++) {
+				if (drinksCheck[i] === drinksDB[j].name) {
+					cost += (drinksDB[i].price * drinksQuantity[i]);
+				}
+			}
+		}
+		return cost;
+	}
 	/**
    * Calculates the discount.
 	 * @param  { object } foods - An array object of foods.
    * @param  { object } drinks - An array of drinks.
    * @return { number } discount
 	 */
-	discount(drinks, foods) {
-		const billing = new Billings();
-		if (billing.subtotal(drinks, foods) > 5000) {
-			const discount = 0.05 * billing.subtotal(drinks, foods);
-			return discount;
+	discount(drinks, foods, foodsQuantity, drinksQuantity) {
+		const bill = new Billings();
+		const subtotal = bill.subtotal(drinks, foods, foodsQuantity, drinksQuantity);
+		if (subtotal > 5000) {
+			return (0.05 * subtotal);
+		} else if (subtotal > 10000) {
+			return (0.1 * subtotal);
 		} else {
 			return 0;
 		}
@@ -91,12 +134,12 @@ export class Billings {
    * @param  { object } drinks - An array of drinks.
    * @return { number } total
 	 */
-	total(drinks, foods) {
-		const billing = new Billings();
+	total(drinks, foods, foodsQuantity, drinksQuantity) {
+		const bill = new Billings();
 		let total = (
-			(billing.subtotal(drinks, foods) -
-            billing.discount(drinks, foods)) +
-            billing.delivery(drinks, foods));
+			(bill.subtotal(drinks, foods, foodsQuantity, drinksQuantity) -
+      bill.discount(drinks, foods, foodsQuantity, drinksQuantity)) +
+      bill.delivery(drinks, foods));
 		return total;
 	}
 }

@@ -45,7 +45,7 @@ export class Menus {
 	getFood(req, res) {
 		const id = parseInt(req.params.id, 10);
 
-		const output = foodsDB.filter((food) => food.id === id)[0];
+		const output = foodsDB.filter((food) => food.foodId === id)[0];
 		if (output) {
 			return res.status(200).send({
 				status: "Success",
@@ -70,7 +70,7 @@ export class Menus {
 	getDrink(req, res) {
 		const id = parseInt(req.params.id, 10);
 
-		const output = drinksDB.filter((drink) => drink.id === id)[0];
+		const output = drinksDB.filter((drink) => drink.drinkId === id)[0];
 		if (output) {
 			return res.status(200).send({
 				status: "Success",
