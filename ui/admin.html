@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
+    <link rel="stylesheet" type="text/css" href="./css/admin.css" />
     <link rel="icon" href="./images/3f-logo.png" />
 </head>
 
 <body class="bodycolor">
+    <div class="food-bg-covering">
     <header class="main-header clearfix" id="main-header">
         <img src="./images/3f-logo.png" id="logo" class="logo fff" />
         <img src="./images/fastfoodfast1.png" class="fastfoodfast" />
@@ -36,6 +38,16 @@
             <form action="./admin_dashboard.html">
                 <label>Username</label>
                 <input type="text" name="text" placeholder="Admin"/>
+                <label>firstname</label>
+                <input type="text" name="text" placeholder="Tony" />
+                <label>lastname</label>
+                <input type="text" name="text" placeholder="Cynthia" />
+                <label>Phone</label>
+                <input type="tel" name="text" placeholder="0802 222 2222" />
+                <label>Email</label>
+                <input type="email" name="email" placeholder="janedoe@testmail.com">
+                <label>Admin token</label>
+                <input type="password" name="password" placeholder="Enter token">
                 <label>Password</label>
                 <input type="password" name="password" placeholder="Enter Password">
                 <label>Confirm password</label>
@@ -63,10 +75,10 @@
     </section>
 
     <footer class="main-footer">
-        &copy; <label>3F Template</label>
+        &copy; <label>F-CUBE</label>
     </footer>
 
-
+</div>
     <script type="text/javascript" src="./js/admin.js"></script>
 </body>
 
