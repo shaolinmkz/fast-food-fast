@@ -34,8 +34,8 @@ const createTable = () => {
 
         CREATE TABLE IF NOT EXISTS foods(
             id SERIAL PRIMARY KEY,
-            name TEXT NOT NULL,
-            price INT NOT NULL,
+            name TEXT UNIQUE NOT NULL,
+            price TEXT NOT NULL,
             image VARCHAR(255),
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -43,8 +43,8 @@ const createTable = () => {
 
         CREATE TABLE IF NOT EXISTS drinks(
             id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            price INT NOT NULL,
+            name TEXT UNIQUE NOT NULL,
+            price TEXT NOT NULL,
             image VARCHAR(255),
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
