@@ -364,9 +364,9 @@ export class Admins{
 		let { id } = req.params;
 		id = parseInt(id, 10);
 
-		db.any("UPDATE orders SET status = $1 WHERE id = $2", [status, id])
-			.then(data => {
-				if (data.length < 0) {
+		db.one("UPDATE orders SET status = $1 WHERE id = $2 RETURNING *", [status, id])
+			.then((statusData) => {
+				if (statusData.length < 0) {
 					return res.status(404).json({
 						status: "Error",
 						message: "Order not found"
@@ -375,7 +375,7 @@ export class Admins{
 				return res.status(200).json({
 					status: "Success",
 					message: "Order status updated",
-					updated_order: data[0]
+					updated_order: statusData[0]
 				});
 			})
 			.catch(error => res.status(500).json({
