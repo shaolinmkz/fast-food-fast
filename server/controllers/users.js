@@ -22,10 +22,10 @@ export class Users {
 						users
 					});
 			})
-			.catch(error => res.status(500)
+			.catch(() => res.status(404)
 				.json({
 					status: "Error",
-					error
+					message: "users not found"
 				}));
 	}
 
@@ -67,11 +67,6 @@ export class Users {
 							mobile_number: "+234" + Number(user.phone),
 							logged_in: `${user.logged_in}`
 						});
-					}).catch((err) => {
-						return res.status(500).json({
-							status: "Error",
-							message: err
-						});
 					});
 			})
 			.catch((err) => {
@@ -91,6 +86,12 @@ export class Users {
 		const { email, password } = req.body;
 		db.any("SELECT * FROM users WHERE email = $1", [email])
 			.then(user => {
+				if (user[0].logged_in.toString() === "true") {
+					return res.status(400).json({
+						status: "Error",
+						message: "User is already logged in"
+					});
+				}
 				if (user.length > 0) {
 					bcrypt.compare(password, user[0].password, (error, result) => {
 						if (error) {
@@ -123,11 +124,7 @@ export class Users {
 											token: token
 										});
 									}
-								})
-								.catch(err => res.status(500).json({
-									status: "Error",
-									err
-								}));
+								});
 						}
 					});
 				} else {
@@ -137,8 +134,9 @@ export class Users {
 					});
 				}
 			})
-			.catch (err => res.status(500).json({
+			.catch (err => res.status(400).json({
 				status: "Error",
+				message: "User doesn't exist, create user!",
 				err
 			}));
 	}
@@ -180,4 +178,51 @@ export class Users {
 				error
 			}));
 	}
+
+
+
+
+	/**
+   * Represents a get all menu function
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	getAllMenu(req, res) {
+		let foods, drinks;
+		db.any("SELECT * FROM foods")
+			.then(data1 => {
+				foods = data1;
+				if (foods[0]) {
+					db.any("SELECT * FROM drinks")
+						.then(data2 => {
+							drinks = data2;
+							return res.status(200).json({
+								status: "Success",
+								message: "All menus received successfully",
+								solid_meals: foods,
+								liquid_meals: drinks
+							});
+						}).catch(err => {
+							res.status(500).json({
+								status: "Error",
+								err
+							});
+						});
+				} else {
+					return res.status(404).json({
+						status: "Error",
+						message: "Menu not found"
+					});
+				}
+			})
+			.catch(error => res.status(500)
+				.json({
+					status: "Error",
+					error
+				}));
+	}
+
+
 }
+
+

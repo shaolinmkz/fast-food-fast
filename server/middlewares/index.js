@@ -6,8 +6,10 @@ import { signupValidation, loginValidation, userExists } from "./usersValidation
 
 import { adminSignupValidation, adminLoginValidation, adminIsExists } from "./adminValidation";
 
+import { MealValidator } from "./mealsValidator";
 
 export { orderValidation, statusValidation, OrderedMeals, Billings,
 	PhoneConverts, getOrderErrorHandler, signupValidation, loginValidation,
-	userExists, adminSignupValidation, adminLoginValidation, adminIsExists };
+	userExists, adminSignupValidation, adminLoginValidation, adminIsExists,
+	MealValidator };
 

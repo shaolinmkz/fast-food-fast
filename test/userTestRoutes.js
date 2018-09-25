@@ -373,6 +373,29 @@ describe("Signin Users route", () => {
 			});
 	});
 
+
+	it("should return 200 when user signs out", (done) => {
+		request.post("/api/v2/logout")
+			.send({
+				email: "nwabuzor.obiora@gmail.com",
+				password: "asdfghj"
+			})
+			.end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.message).to.eql("User Logged out Successfully");
+				expect(res.body.tokenMessage).to.eql("Token Expired");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
 	it("should return 400 if password isn't same with the hashed password", (done) => {
 		request.post("/api/v2/auth/login")
 			.send({
@@ -439,7 +462,7 @@ describe("Signin Users route", () => {
 describe("Signout Users route", () => {
 
 	it("should return 200 when user signs out", (done) => {
-		request.post("/api/v2/auth/logout")
+		request.post("/api/v2/logout")
 			.send({
 				email: "nwabuzor.obiora@gmail.com",
 				password: "asdfghj"
@@ -460,7 +483,7 @@ describe("Signout Users route", () => {
 	});
 
 	it("should return 400 if user email isn't found ", (done) => {
-		request.post("/api/v2/auth/logout")
+		request.post("/api/v2/logout")
 			.send({
 				email: "Mwabuzor.obiora@gmail.com",
 				password: "asdfghj"
@@ -486,7 +509,7 @@ describe("Signout Users route", () => {
 describe("Fetch all users route", () => {
 
 	it("should return 200 if all users exist", (done) => {
-		request.get("/api/v2/auth/users")
+		request.get("/api/v2/users")
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.message).to.eql("All users received successfully");
@@ -502,3 +525,26 @@ describe("Fetch all users route", () => {
 	});
 });
 
+/**
+ * GET ALL MENUS
+ */
+describe("Fetch all menu route", () => {
+
+	it("should return 200 if all menus exist", (done) => {
+		request.get("/api/v2/menu")
+			.end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.message).to.eql("All menus received successfully");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+});

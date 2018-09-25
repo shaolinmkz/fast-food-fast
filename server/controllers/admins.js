@@ -1,6 +1,9 @@
 import { db } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.load();
 
 
 export class Admins{
@@ -20,10 +23,10 @@ export class Admins{
 						admins
 					});
 			})
-			.catch(error => res.status(500)
+			.catch(() => res.status(404)
 				.json({
 					status: "Error",
-					error
+					message: "Admins not found"
 				}));
 	}
 
@@ -42,6 +45,7 @@ export class Admins{
 			password } = req.body;
 
 		let { phone } = req.body;
+
 		if (adminToken !== process.env.ADMIN_TOKEN) {
 			return res.status(400).json({
 				status: "Error",
@@ -51,9 +55,10 @@ export class Admins{
 		const fullname = `${lastname.trim()} ${firstname.trim()}`;
 		phone = phone.toString().trim();
 		const hash = bcrypt.hashSync(password, 10);
+		const bool = "true";
 
-		db.none("INSERT INTO admins(username, fullname, email, phone, password, logged_in)" +
-      "VALUES ($1, $2, $3, $4, $5, $6)", [username, fullname, email, phone, hash, "true"])
+		db.any("INSERT INTO admins(username, fullname, email, phone, password, logged_in)" +
+      "VALUES ($1, $2, $3, $4, $5, $6)", [username, fullname, email, phone, hash, bool])
 			.then(() => {
 				db.any("SELECT * FROM admins WHERE username = $1", [username])
 					.then(data => {
@@ -97,11 +102,24 @@ export class Admins{
    */
 	loginAdmin(req, res) {
 
-		const { username, password } = req.body;
+		const { password } = req.body;
+
+		let { username } = req.body;
+
+		username = username.trim();
+
 		db.any("SELECT * FROM admins WHERE username = $1", [username])
 			.then(admin => {
 				if (admin.length > 0) {
 					bcrypt.compare(password, admin[0].password, (error, result) =>{
+
+						if (admin[0].logged_in.toString() === "true") {
+							return res.status(400).json({
+								status: "Error",
+								message: "Admin is logged in already!"
+							});
+						}
+
 						if (error) {
 							return res.status(400).json({
 								status: "Error",
@@ -159,7 +177,9 @@ export class Admins{
    */
 	logoutAdmin(req, res) {
 
-		const { username } = req.body;
+		let { username } = req.body;
+
+		username = username.trim();
 
 		db.any("UPDATE admins SET logged_in = false WHERE username = $1 RETURNING *", [username])
 			.then(admin => {
@@ -167,7 +187,7 @@ export class Admins{
 					const token = jwt.sign({
 						id: admin[0].id,
 						username: admin[0].username
-					}, process.env.SECRET_KEY, { expiresIn: "1s" });
+					}, process.env.SECRET_KEY, { expiresIn: "5s" });
 					if (token) {
 						return res.status(200).json({
 							status: "Success",
@@ -187,6 +207,84 @@ export class Admins{
 				status: "Error",
 				error
 			}));
+	}
+
+
+
+	/**
+   * Represents Add Foods by admins
+   * @param { object } req - request body
+   * @param { object } res - response body
+   */
+	addFoods(req, res) {
+
+		let { name, price } = req.body;
+
+		name = name.toString().trim(); price = price.toString().trim();
+
+		db.none("INSERT INTO foods(name, price) VALUES ($1, $2)", [name, price])
+			.then(() => {
+				db.any("SELECT * FROM foods WHERE name = $1", [name])
+					.then(data => {
+						const foods = data[0];
+
+						return res.status(201).json({
+							status: "Success",
+							message: "Food created Successfully",
+							product_name: foods.name,
+							price: foods.price,
+						});
+					}).catch((err) => {
+						return res.status(500).json({
+							status: "Error",
+							message: err
+						});
+					});
+			})
+			.catch(() => {
+				return res.status(409).json({
+					status: "Error",
+					message: "Food already exists, choose a different name"
+				});
+			});
+	}
+
+	/**
+   * Represents Add Drinks by admins
+   * @param { object } req - request body
+   * @param { object } res - response body
+   */
+	addDrinks(req, res) {
+
+		let { name, price } = req.body;
+
+		name = name.toString().trim(); price = price.toString().trim();
+
+		db.none("INSERT INTO drinks(name, price) VALUES ($1, $2)", [name, price])
+			.then(() => {
+				db.any("SELECT * FROM drinks WHERE name = $1", [name])
+					.then(data => {
+						const drinks = data[0];
+
+						return res.status(201).json({
+							status: "Success",
+							message: "Drink created Successfully",
+							product_name: drinks.name,
+							price: drinks.price,
+						});
+					}).catch((err) => {
+						return res.status(500).json({
+							status: "Error",
+							message: err
+						});
+					});
+			})
+			.catch(() => {
+				return res.status(409).json({
+					status: "Error",
+					message: "Drink already exists, choose a different name"
+				});
+			});
 	}
 
 
