@@ -1,4 +1,62 @@
+import { db } from "../db";
 import { foodsDB, drinksDB } from "../dummyDB";
+// let foodsDB = [];
+// let drinksDB = [];
+
+// export const foodsDBfunc = (req, res) => {
+// 	db.any("SELECT * FROM foods")
+// 		.then((foodsData) => {
+
+// 			return foodsDB.push(foodsData);
+// 			// console.log(foodsDB);
+// 		})
+// 		.catch(()=> {
+// 			return res.status(404).json({
+// 				status: "Error",
+// 				message: "Not found"
+// 			});
+// 		});
+// };
+
+// export const drinksDBfunc = (req, res) => {
+// 	db.any("SELECT * FROM drinks")
+// 		.then((drinksData) => {
+
+// 			return drinksDB.push(drinksData);
+// 			// console.log(drinksDB);
+// 		})
+// 		.catch(() => {
+// 			return res.status(404).json({
+// 				status: "Error",
+// 				message: "Not found"
+// 			});
+// 		});
+// };
+
+
+
+
+// export class Quantity {
+// 	/**
+//    * Converts string to array.
+// 	 * @param  { object } quantity - An array of numbers.
+//    * @return { object } newdrinks - Array object
+// 	 */
+// 	displayQuantity (quantity) {
+// 		if (!(Array.isArray(quantity)) && (typeof quantity === "string")) {
+// 			let q1 = quantity.split(",");
+// 			let q2 = []; let i;
+
+// 			for (i = 0; i < q1.length; i++) {
+// 				q2.push(Number(q1[i]));
+// 			}
+// 			return q2;
+// 		} else {
+// 			return quantity;
+// 		}
+// 	}
+// }
+
 
 /**
  * @class \{{{object}}\} {{OrderedMeals}}{{Class that handles request from the client side.}}
@@ -16,6 +74,7 @@ export class OrderedMeals {
 			return drinks;
 		}else {
 			const newdrinks = drinks.split(",");
+
 			return newdrinks;
 		}
 	}
@@ -63,12 +122,22 @@ export class Billings {
 	getFoodsPrice(foods, foodsQuantity) {
 		let i, j, cost = 0;
 		const orderedMeals = new OrderedMeals();
-		const foodsCheck = orderedMeals.displayDrinks(foods);
+    const foodsCheck = orderedMeals.displayDrinks(foods);
+    // let foodsDB = [];
+    // foodsDB.push(foodsDBfunc());
+    // console.log(foodsDB);
+
+		// const convertQuantity = new Quantity;
+		// foodsQuantity = convertQuantity(foodsQuantity);
+
+		// if (foodsCheck[0] === "") {
+		// 	return 0;
+		// }
 
 		for (i = 0; i < foodsCheck.length; i++) {
 			for (j = 0; j < foodsDB.length; j++) {
 				if (foodsCheck[i] === foodsDB[j].name) {
-					cost += (foodsDB[i].price * foodsQuantity[i]);
+					cost += (foodsDB[i].price * (foodsQuantity[i] || 1));
 				}
 			}
 		}
@@ -84,17 +153,30 @@ export class Billings {
 	getDrinksPrice(drinks, drinksQuantity) {
 		let i, j, cost = 0;
 		const orderedMeals = new OrderedMeals();
-		const drinksCheck = orderedMeals.displayFoods(drinks);
+    const drinksCheck = orderedMeals.displayFoods(drinks);
+    // let drinksDB = [];
+    // drinksDB.push(drinksDBfunc());
+    // console.log(drinksDB);
+
+		// const convertQuantity = new Quantity;
+		// drinksQuantity = convertQuantity(drinksQuantity);
+
+		// if (drinksCheck[0] === "") {
+		// 	return 0;
+		// }
 
 		for (i = 0; i < drinksCheck.length; i++) {
 			for (j = 0; j < drinksDB.length; j++) {
 				if (drinksCheck[i] === drinksDB[j].name) {
-					cost += (drinksDB[i].price * drinksQuantity[i]);
+					cost += (drinksDB[i].price * (drinksQuantity[i] || 1));
 				}
 			}
 		}
 		return cost;
 	}
+
+
+
 	/**
    * Calculates the discount.
 	 * @param  { object } foods - An array object of foods.
@@ -132,6 +214,8 @@ export class Billings {
    * Calculates the total.
 	 * @param  { object } foods - An array object of foods.
    * @param  { object } drinks - An array of drinks.
+   * @param  { object } foodsQuantity - An array object of quantity foods.
+   * @param  { object } drinksQuantity - An array of quantity drinks.
    * @return { number } total
 	 */
 	total(drinks, foods, foodsQuantity, drinksQuantity) {

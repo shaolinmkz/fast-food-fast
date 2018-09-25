@@ -13,11 +13,11 @@ const createTable = () => {
 
 	const query =
         `
-        DROP TABLE IF EXISTS users CASCADE;
-        DROP TABLE IF EXISTS admins CASCADE;
-        DROP TABLE IF EXISTS orders CASCADE;
-        DROP TABLE IF EXISTS drinks CASCADE;
-        DROP TABLE IF EXISTS foods CASCADE;
+        // DROP TABLE IF EXISTS users CASCADE;
+        // DROP TABLE IF EXISTS admins CASCADE;
+        // DROP TABLE IF EXISTS orders CASCADE;
+        // DROP TABLE IF EXISTS drinks CASCADE;
+        // DROP TABLE IF EXISTS foods CASCADE;
 
         CREATE TABLE IF NOT EXISTS users(
             id SERIAL PRIMARY KEY,
@@ -36,7 +36,7 @@ const createTable = () => {
             id SERIAL PRIMARY KEY,
             name TEXT UNIQUE NOT NULL,
             price TEXT NOT NULL,
-            image VARCHAR(255),
+            image TEXT,
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
@@ -45,7 +45,7 @@ const createTable = () => {
             id SERIAL PRIMARY KEY,
             name TEXT UNIQUE NOT NULL,
             price TEXT NOT NULL,
-            image VARCHAR(255),
+            image TEXT,
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
@@ -54,11 +54,12 @@ const createTable = () => {
             id SERIAL PRIMARY KEY,
             food_items TEXT,
             drink_items TEXT,
-            subtotal INT NOT NULL,
-            delivery INT NOT NULL,
-            discount INT NOT NULL,
-            total INT NOT NULL,
-            user_id INT REFERENCES users(id),
+            subtotal TEXT NOT NULL,
+            delivery TEXT NOT NULL,
+            discount TEXT NOT NULL,
+            total TEXT NOT NULL,
+            status TEXT NOT NULL,
+            user_id TEXT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
 
@@ -80,11 +81,10 @@ const createTable = () => {
 };
 createTable();
 
-
 const pgp = pg();
 export const db = pgp(connectionString);
 
 if (db) {
-	console.log("Database Connected");
+	console.log("Database Connected"); /**For testing */
 	console.log(connectionString);
 }

@@ -134,7 +134,10 @@ Git-Hub
 ## Authors
 * **Nwabuzor, Chukwuemeka Obiora** - *Initial work* - [Git-hub repo link](https://github.com/shaolinmkz/fast-food-fast)
 
+## Credits
+[Andela Fellowship](https://andela.com/fellowship/)
+
 ## Acknowledgments
 * I appreciate anynoe who has impacted in these project. You are all awesome!!!
-* .................
+* ..............
 * ......

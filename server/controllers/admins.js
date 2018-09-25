@@ -288,7 +288,101 @@ export class Admins{
 	}
 
 
+
+	/**
+* Represents Get a specific order
+* @param { object } req - body request
+* @param { object } res - body response
+*/
+	getASpecificOrder(req, res) {
+		let { id } = req.params;
+		id = parseInt(id, 10);
+		console.log(id);
+		db.any("SELECT * FROM orders WHERE id= $1", [id])
+			.then(order => {
+				if (order.length - 1 < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "order not found"
+					});
+				}
+				return res.status(200)
+					.json({
+						status: "Success",
+						message: "All orders received successfully",
+						order
+					});
+			})
+			.catch(() => res.status(404)
+				.json({
+					status: "Error",
+					message: "Orders not found"
+				}));
+	}
+
+
+
+	/**
+   * Represents a Get all order
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	fetchAllOrders(req, res) {
+		db.any("SELECT * FROM orders")
+			.then(allOrders => {
+				if (allOrders.length - 1 < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "orders not found"
+					});
+				}
+				return res.status(200)
+					.json({
+						status: "Success",
+						message: "All orders received successfully",
+						allOrders
+					});
+			})
+			.catch(() => res.status(404)
+				.json({
+					status: "Error",
+					message: "Orders not found"
+				}));
+	}
+
+
+
+
+
+	/**
+   * @description Update order status
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	updateOrderStatus(req, res) {
+		const { status } = req.body;
+		let { id } = req.params;
+		id = parseInt(id, 10);
+
+		db.any("UPDATE orders SET status = $1 WHERE id = $2", [status, id])
+			.then(data => {
+				if (data.length < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "Order not found"
+					});
+				}
+				return res.status(200).json({
+					status: "Success",
+					message: "Order status updated",
+					updated_order: data[0]
+				});
+			})
+			.catch(error => res.status(500).json({
+				status: "Error",
+				error
+			}));
+	}
+
 }
-
-
 

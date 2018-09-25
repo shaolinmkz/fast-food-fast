@@ -40,7 +40,7 @@ export const insertDrinks = (req, res) => {
 											db.none("INSERT INTO drinks (name, price) VALUES ($1, $2)", ["five alive 1L", "600"]);
 											return res.status(201).json({
 												status: "success",
-												message: "ALL MENU INSERTED"
+												message: "DATABASE SUCCESSFULLY POPULATED"
 											});
 										});
 								});

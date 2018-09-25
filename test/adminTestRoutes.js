@@ -812,7 +812,7 @@ describe("Add a menu by Admin", () => {
 describe("Add a menu by Admin", () => {
 
 	it("should return 201 if all test menus are inserted", (done) => {
-		request.post("/api/v2/admin/push")
+		request.post("/api/v2/pushall")
 			.set("Connection", "keep alive")
 			.set("Accept", "application/json")
 			.set("authorization", tokenHeaderAdmin(1))
@@ -820,7 +820,7 @@ describe("Add a menu by Admin", () => {
 			.send({})
 			.end((err, res) => {
 				expect(res.status).to.eql(201);
-				expect(res.body.message).to.eql("ALL MENU INSERTED");
+				expect(res.body.message).to.eql("DATABASE SUCCESSFULLY POPULATED");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(7);
 				expect(res.body).to.have.property("status").with.lengthOf(7);

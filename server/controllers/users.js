@@ -1,6 +1,11 @@
 import { db } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { OrderedMeals, Billings } from "../middlewares";
+import { foodsDBfunc, drinksDBfunc } from "../middlewares/logics";
+
+const orderedMeals = new OrderedMeals();
+const billing = new Billings();
 
 /**
  * @class \{{{object}}\} {{Users}}{{Contains methods users session}}
@@ -150,7 +155,7 @@ export class Users {
    */
 	logoutUser(req, res) {
 
-		const { email } = req.body;
+		const { email } = req.userInfo;
 
 		db.any("UPDATE users SET logged_in = false WHERE email = $1 RETURNING *", [email])
 			.then(user => {
@@ -183,7 +188,7 @@ export class Users {
 
 
 	/**
-   * Represents a get all menu function
+   * @description Represents a get all menu function
    * @param { object } req - body request
    * @param { object } res - body response
    */
@@ -223,6 +228,120 @@ export class Users {
 	}
 
 
+
+	/**
+   * @description Method that places an order
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	placeOrder(req, res) {
+		// foodsDBfunc();
+		// drinksDBfunc();
+		const { id }  = req.userInfo;
+		console.log("starting place osder function", id);
+		let { address, lga, state, foods,
+			foodsQuantity, drinks, drinksQuantity } = req.body;
+
+		foods = orderedMeals.displayFoods(foods);
+		drinks = orderedMeals.displayDrinks(drinks);
+		console.log("before db.tx", foods, drinks, address, lga, state);
+
+		db.any("UPDATE users SET address = $1 WHERE id = $2 RETURNING *", [address, id])
+			.then(() => {
+				db.any("UPDATE users SET lga = $1 WHERE id = $2 RETURNING *", [lga, id])
+					.then(() => {
+						db.any("UPDATE users SET state = $1 WHERE id = $2 RETURNING *", [state, id])
+							.then((userData) => {
+								const userInfo = userData[0];
+								// console.log("user information ----------------------->",userInfo);
+								let subtotal = billing.subtotal(drinks, foods, foodsQuantity, drinksQuantity);
+								console.log("1");
+								let discount = billing.discount(drinks, foods, foodsQuantity, drinksQuantity);
+								console.log(2);
+								let delivery = billing.delivery(drinks, foods);
+								console.log(3);
+								let total = billing.total(drinks, foods, foodsQuantity, drinksQuantity);
+								console.log(4);
+								let status = "new"; /**Order status could be: new, procesing, cancelled, or completed*/
+								console.log(5);
+								foods = foods.join(","); drinks = drinks.join(",");
+								console.log(foods,"_________________________", drinks);
+								db.any("INSERT INTO orders (food_items, drink_items, subtotal, delivery, discount, total, status, user_id)" +
+                  "VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [foods, drinks, subtotal, delivery, discount, total, status, id])
+									.then(() => {
+										console.log(6);
+										db.any("SELECT * FROM orders WHERE user_id = $1", [id])
+											.then(orderData => {
+												const orderDetails = orderData[(orderData.length) - 1];
+
+												return res.status(201).json({
+													status: "Success",
+													message: "Your order has been placed",
+													order_id: orderDetails.id,
+													shippingdetails: userInfo,
+													items: {
+														foods: orderDetails.food_items || [],
+														drinks: orderDetails.drink_items || []
+													},
+													bill: {
+														subtotal: `${orderDetails.subtotal}`,
+														discount: `${orderDetails.discount}`,
+														delivery: `${orderDetails.delivery}`,
+														total: `${orderDetails.total}`
+													},
+													order_status: orderDetails.status,
+													ordered_datetime: orderDetails.created_date
+												});
+
+											})
+											.catch(err => err);
+									})
+									.catch(err => err);
+							})
+							.catch(err => err);
+					})
+					.catch(err => err);
+			})
+			.catch(err => err);
+
+	}
+
+
+
+	/**
+   * Represents a Get user order history
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	fetchUsersOrderHistory(req, res) {
+		const { id } = req.params || req.userInfo;
+		db.any("SELECT * FROM orders WHERE user_id= $1", [id])
+			.then(history => {
+				if (history.length - 1 < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "History not found"
+					});
+				}
+				return res.status(200)
+					.json({
+						status: "Success",
+						message: "All order history received successfully",
+						history
+					});
+			})
+			.catch(() => res.status(404)
+				.json({
+					status: "Error",
+					message: "History not found"
+				}));
+	}
+
+
+
+
+
 }
+
 
 
