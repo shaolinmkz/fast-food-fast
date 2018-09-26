@@ -4,8 +4,7 @@ import { adminSignupValidation, adminLoginValidation } from "../middlewares";
 
 import { Helper } from "../auth";
 
-import { insertFoods, insertDrinks } from "../db/pushAllMenus";
-import { insertUsers, insertAdmins } from "../db/populateTable";
+import { polulateDB } from "../db/populateTable";
 
 import { signupValidation, MealValidator } from "../middlewares";
 
@@ -16,7 +15,7 @@ const admin = new Admins();
 const adminRoutes = express.Router();
 
 adminRoutes.get("/api/v2/admins", admin.fetchAdmins); /**For testing, gets all admins*/
-adminRoutes.post("/api/v2/pushall", insertAdmins, insertUsers, insertFoods, insertDrinks); /**For testing, populate database table*/
+adminRoutes.post("/api/v2/pushall", polulateDB); /**For testing, populate database table*/
 
 adminRoutes.post("/api/v2/auth/admin/signup", signupValidation, adminSignupValidation, admin.createNewAdmins);/**admin signup */
 adminRoutes.post("/api/v2/auth/admin/login", adminLoginValidation, admin.loginAdmin); /**admin login*/

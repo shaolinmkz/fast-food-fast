@@ -36,26 +36,20 @@ export class Helper {
 	/**Authorization: Bearer <access_token>*/
 
 	/**
- * Token verification for aAmin
- * @param {object} req - The request body
- * @param {object} res - The response body
- * @param {object} next - function that call the next middleware
- */
+   * Token verification for Admin
+   * @param {object} req - The request body
+   * @param {object} res - The response body
+   * @param {object} next - function that call the next middleware
+   */
 	static verifyAdminsToken(req, res, next) {
 		/**get auth header value*/
-		const bearerHeader = req.body.token || req.headers["authorization"] || req.headers["x-access-token"]|| req.headers.authorization || req.params.token;
+		const bearerHeader = req.headers["authorization"] || req.headers["x-access-token"];
 		/**Check if bearer is undefined*/
 		if (typeof bearerHeader !== "undefined") {
-			/**Split at the space*/
-			const bearer = bearerHeader.split(" ");
-			/**Get token from array*/
-			const bearerToken = bearer[1];
 			/**Set the Token*/
-			req.token =  bearerHeader || bearerToken;
+			req.token =  bearerHeader;
 
-			const secret_key = process.env.ADMIN_ONLY;
-
-			jwt.verify(req.token, secret_key, (err, decodedToken) => {
+			jwt.verify(req.token, process.env.ADMIN_ONLY, (err, decodedToken) => {
 				if (err) {
 					res.status(401).json({
 						status: "Error",
@@ -87,15 +81,11 @@ export class Helper {
   */
 	static verifyUsersToken(req, res, next) {
 		/**get auth header value*/
-		const bearerHeader = req.body.token || req.headers["authorization"] || req.headers["x-access-token"] || req.headers.authorization || req.params.token;
+		const bearerHeader = req.headers["authorization"] || req.headers["x-access-token"];
 		/**Check if bearer is undefined*/
 		if (typeof bearerHeader !== "undefined") {
-			/**Split at the space*/
-			const bearer = bearerHeader.split(" ");
-			/**Get token from array*/
-			const bearerToken = bearer[1];
 			/**Set the Token*/
-			req.token = bearerHeader || bearerToken;
+			req.token = bearerHeader;
 
 			jwt.verify(req.token, process.env.SECRET_KEY, (err, decodedToken) => {
 				if (err) {

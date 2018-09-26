@@ -15,17 +15,15 @@ dotenv.load();
 /**
  * Generate token
  */
-
 const tokenHeaderAdmin = id => jwt.sign(
 	{ user: { id, username: "mustapha" } },
 	process.env.ADMIN_ONLY, { expiresIn: 24 * 60 * 60 }
 ).toString();
 
 const invalidtoken = id => jwt.sign(
-	{ user: { id, username: "invalidname" } },
-	"invalidtoken", { expiresIn: 24 * 60 * 60 }
+	{ user: { id, username: "asdasdadsd" } },
+	"asdadsdad", { expiresIn: 24 * 60 * 60 }
 ).toString();
-
 
 /**
  * Create Admin
@@ -353,14 +351,14 @@ describe("Admin Login route", () => {
 
 
 
-	it("should return 400 if username is not found in the database", (done) => {
+	it("should return 404 if username is not found in the database", (done) => {
 		request.post("/api/v2/auth/admin/login")
 			.send({
 				username: "shaolin009",
 				password: "asdfghjkl"
 			})
 			.end((err, res) => {
-				expect(res.status).to.eql(400);
+				expect(res.status).to.eql(404);
 				expect(res.body.message).to.eql("Admin doesn't exist, create admin!");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(5);
@@ -373,27 +371,7 @@ describe("Admin Login route", () => {
 			});
 	});
 
-	it("should return 200 if admin logs out", (done) => {
-		request.post("/api/v2/admin/logout")
-			.send({
-				username: "shaolin007",
-				password: "asdfghjkl"
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("Admin Logged out Successfully");
-				expect(res.body.message).to.be.a("string");
-				expect(res.body.status).to.have.lengthOf(7);
-				expect(res.body).to.have.property("status").with.lengthOf(7);
-				(res.body.tokenMessage).should.equal("Token Expired");
-				(res.body.logged_in).should.equal("false");
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-  });
+
 
 
 	it("should return 400 if password is wrong", (done) => {
@@ -401,47 +379,6 @@ describe("Admin Login route", () => {
 			.send({
 				username: "shaolin007",
 				password: "asdfghjk"
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(404);
-				expect(res.body.message).to.eql("wrong password, please check and try again");
-				expect(res.body.message).to.be.a("string");
-				expect(res.body.status).to.have.lengthOf(5);
-				expect(res.body).to.have.property("status").with.lengthOf(5);
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-
-	it("should return 200 if user logs in successfully", (done) => {
-		request.post("/api/v2/auth/admin/login")
-			.send({
-				username: "shaolin007",
-				password: "asdfghjkl"
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("Admin shaolin007 Logged in successfully");
-				expect(res.body.message).to.be.a("string");
-				expect(res.body.status).to.have.lengthOf(7);
-				expect(res.body).to.have.property("status").with.lengthOf(7);
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-	it("should return 400 if admin is logged in already", (done) => {
-		request.post("/api/v2/auth/admin/login")
-			.send({
-				username: "shaolin007",
-				password: "asdfghjkl"
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
@@ -456,7 +393,6 @@ describe("Admin Login route", () => {
 				done();
 			});
 	});
-
 
 });
 
@@ -485,20 +421,25 @@ describe("Fetch all admins", () => {
 
 
 
-/**
- * Logout Admin
- */
-describe("Logout Admin", () => {
 
-	it("should return 400 if admin logs out with invalid credentials", (done) => {
-		request.post("/api/v2/admin/logout")
+/**
+ * Add a meal by Admin
+ */
+describe("Add a menu by Admin", () => {
+
+	it("should return 400 if field is a boolean false", (done) => {
+		request.post("/api/v2/admin/menu/foods")
+			.set("Connection", "keep alive")
+			.set("Accept", "application/json")
+			.set("authorization", tokenHeaderAdmin(2))
+			.set("Content-Type", "application/json")
 			.send({
-				username: "shaolin00000",
-				password: "asdfghjkl"
+				name: " ",
+				price: "1000"
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("Invalid admin!");
+				expect(res.body.message).to.eql("Required field empty");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(5);
 				expect(res.body).to.have.property("status").with.lengthOf(5);
@@ -511,49 +452,15 @@ describe("Logout Admin", () => {
 			});
 	});
 
-	it("should return 200 if admin logs out", (done) => {
-		request.post("/api/v2/admin/logout")
-			.send({
-				username: "shaolin007",
-				password: "asdfghjkl"
-			})
-			.end((err, res) => {
-				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("Admin Logged out Successfully");
-				expect(res.body.message).to.be.a("string");
-				expect(res.body.status).to.have.lengthOf(7);
-				expect(res.body).to.have.property("status").with.lengthOf(7);
-				(res.body.tokenMessage).should.equal("Token Expired");
-				(res.body.logged_in).should.equal("false");
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
-});
-
-
-/**
- * Add a meal by Admin
- */
-describe("Add a menu by Admin", () => {
-
-	it("should return 400 if field is a boolean false", (done) => {
-		request.post("/api/v2/admin/menu/foods")
+	it("should return 400 if order is not found", (done) => {
+		request.get("/api/v2/orders")
 			.set("Connection", "keep alive")
 			.set("Accept", "application/json")
-			.set("authorization", tokenHeaderAdmin(1))
+			.set("authorization", tokenHeaderAdmin(2))
 			.set("Content-Type", "application/json")
-			.send({
-				name: " ",
-				price: "1000"
-			})
 			.end((err, res) => {
-				expect(res.status).to.eql(400);
-				expect(res.body.message).to.eql("Required field empty");
+				expect(res.status).to.eql(404);
+				expect(res.body.message).to.eql("orders not found");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(5);
 				expect(res.body).to.have.property("status").with.lengthOf(5);
@@ -809,14 +716,10 @@ describe("Add a menu by Admin", () => {
 });
 
 
-describe("Add a menu by Admin", () => {
+describe("Polulate database", () => {
 
 	it("should return 201 if all test menus are inserted", (done) => {
 		request.post("/api/v2/pushall")
-			.set("Connection", "keep alive")
-			.set("Accept", "application/json")
-			.set("authorization", tokenHeaderAdmin(1))
-			.set("Content-Type", "application/json")
 			.send({})
 			.end((err, res) => {
 				expect(res.status).to.eql(201);
@@ -832,31 +735,6 @@ describe("Add a menu by Admin", () => {
 				done();
 			});
 	});
-
-
-
-	it("should return 409 menu already exist", (done) => {
-		request.post("/api/v2/admin/push")
-			.set("Connection", "keep alive")
-			.set("Accept", "application/json")
-			.set("authorization", tokenHeaderAdmin(1))
-			.set("Content-Type", "application/json")
-			.send({})
-			.end((err, res) => {
-				expect(res.status).to.eql(409);
-				expect(res.body.message).to.eql("Menu Already Exist");
-				expect(res.body.message).to.be.a("string");
-				expect(res.body.status).to.have.lengthOf(5);
-				expect(res.body).to.have.property("status").with.lengthOf(5);
-				(res.body.status).should.equal("Error");
-				should.not.exist(err);
-				should.exist(res.body);
-				(res.body).should.be.an("object");
-				if (err) { return done(err); }
-				done();
-			});
-	});
-
 
 
 });

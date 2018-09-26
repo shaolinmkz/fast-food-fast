@@ -12,6 +12,7 @@ const request = supertest.agent(app);
  */
 describe("SignUp users route", () => {
 
+
 	it("should return 400 if all fields are empty", (done) => {
 		request.post("/api/v2/auth/signup")
 			.send({
@@ -58,7 +59,8 @@ describe("SignUp users route", () => {
 				if (err) { return done(err); }
 				done();
 			});
-	});
+  });
+
 
 	it("should return 400 if all fields are empty", (done) => {
 		request.post("/api/v2/auth/signup")

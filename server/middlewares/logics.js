@@ -75,7 +75,7 @@ export class Billings {
 		for (i = 0; i < foodsCheck.length; i++) {
 			for (j = 0; j < foodsDB.length; j++) {
 				if (foodsCheck[i].trim() === foodsDB[j].name) {
-					cost += (foodsDB[i].price * (foodsQuantity[i] || 1));
+					cost += (foodsDB[i].price * (foodsQuantity[i]));
 				}
 			}
 		}
@@ -101,7 +101,7 @@ export class Billings {
 		for (i = 0; i < drinksCheck.length; i++) {
 			for (j = 0; j < drinksDB.length; j++) {
 				if (drinksCheck[i].trim() === drinksDB[j].name) {
-					cost += (drinksDB[i].price * (drinksQuantity[i] || 1));
+					cost += (drinksDB[i].price * (drinksQuantity[i]));
 				}
 			}
 		}
@@ -161,37 +161,5 @@ export class Billings {
 	}
 }
 
-/**
- * @class \{{{object}}\} {{PhoneConverts}}{{Has methods that converts strings to numbers}}
- */
-export class PhoneConverts {
 
-	/**
-   * Converts string to number datatype.
-   * Append the postal code +234 to the start and removes any leading zero
-	 * @param  { object } phone - An string of digits.
-   * @param  { number } phone - A number of digits
-   * @return { number } phone
-	 */
-	convertPhoneNumber(phone) {
-		if (phone.toString().length === 10) {
-			let temp = phone.toString();
-			return Number("234" + temp);
-		} else if (phone.length === 11) {
-			let temp = phone.toString().slice(1, phone.length);
-			return Number("234" + temp);
-		} else {
-			return Number(phone);
-		}
-	}
 
-	/**
-   * Converts string to number datatype.
-	 * @param  { object } addressNo - An string of digit(s).
-   * @param  { number } addressNo - A number of digit(s)
-   * @return { number } addressNo
-	 */
-	convertAddressNo(addressNo) {
-		return Number(addressNo);
-	}
-}

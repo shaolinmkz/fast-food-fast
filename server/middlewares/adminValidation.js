@@ -60,26 +60,19 @@ export const adminSignupValidation = (req, res, next) => {
  */
 export const adminLoginValidation = (req, res, next) => {
 	const { username, password } = req.body;
-	try{
-		if (!username || !password) {
-			return res.status(400).json({
-				status: "Error",
-				message: "username or password is not defined"
-			});
-		}
-		if (typeof username !== "string" || typeof password !== "string") {
-			return res.status(400).json({
-				status: "Error",
-				message: "username and Passord must be a string datatype"
-			});
-		}
-		return next();
-	} catch(err) {
-		res.status(500).json({
+
+	if (!username || !password) {
+		return res.status(400).json({
 			status: "Error",
-			err
+			message: "username or password is not defined"
 		});
 	}
-
+	if (typeof username !== "string" || typeof password !== "string") {
+		return res.status(400).json({
+			status: "Error",
+			message: "username and Passord must be a string datatype"
+		});
+	}
+	return next();
 };
 
