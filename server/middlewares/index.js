@@ -9,7 +9,7 @@ import { adminSignupValidation, adminLoginValidation, adminIsExists } from "./ad
 import { MealValidator } from "./mealsValidator";
 
 export {
-  orderValidation, useridAddressNoCheck, statusValidation, OrderedMeals, Billings,
+	orderValidation, useridAddressNoCheck, statusValidation, OrderedMeals, Billings,
 	PhoneConverts, getOrderErrorHandler, signupValidation, loginValidation,
 	userExists, adminSignupValidation, adminLoginValidation, adminIsExists,
 	MealValidator };

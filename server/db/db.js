@@ -4,7 +4,7 @@ import { Pool } from "pg";
 
 dotenv.config();
 
-
+/**                             Local DB                   Heroku DB                 Elephant DB               */
 const connectionString = process.env.PGADMIN_URL || process.env.DATABASE_URL || process.env.ELEPHANT_DB_URL;
 
 const createTable = () => {
@@ -59,7 +59,7 @@ const createTable = () => {
             discount TEXT NOT NULL,
             total TEXT NOT NULL,
             status TEXT NOT NULL,
-            user_id TEXT REFERENCES users(id),
+            user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
 
@@ -85,7 +85,8 @@ createTable();
 const pgp = pg();
 export const db = pgp(connectionString);
 
-if (db) {
-	console.log("Database Connected"); /**For testing */
-	console.log(connectionString);
-}
+console.log("Database Connected"); /**For testing */
+console.log(connectionString);
+
+
+

@@ -5,29 +5,29 @@ import dotenv from "dotenv";
 
 dotenv.load();
 
-
 export class Admins{
 
 	/**
-   * Represents a get all admins function
+   * Represents a get all admins method
    * @param { object } req - body request
    * @param { object } res - body response
    */
 	fetchAdmins(req, res) {
 		db.any("SELECT * FROM admins")
 			.then(admins => {
+				if (admins.length - 1 < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "Admins not found"
+					});
+				}
 				return res.status(200)
 					.json({
 						status: "Success",
 						message: "All admins received successfully",
 						admins
 					});
-			})
-			.catch(() => res.status(404)
-				.json({
-					status: "Error",
-					message: "Admins not found"
-				}));
+			});
 	}
 
 	/**
@@ -79,18 +79,7 @@ export class Admins{
 							mobile_number: "+234" + Number(admin.phone),
 							logged_in: `${admin.logged_in}`
 						});
-					}).catch((err) => {
-						return res.status(500).json({
-							status: "Error",
-							message: err
-						});
 					});
-			})
-			.catch((err) => {
-				return res.status(500).json({
-					status: "Error",
-					message: err
-				});
 			});
 	}
 
@@ -119,14 +108,6 @@ export class Admins{
 								message: "Admin is logged in already!"
 							});
 						}
-
-						if (error) {
-							return res.status(400).json({
-								status: "Error",
-								message: "invalid admin!"
-							});
-						}
-
 						if (!result) {
 							return res.status(400).json({
 								status: "Error",
@@ -142,19 +123,14 @@ export class Admins{
 										username: admin2[0].username,
 										phone: admin2[0].phone
 									}, process.env.ADMIN_ONLY, {expiresIn: "1d"});
-									if (token) {
-										return res.status(200).json({
-											status: "Success",
-											message: `Admin ${admin2[0].username} Logged in successfully`,
-											logged_in: admin2[0].logged_in,
-											token: token
-										});
-									}
-								})
-								.catch(err => res.status(500).json({
-									status: "Error",
-									err
-								}));
+
+									return res.status(200).json({
+										status: "Success",
+										message: `Admin ${admin2[0].username} Logged in successfully`,
+										logged_in: admin2[0].logged_in,
+										token: token
+									});
+								});
 						}
 					});
 				} else{
@@ -163,11 +139,7 @@ export class Admins{
 						message: "Admin doesn't exist, create admin!"
 					});
 				}
-			})
-			.catch(err => res.status(500).json({
-				status: "Error",
-				err
-			}));
+			});
 	}
 
 
@@ -178,37 +150,31 @@ export class Admins{
    */
 	logoutAdmin(req, res) {
 
-		let { username } = req.adminInfo;
-
+		let { username } = req.body;
 
 		db.any("UPDATE admins SET logged_in = false WHERE username = $1 RETURNING *", [username])
-			.then(admin => {
+			.then((admin) => {
 				if (admin.length > 0) {
 					const token = jwt.sign({
 						id: admin[0].id,
 						username: admin[0].username,
 						email: admin[0].email,
 						phone: admin[0].phone
-					}, process.env.ADMIN_ONLY, { expiresIn: "5s" });
-					if (token) {
-						return res.status(200).json({
-							status: "Success",
-							message: "Admin Logged out Successfully",
-							logged_in: admin[0].logged_in,
-							tokenMessage: "Token Expired",
-						});
-					}
+					}, process.env.ADMIN_ONLY, { expiresIn: "0s" });
+
+					return res.status(200).json({
+						status: "Success",
+						message: "Admin " + admin.username +"Logged out Successfully",
+						logged_in: admin[0].logged_in,
+						tokenMessage: "Token Expired => " + token,
+					});
 				} else {
 					return res.status(400).json({
 						status: "Error",
 						message: "Invalid admin!"
 					});
 				}
-			})
-			.catch( res.status(500).json({
-				status: "Error",
-				message: "You are not signed in"
-			}));
+			});
 	}
 
 
@@ -235,11 +201,6 @@ export class Admins{
 							message: "Food created Successfully",
 							product_name: foods.name,
 							price: foods.price,
-						});
-					}).catch((err) => {
-						return res.status(500).json({
-							status: "Error",
-							message: err
 						});
 					});
 			})
@@ -274,11 +235,6 @@ export class Admins{
 							product_name: drinks.name,
 							price: drinks.price,
 						});
-					}).catch((err) => {
-						return res.status(500).json({
-							status: "Error",
-							message: err
-						});
 					});
 			})
 			.catch(() => {
@@ -299,7 +255,6 @@ export class Admins{
 	getASpecificOrder(req, res) {
 		let { id } = req.params;
 		id = parseInt(id, 10);
-		console.log(id);
 		db.any("SELECT * FROM orders WHERE id= $1", [id])
 			.then(order => {
 				if (order.length - 1 < 0) {
@@ -311,15 +266,10 @@ export class Admins{
 				return res.status(200)
 					.json({
 						status: "Success",
-						message: "All orders received successfully",
+						message: "Order received successfully",
 						order
 					});
-			})
-			.catch(() => res.status(404)
-				.json({
-					status: "Error",
-					message: "Orders not found"
-				}));
+			});
 	}
 
 
@@ -344,12 +294,7 @@ export class Admins{
 						message: "All orders received successfully",
 						allOrders
 					});
-			})
-			.catch(() => res.status(404)
-				.json({
-					status: "Error",
-					message: "Orders not found"
-				}));
+			});
 	}
 
 
@@ -368,21 +313,15 @@ export class Admins{
 
 		db.one("UPDATE orders SET status = $1 WHERE id = $2 RETURNING *", [status, id])
 			.then((statusData) => {
-				if (statusData.length < 0) {
-					return res.status(404).json({
-						status: "Error",
-						message: "Order not found"
-					});
-				}
 				return res.status(200).json({
 					status: "Success",
 					message: "Order status updated",
 					updated_order: statusData[0]
 				});
 			})
-			.catch(error => res.status(500).json({
+			.catch(() => res.status(404).json({
 				status: "Error",
-				error
+				message: "Order not found"
 			}));
 	}
 

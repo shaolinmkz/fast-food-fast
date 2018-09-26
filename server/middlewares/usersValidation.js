@@ -9,7 +9,7 @@ let i;
  * @param {object} next - function to execute next middleware
  */
 export const signupValidation = (req, res, next) => {
-	const { firstname, lastname, email, phone, password, confirmPassword, username  } = req.body;
+	const { firstname, lastname, email, phone, password, confirmPassword } = req.body;
 
 	if (password !== confirmPassword) {
 		return res.status(400).json({
@@ -62,33 +62,23 @@ export const signupValidation = (req, res, next) => {
 
 	/**Namescheck*/
 
-	try {
-		if (!(Helper.isValidAlphabet(firstname.toString().toLowerCase()))) {
-			return res.status(400).json({
-				status: "Error",
-				message: `Invalid input ${firstname}. All characters must be alphabets`
-			});
-		}
-	} catch (err) {
-		return res.status(500).json({
+
+	if (!(Helper.isValidAlphabet(firstname.toString().toLowerCase()))) {
+		return res.status(400).json({
 			status: "Error",
-			message: err
+			message: `Invalid input ${firstname}. All characters must be alphabets`
 		});
 	}
 
-	try{
-		if (!(Helper.isValidAlphabet(lastname.toString().toLowerCase()))) {
-			return res.status(400).json({
-				status: "Error",
-				message: `Invalid input ${lastname}. All characters must be alphabets`
-			});
-		}
-	} catch (err) {
-		return res.status(500).json({
+
+
+	if (!(Helper.isValidAlphabet(lastname.toString().toLowerCase()))) {
+		return res.status(400).json({
 			status: "Error",
-			message: err
+			message: `Invalid input ${lastname}. All characters must be alphabets`
 		});
 	}
+
 
 	for (i = 0; i < phone.length; i++) {
 		if (phone.toString().charAt(i) === " ") {
@@ -99,19 +89,14 @@ export const signupValidation = (req, res, next) => {
 		}
 	}
 
-	try{
-		if (!(Helper.isValidNumber(phone.toString()))) {
-			return res.status(400).json({
-				status: "Error",
-				message: `Invalid input ${phone}. All characters must be numbers`
-			});
-		}
-	} catch (err) {
-		return res.status(500).json({
+
+	if (!(Helper.isValidNumber(phone.toString()))) {
+		return res.status(400).json({
 			status: "Error",
-			message: err
+			message: `Invalid input ${phone}. All characters must be numbers`
 		});
 	}
+
 
 
 	if (phone.length !== 11) {
@@ -122,9 +107,7 @@ export const signupValidation = (req, res, next) => {
 	}
 
 	/**Move to next middleware function if username is defined */
-	if(username || email) {
-		next();
-	}
+	next();
 };
 
 
@@ -136,32 +119,20 @@ export const signupValidation = (req, res, next) => {
  * @param {object} next - function to execute next middleware
  */
 export const userExists = (req, res, next) => {
-	const { firstname, lastname, email, phone, password} = req.body;
+	const { email, phone } = req.body;
 
 
-	if (firstname && lastname && email && phone && password) {
-		db.any("SELECT * FROM users WHERE email = $1 OR phone = $2", [email, phone])
-			.then(data => {
-				if (data.length > 0) {
-					return res.status(409).json({
-						status: "Error",
-						message: "User already exists"
-					});
-				} else{
-					next();
-				}
-			})
-			.catch((err) => {
-				return res.status(400).json({
+	db.any("SELECT * FROM users WHERE email = $1 OR phone = $2", [email, phone])
+		.then(data => {
+			if (data.length > 0) {
+				return res.status(409).json({
 					status: "Error",
-					message: err
+					message: "User already exists"
 				});
-			});
-	} else{ return res.status(400).json({
-		status: "Error",
-		message: "Empty input field, can't read inputs"
-	});
-	}
+			} else{
+				next();
+			}
+		});
 };
 
 
