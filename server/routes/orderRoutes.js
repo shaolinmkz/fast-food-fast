@@ -1,13 +1,13 @@
 import express from "express";
 import { Orders, Menus } from "../controllers";
-import { orderValidation, statusValidation, getOrderErrorHandler } from "../middlewares";
+import { orderValidation, useridAddressNoCheck, statusValidation, getOrderErrorHandler } from "../middlewares";
 
 const orders = new Orders();
 const menus = new Menus();
 
 const orderRoutes = express.Router();
 /**DUMMY DATABASE ROUTES**/
-orderRoutes.post("/api/v1/orders", orderValidation, orders.placeOrder);
+orderRoutes.post("/api/v1/orders", orderValidation, useridAddressNoCheck, orders.placeOrder);
 orderRoutes.get("/api/v1/orders", orders.getAllOrders);
 orderRoutes.get("/api/v1/orders/:id", getOrderErrorHandler, orders.getAnOrder);
 orderRoutes.put("/api/v1/orders/:id", statusValidation, orders.updateStatus);

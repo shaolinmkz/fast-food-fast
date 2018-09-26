@@ -1,4 +1,4 @@
-import { orderValidation, statusValidation, getOrderErrorHandler } from "./orderValidation";
+import { orderValidation, useridAddressNoCheck, statusValidation, getOrderErrorHandler } from "./orderValidation";
 
 import { OrderedMeals, Billings, PhoneConverts } from "./logics";
 
@@ -8,7 +8,8 @@ import { adminSignupValidation, adminLoginValidation, adminIsExists } from "./ad
 
 import { MealValidator } from "./mealsValidator";
 
-export { orderValidation, statusValidation, OrderedMeals, Billings,
+export {
+  orderValidation, useridAddressNoCheck, statusValidation, OrderedMeals, Billings,
 	PhoneConverts, getOrderErrorHandler, signupValidation, loginValidation,
 	userExists, adminSignupValidation, adminLoginValidation, adminIsExists,
 	MealValidator };

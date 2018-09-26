@@ -393,7 +393,7 @@ describe("Admin Login route", () => {
 				if (err) { return done(err); }
 				done();
 			});
-	});
+  });
 
 
 	it("should return 400 if password is wrong", (done) => {
@@ -403,7 +403,7 @@ describe("Admin Login route", () => {
 				password: "asdfghjk"
 			})
 			.end((err, res) => {
-				expect(res.status).to.eql(400);
+				expect(res.status).to.eql(404);
 				expect(res.body.message).to.eql("wrong password, please check and try again");
 				expect(res.body.message).to.be.a("string");
 				expect(res.body.status).to.have.lengthOf(5);

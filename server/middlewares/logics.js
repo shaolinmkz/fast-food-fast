@@ -1,61 +1,4 @@
-import { db } from "../db";
 import { foodsDB, drinksDB } from "../dummyDB";
-// let foodsDB = [];
-// let drinksDB = [];
-
-// export const foodsDBfunc = (req, res) => {
-// 	db.any("SELECT * FROM foods")
-// 		.then((foodsData) => {
-
-// 			return foodsDB.push(foodsData);
-// 			// console.log(foodsDB);
-// 		})
-// 		.catch(()=> {
-// 			return res.status(404).json({
-// 				status: "Error",
-// 				message: "Not found"
-// 			});
-// 		});
-// };
-
-// export const drinksDBfunc = (req, res) => {
-// 	db.any("SELECT * FROM drinks")
-// 		.then((drinksData) => {
-
-// 			return drinksDB.push(drinksData);
-// 			// console.log(drinksDB);
-// 		})
-// 		.catch(() => {
-// 			return res.status(404).json({
-// 				status: "Error",
-// 				message: "Not found"
-// 			});
-// 		});
-// };
-
-
-
-
-// export class Quantity {
-// 	/**
-//    * Converts string to array.
-// 	 * @param  { object } quantity - An array of numbers.
-//    * @return { object } newdrinks - Array object
-// 	 */
-// 	displayQuantity (quantity) {
-// 		if (!(Array.isArray(quantity)) && (typeof quantity === "string")) {
-// 			let q1 = quantity.split(",");
-// 			let q2 = []; let i;
-
-// 			for (i = 0; i < q1.length; i++) {
-// 				q2.push(Number(q1[i]));
-// 			}
-// 			return q2;
-// 		} else {
-// 			return quantity;
-// 		}
-// 	}
-// }
 
 
 /**
@@ -122,21 +65,16 @@ export class Billings {
 	getFoodsPrice(foods, foodsQuantity) {
 		let i, j, cost = 0;
 		const orderedMeals = new OrderedMeals();
-    const foodsCheck = orderedMeals.displayDrinks(foods);
-    // let foodsDB = [];
-    // foodsDB.push(foodsDBfunc());
-    // console.log(foodsDB);
+		const foodsCheck = orderedMeals.displayDrinks(foods);
 
-		// const convertQuantity = new Quantity;
-		// foodsQuantity = convertQuantity(foodsQuantity);
 
-		// if (foodsCheck[0] === "") {
-		// 	return 0;
-		// }
+		if (foodsCheck[0] === "") {
+			return 0;
+		}
 
 		for (i = 0; i < foodsCheck.length; i++) {
 			for (j = 0; j < foodsDB.length; j++) {
-				if (foodsCheck[i] === foodsDB[j].name) {
+				if (foodsCheck[i].trim() === foodsDB[j].name) {
 					cost += (foodsDB[i].price * (foodsQuantity[i] || 1));
 				}
 			}
@@ -153,21 +91,16 @@ export class Billings {
 	getDrinksPrice(drinks, drinksQuantity) {
 		let i, j, cost = 0;
 		const orderedMeals = new OrderedMeals();
-    const drinksCheck = orderedMeals.displayFoods(drinks);
-    // let drinksDB = [];
-    // drinksDB.push(drinksDBfunc());
-    // console.log(drinksDB);
+		const drinksCheck = orderedMeals.displayFoods(drinks);
 
-		// const convertQuantity = new Quantity;
-		// drinksQuantity = convertQuantity(drinksQuantity);
 
-		// if (drinksCheck[0] === "") {
-		// 	return 0;
-		// }
+		if (drinksCheck[0] === "") {
+			return 0;
+		}
 
 		for (i = 0; i < drinksCheck.length; i++) {
 			for (j = 0; j < drinksDB.length; j++) {
-				if (drinksCheck[i] === drinksDB[j].name) {
+				if (drinksCheck[i].trim() === drinksDB[j].name) {
 					cost += (drinksDB[i].price * (drinksQuantity[i] || 1));
 				}
 			}

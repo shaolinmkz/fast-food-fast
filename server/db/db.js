@@ -5,7 +5,7 @@ import { Pool } from "pg";
 dotenv.config();
 
 
-const connectionString = process.env.PGADMIN_URL || process.env.PGTEST_URL || process.env.ELEPHANT_DB_URL;
+const connectionString = process.env.PGADMIN_URL || process.env.DATABASE_URL || process.env.ELEPHANT_DB_URL;
 
 const createTable = () => {
 	const pool = new Pool({ connectionString });
@@ -13,11 +13,11 @@ const createTable = () => {
 
 	const query =
         `
-        // DROP TABLE IF EXISTS users CASCADE;
-        // DROP TABLE IF EXISTS admins CASCADE;
-        // DROP TABLE IF EXISTS orders CASCADE;
-        // DROP TABLE IF EXISTS drinks CASCADE;
-        // DROP TABLE IF EXISTS foods CASCADE;
+        DROP TABLE IF EXISTS users CASCADE;
+        DROP TABLE IF EXISTS admins CASCADE;
+        DROP TABLE IF EXISTS orders CASCADE;
+        DROP TABLE IF EXISTS drinks CASCADE;
+        DROP TABLE IF EXISTS foods CASCADE;
 
         CREATE TABLE IF NOT EXISTS users(
             id SERIAL PRIMARY KEY,
@@ -79,6 +79,7 @@ const createTable = () => {
 		.then(() => pool.end())
 		.catch(() => pool.end());
 };
+
 createTable();
 
 const pgp = pg();

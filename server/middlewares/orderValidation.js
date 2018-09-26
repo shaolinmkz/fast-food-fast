@@ -13,10 +13,10 @@ let i = 0;
  * @function  { next } - Proceeds to the next method on the route
  */
 export const orderValidation = (req, res, next) => {
-	const { userId, addressNo, address, lga, state } = req.body;
+	const {address, lga, state } = req.body;
 	let { foodsQuantity, drinksQuantity, foods, drinks } = req.body;
 
-	const reqArray = [userId, addressNo, address, lga, state, foods, drinks, foodsQuantity, drinksQuantity];
+	const reqArray = [address, lga, state, foods, drinks, foodsQuantity, drinksQuantity];
 
 	for (i in reqArray) {
 		if (!reqArray[i]) {
@@ -61,6 +61,7 @@ export const orderValidation = (req, res, next) => {
 		}
 	}
 
+
 	const objStr = [foods, drinks];
 	for (i = 0; i < objStr.length; i++) {
 		if (typeof objStr[i] !== "string" && !Array.isArray(objStr[i])) {
@@ -84,8 +85,15 @@ export const orderValidation = (req, res, next) => {
 		});
 	}
 
+	return next();
+};
+
+
+export const useridAddressNoCheck = (req, res, next) => {
+	const { userId, addressNo } = req.body;
+
 	const num = [userId, addressNo];
-	for(i in num) {
+	for (i in num) {
 		if (typeof num[i] !== "number") {
 			return res.status(400).json({
 				status: "Error",
@@ -93,10 +101,8 @@ export const orderValidation = (req, res, next) => {
 			});
 		}
 	}
+	next();
 
-
-
-	return next();
 };
 
 /**

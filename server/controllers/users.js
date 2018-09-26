@@ -2,7 +2,6 @@ import { db } from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { OrderedMeals, Billings } from "../middlewares";
-import { foodsDBfunc, drinksDBfunc } from "../middlewares/logics";
 
 const orderedMeals = new OrderedMeals();
 const billing = new Billings();
@@ -163,7 +162,7 @@ export class Users {
 					const token = jwt.sign({
 						id: user[0].id,
 						email
-					}, process.env.SECRET_KEY, { expiresIn: "1s" });
+					}, process.env.SECRET_KEY, { expiresIn: "0s" });
 					if (token) {
 						return res.status(200).json({
 							status: "Success",
@@ -235,16 +234,14 @@ export class Users {
    * @param { object } res - body response
    */
 	placeOrder(req, res) {
-		// foodsDBfunc();
-		// drinksDBfunc();
+
 		const { id }  = req.userInfo;
-		console.log("starting place osder function", id);
+
 		let { address, lga, state, foods,
 			foodsQuantity, drinks, drinksQuantity } = req.body;
 
 		foods = orderedMeals.displayFoods(foods);
 		drinks = orderedMeals.displayDrinks(drinks);
-		console.log("before db.tx", foods, drinks, address, lga, state);
 
 		db.any("UPDATE users SET address = $1 WHERE id = $2 RETURNING *", [address, id])
 			.then(() => {
@@ -253,23 +250,19 @@ export class Users {
 						db.any("UPDATE users SET state = $1 WHERE id = $2 RETURNING *", [state, id])
 							.then((userData) => {
 								const userInfo = userData[0];
-								// console.log("user information ----------------------->",userInfo);
+
 								let subtotal = billing.subtotal(drinks, foods, foodsQuantity, drinksQuantity);
-								console.log("1");
 								let discount = billing.discount(drinks, foods, foodsQuantity, drinksQuantity);
-								console.log(2);
 								let delivery = billing.delivery(drinks, foods);
-								console.log(3);
 								let total = billing.total(drinks, foods, foodsQuantity, drinksQuantity);
-								console.log(4);
 								let status = "new"; /**Order status could be: new, procesing, cancelled, or completed*/
-								console.log(5);
+
 								foods = foods.join(","); drinks = drinks.join(",");
-								console.log(foods,"_________________________", drinks);
+
 								db.any("INSERT INTO orders (food_items, drink_items, subtotal, delivery, discount, total, status, user_id)" +
                   "VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [foods, drinks, subtotal, delivery, discount, total, status, id])
 									.then(() => {
-										console.log(6);
+
 										db.any("SELECT * FROM orders WHERE user_id = $1", [id])
 											.then(orderData => {
 												const orderDetails = orderData[(orderData.length) - 1];
@@ -292,17 +285,11 @@ export class Users {
 													order_status: orderDetails.status,
 													ordered_datetime: orderDetails.created_date
 												});
-
-											})
-											.catch(err => err);
-									})
-									.catch(err => err);
-							})
-							.catch(err => err);
-					})
-					.catch(err => err);
-			})
-			.catch(err => err);
+											});
+									});
+							});
+					});
+			});
 
 	}
 

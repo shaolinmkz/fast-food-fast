@@ -65,9 +65,9 @@ export class Admins{
 						const admin = data[0];
 						const token = jwt.sign({
 							id: admin.id,
-							email: email,
-							username: username,
-							phone: phone
+							email: admin.email,
+							username: admin.username,
+							phone: admin.phone
 						}, process.env.ADMIN_ONLY, { expiresIn: "1d" });
 						return res.status(201).json({
 							status: "Success",
@@ -139,7 +139,8 @@ export class Admins{
 									const token = jwt.sign({
 										id: admin2[0].id,
 										email: admin2[0].email,
-										username: admin2[0].username
+										username: admin2[0].username,
+										phone: admin2[0].phone
 									}, process.env.ADMIN_ONLY, {expiresIn: "1d"});
 									if (token) {
 										return res.status(200).json({
@@ -157,7 +158,7 @@ export class Admins{
 						}
 					});
 				} else{
-					return res.status(400).json({
+					return res.status(404).json({
 						status: "Error",
 						message: "Admin doesn't exist, create admin!"
 					});
@@ -177,17 +178,18 @@ export class Admins{
    */
 	logoutAdmin(req, res) {
 
-		let { username } = req.body;
+		let { username } = req.adminInfo;
 
-		username = username.trim();
 
 		db.any("UPDATE admins SET logged_in = false WHERE username = $1 RETURNING *", [username])
 			.then(admin => {
 				if (admin.length > 0) {
 					const token = jwt.sign({
 						id: admin[0].id,
-						username: admin[0].username
-					}, process.env.SECRET_KEY, { expiresIn: "5s" });
+						username: admin[0].username,
+						email: admin[0].email,
+						phone: admin[0].phone
+					}, process.env.ADMIN_ONLY, { expiresIn: "5s" });
 					if (token) {
 						return res.status(200).json({
 							status: "Success",
@@ -203,9 +205,9 @@ export class Admins{
 					});
 				}
 			})
-			.catch(error => res.status(500).json({
+			.catch( res.status(500).json({
 				status: "Error",
-				error
+				message: "You are not signed in"
 			}));
 	}
 
