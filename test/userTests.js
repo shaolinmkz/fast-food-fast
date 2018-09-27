@@ -146,7 +146,7 @@ describe("User signup and activities", () => {
 
 
 
-	it("should return 201 if user doesn't exists", (done) => {
+	it("should return 201 if user makes a successful order", (done) => {
 		chai.request(app)
 			.post("/api/v2/orders")
 			.send({
@@ -272,6 +272,33 @@ describe("User signup and activities", () => {
 				expect(res.body.message).to.eql("Invalid input 3423434234. Should be a string data type");
 				expect(res.body.status).to.have.lengthOf(5);
 				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+	it("should return 201 if user doesn't exists", (done) => {
+		chai.request(app)
+			.post("/api/v2/orders")
+			.send({
+				address: "XYZ building behinde genesis deluxe",
+				lga: "Apapa",
+				state: "Lagos",
+				foods: ["citizens meal", "pot lovers menu"],
+				foodsQuantity: [2, 5],
+				drinks: ["five alive 1L", "fanta orange 50cl", "coca cola 50cl"],
+				drinksQuantity: [6, 1, 3]
+			})
+			.set("authorization", testToken)
+			.end((err, res) => {
+				expect(res.status).to.eql(201);
+				expect(res.body.message).to.eql("Your order has been placed");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
 				should.not.exist(err);
 				should.exist(res.body);
 				(res.body).should.be.an("object");

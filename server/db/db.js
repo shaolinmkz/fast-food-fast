@@ -4,8 +4,8 @@ import { Pool } from "pg";
 
 dotenv.config();
 
-/**                             Local DB                   Heroku DB                 Elephant DB               */
-const connectionString = process.env.PGADMIN_URL || process.env.DATABASE_URL || process.env.ELEPHANT_DB_URL;
+
+const connectionString = process.env.DATABASE_URL;
 
 const createTable = () => {
 	const pool = new Pool({ connectionString });

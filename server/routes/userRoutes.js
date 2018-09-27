@@ -7,7 +7,7 @@ const user = new Users();
 
 const userRoutes = express.Router();
 
-userRoutes.get("/api/v2/users", user.fetchUsers); /**for testing*/
+userRoutes.get("/api/v2/users", Helper.verifyAdminsToken, user.fetchUsers); /**for testing*/
 userRoutes.post("/api/v2/auth/signup", signupValidation, userExists, user.createNewUsers);
 userRoutes.post("/api/v2/auth/login", loginValidation, user.loginUser);
 userRoutes.post("/api/v2/logout", user.logoutUser);

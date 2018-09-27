@@ -307,23 +307,39 @@ export class Admins{
    * @param { object } res - body response
    */
 	updateOrderStatus(req, res) {
-		const { status } = req.body;
+		let { status } = req.body;
 		let { id } = req.params;
-		id = parseInt(id, 10);
 
-		db.one("UPDATE orders SET status = $1 WHERE id = $2 RETURNING *", [status, id])
-			.then((statusData) => {
-				return res.status(200).json({
-					status: "Success",
-					message: "Order status updated",
-					updated_order: statusData[0]
-				});
-			})
-			.catch(() => res.status(404).json({
+		id = parseInt(id, 10);
+		const status1 = "new";
+		const status2 = "processing";
+		const status3 = "cancelled";
+		const status4 = "complete";
+		status = status.toLowerCase();
+
+		if (status === status1 || status === status2 || status === status3 || status === status4) {
+			db.one("UPDATE orders SET status = $1 WHERE id = $2 RETURNING *", [status, id])
+				.then((statusData) => {
+					return res.status(200).json({
+						status: "Success",
+						message: "Order status updated",
+						updated_order: statusData[0]
+					});
+				})
+				.catch(() => res.status(404).json({
+					status: "Error",
+					message: "Order not found"
+				}));
+		} else {
+			return res.status(400).json({
 				status: "Error",
-				message: "Order not found"
-			}));
+				message: "Should be either new, processing, cancelled or complete"
+			});
+		}
 	}
 
+
+
 }
+
 
