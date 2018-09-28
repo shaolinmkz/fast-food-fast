@@ -136,7 +136,7 @@ export class Users {
    */
 	logoutUser(req, res) {
 
-		const { email } = req.body;
+		const { email } = req.userInfo;
 
 		db.any("UPDATE users SET logged_in = false WHERE email = $1 RETURNING *", [email])
 			.then(user => {

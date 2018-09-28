@@ -90,6 +90,7 @@ describe("Admin signup and other activities", () => {
 				username: "cole",
 				password: "asdfilkj"
 			})
+			.set("authorization", process.env.cole)
 			.end(() => {
 				done();
 			});
@@ -103,6 +104,7 @@ describe("Admin signup and other activities", () => {
 				username: "wewrere",
 				password: "asdfilkj"
 			})
+			.set("authorization", process.env.cole)
 			.end(() => {
 				done();
 			});

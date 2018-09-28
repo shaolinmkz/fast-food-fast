@@ -14,12 +14,12 @@ const admin = new Admins();
 
 const adminRoutes = express.Router();
 
-adminRoutes.get("/api/v2/admins", admin.fetchAdmins); /**For testing, gets all admins*/
-adminRoutes.post("/api/v2/pushall", polulateDB); /**For testing, populate database table*/
+adminRoutes.get("/api/v2/admins", Helper.verifyAdminsToken, admin.fetchAdmins); /**For testing, get all admins*/
+adminRoutes.post("/api/v2/pushall", Helper.verifyAdminsToken, polulateDB); /**For testing, populate database table*/
 
 adminRoutes.post("/api/v2/auth/admin/signup", signupValidation, adminSignupValidation, admin.createNewAdmins);/**admin signup */
 adminRoutes.post("/api/v2/auth/admin/login", adminLoginValidation, admin.loginAdmin); /**admin login*/
-adminRoutes.post("/api/v2/admin/logout", admin.logoutAdmin); /**logout admin */
+adminRoutes.post("/api/v2/admin/logout", Helper.verifyAdminsToken, admin.logoutAdmin); /**logout admin */
 
 adminRoutes.post("/api/v2/admin/menu/drinks", Helper.verifyAdminsToken, MealValidator.mealsCheck, admin.addDrinks); /**add drinks menu */
 adminRoutes.post("/api/v2/admin/menu/foods", Helper.verifyAdminsToken, MealValidator.mealsCheck, admin.addFoods); /**add foods menu */

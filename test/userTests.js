@@ -81,6 +81,7 @@ describe("User signup and activities", () => {
 				email: "ppppp.pp@yahoo.com",
 				password: "asdfghjkl"
 			})
+			.set("authorization", process.env.invalidUserToken)
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid User!");
@@ -101,6 +102,7 @@ describe("User signup and activities", () => {
 				email: "yyyyy.xxxxx@yahoo.com",
 				password: "asdfghjkl"
 			})
+			.set("authorization", testToken2)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				if (err) { return done(err); }

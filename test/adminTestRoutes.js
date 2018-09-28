@@ -404,6 +404,7 @@ describe("Admin Login route", () => {
 describe("Fetch all admins", () => {
 	it("should return 200 if all admins are returned", (done) => {
 		request.get("/api/v2/admins")
+			.set("authorization", tokenHeaderAdmin(2))
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.message).to.eql("All admins received successfully");
@@ -720,6 +721,7 @@ describe("Polulate database", () => {
 
 	it("should return 201 if all test menus are inserted", (done) => {
 		request.post("/api/v2/pushall")
+			.set("authorization", tokenHeaderAdmin(2))
 			.send({})
 			.end((err, res) => {
 				expect(res.status).to.eql(201);
@@ -745,22 +747,22 @@ describe("Polulate database", () => {
  */
 describe("Fetch all users route", () => {
 
-  it("should return 200 if all users exist", (done) => {
-    request.get("/api/v2/users")
-      .set("authorization", tokenHeaderAdmin(2))
-      .end((err, res) => {
-        expect(res.status).to.eql(200);
-        expect(res.body.message).to.eql("All users received successfully");
-        expect(res.body.message).to.be.a("string");
-        expect(res.body.status).to.have.lengthOf(7);
-        expect(res.body).to.have.property("status").with.lengthOf(7);
-        should.not.exist(err);
-        should.exist(res.body);
-        (res.body).should.be.an("object");
-        if (err) { return done(err); }
-        done();
-      });
-  });
+	it("should return 200 if all users exist", (done) => {
+		request.get("/api/v2/users")
+			.set("authorization", tokenHeaderAdmin(2))
+			.end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.message).to.eql("All users received successfully");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
 });
 
 

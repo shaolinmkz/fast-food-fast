@@ -7,6 +7,7 @@ const should = chai.should();
 
 const request = supertest.agent(app);
 
+
 /**
  * signup User
  */
@@ -59,7 +60,7 @@ describe("SignUp users route", () => {
 				if (err) { return done(err); }
 				done();
 			});
-  });
+	});
 
 
 	it("should return 400 if all fields are empty", (done) => {
@@ -382,6 +383,7 @@ describe("Signin Users route", () => {
 				email: "nwabuzor.obiora@gmail.com",
 				password: "asdfghj"
 			})
+			.set("authorization", process.env.obiora)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
 				expect(res.body.message).to.eql("User Logged out Successfully");
@@ -465,6 +467,7 @@ describe("Signout Users route", () => {
 
 	it("should return 200 when user signs out", (done) => {
 		request.post("/api/v2/logout")
+      .set("authorization", process.env.obiora)
 			.send({
 				email: "nwabuzor.obiora@gmail.com",
 				password: "asdfghj"
@@ -490,6 +493,7 @@ describe("Signout Users route", () => {
 				email: "Mwabuzor.obiora@gmail.com",
 				password: "asdfghj"
 			})
+			.set("authorization", process.env.invalidUserToken)
 			.end((err, res) => {
 				expect(res.status).to.eql(400);
 				expect(res.body.message).to.eql("Invalid User!");

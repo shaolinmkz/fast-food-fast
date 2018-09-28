@@ -150,7 +150,7 @@ export class Admins{
    */
 	logoutAdmin(req, res) {
 
-		let { username } = req.body;
+		let { username } = req.adminInfo;
 
 		db.any("UPDATE admins SET logged_in = false WHERE username = $1 RETURNING *", [username])
 			.then((admin) => {
