@@ -5,7 +5,7 @@ import { Pool } from "pg";
 dotenv.config();
 
 
-const connectionString = process.env.PGADMIN_URL || process.env.PGTEST_URL || process.env.ELEPHANT_DB_URL;
+const connectionString = process.env.DATABASE_URL;
 
 const createTable = () => {
 	const pool = new Pool({ connectionString });
@@ -36,7 +36,7 @@ const createTable = () => {
             id SERIAL PRIMARY KEY,
             name TEXT UNIQUE NOT NULL,
             price TEXT NOT NULL,
-            image VARCHAR(255),
+            image TEXT,
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
@@ -45,7 +45,7 @@ const createTable = () => {
             id SERIAL PRIMARY KEY,
             name TEXT UNIQUE NOT NULL,
             price TEXT NOT NULL,
-            image VARCHAR(255),
+            image TEXT,
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
@@ -54,10 +54,11 @@ const createTable = () => {
             id SERIAL PRIMARY KEY,
             food_items TEXT,
             drink_items TEXT,
-            subtotal INT NOT NULL,
-            delivery INT NOT NULL,
-            discount INT NOT NULL,
-            total INT NOT NULL,
+            subtotal TEXT NOT NULL,
+            delivery TEXT NOT NULL,
+            discount TEXT NOT NULL,
+            total TEXT NOT NULL,
+            status TEXT NOT NULL,
             user_id INT REFERENCES users(id),
             created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           );
@@ -78,13 +79,14 @@ const createTable = () => {
 		.then(() => pool.end())
 		.catch(() => pool.end());
 };
-createTable();
 
+createTable();
 
 const pgp = pg();
 export const db = pgp(connectionString);
 
-if (db) {
-	console.log("Database Connected");
-	console.log(connectionString);
-}
+console.log("Database Connected"); /**For testing */
+console.log(connectionString);
+
+
+

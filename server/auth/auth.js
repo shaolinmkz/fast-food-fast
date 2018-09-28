@@ -1,4 +1,7 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.load();
 
 /**
  * @class \{{{object}}\} {{Helper}}{{Methods for validation}}
@@ -33,41 +36,65 @@ export class Helper {
 	/**Authorization: Bearer <access_token>*/
 
 	/**
- * Token verification for aAmin
- * @param {object} req - The request body
- * @param {object} res - The response body
- * @param {object} next - function that call the next middleware
- */
-	static verifyToken(req, res, next) {
+   * Token verification for Admin
+   * @param {object} req - The request body
+   * @param {object} res - The response body
+   * @param {object} next - function that call the next middleware
+   */
+	static verifyAdminsToken(req, res, next) {
 		/**get auth header value*/
-		const bearerHeader = req.headers["authorization"]
-      || req.headers["x-access-token"]
-      || req.headers.authorization
-      || req.params.token;
+		const bearerHeader = req.headers["authorization"] || req.headers["x-access-token"];
 		/**Check if bearer is undefined*/
 		if (typeof bearerHeader !== "undefined") {
-			/**Split at the space*/
-			const bearer = bearerHeader.split(" ");
-			/**Get token from array*/
-			const bearerToken = bearer[1];
 			/**Set the Token*/
-			req.token = bearerToken || bearerHeader;
+			req.token =  bearerHeader;
 
-			const secret_key = process.env.ADMIN_ONLY || process.env.SECRET_KEY;
-
-			jwt.verify(req.token, secret_key, (err, data) => {
+			jwt.verify(req.token, process.env.ADMIN_ONLY, (err, decodedToken) => {
 				if (err) {
 					res.status(401).json({
 						status: "Error",
 						message: "Invalid Token"
 					});
-				} else if (!data) {
-					res.status(403).json({
+				} if (decodedToken) {
+					req.adminInfo = decodedToken;
+					/**Next middleware*/
+					return next();
+				}
+			});
+
+		} else {
+			/**Forbidden*/
+			return res.status(400).json({
+				status: "Error",
+				message: "Token not provided"
+			});
+		}
+	}
+
+
+
+	/**
+  * Token verification for Users
+  * @param {object} req - The request body
+  * @param {object} res - The response body
+  * @param {object} next - function that call the next middleware
+  */
+	static verifyUsersToken(req, res, next) {
+		/**get auth header value*/
+		const bearerHeader = req.headers["authorization"] || req.headers["x-access-token"];
+		/**Check if bearer is undefined*/
+		if (typeof bearerHeader !== "undefined") {
+			/**Set the Token*/
+			req.token = bearerHeader;
+
+			jwt.verify(req.token, process.env.SECRET_KEY, (err, decodedToken) => {
+				if (err) {
+					res.status(401).json({
 						status: "Error",
 						message: "Invalid Token"
 					});
-				} else{
-					req.decoded = data;
+				} if (decodedToken) {
+					req.userInfo = decodedToken;
 					/**Next middleware*/
 					return next();
 				}

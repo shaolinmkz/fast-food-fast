@@ -26,19 +26,13 @@ export class MealValidator {
 		}
 
 
-		try {
-			if (!(Helper.isValidAlphabet(name.split(" ").join("").toString().toLowerCase()))) {
-				return res.status(400).json({
-					status: "Error",
-					message: `Invalid input ${name}. All characters must be alphabets`
-				});
-			}
-		} catch (err) {
-			return res.status(500).json({
+		if (!(Helper.isValidAlphabet(name.split(" ").join("").toString().toLowerCase()))) {
+			return res.status(400).json({
 				status: "Error",
-				message: err
+				message: `Invalid input ${name}. All characters must be alphabets`
 			});
 		}
+
 
 		for (i = 0; i < price.length; i++) {
 			if (price.toString().charAt(i) === " ") {
@@ -50,23 +44,15 @@ export class MealValidator {
 		}
 
 
-		try {
-			if (!(Helper.isValidNumber(price.toString()))) {
-				return res.status(400).json({
-					status: "Error",
-					message: `Invalid input ${price}. All characters must be numbers`
-				});
-			}
-		} catch (err) {
-			return res.status(500).json({
+		if (!(Helper.isValidNumber(price.toString()))) {
+			return res.status(400).json({
 				status: "Error",
-				message: err
+				message: `Invalid input ${price}. All characters must be numbers`
 			});
 		}
 
-		if ( name && price) {
-			next();
-		}
+
+		next();
 
 	}
 

@@ -1,6 +1,10 @@
 import { db } from "../db";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { OrderedMeals, Billings } from "../middlewares";
+
+const orderedMeals = new OrderedMeals();
+const billing = new Billings();
 
 /**
  * @class \{{{object}}\} {{Users}}{{Contains methods users session}}
@@ -15,18 +19,19 @@ export class Users {
 	fetchUsers (req, res) {
 		db.any("SELECT * FROM users")
 			.then(users => {
+				if (users.length < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "users not found"
+					});
+				}
 				return res.status(200)
 					.json({
 						status: "Success",
 						message: "All users received successfully",
 						users
 					});
-			})
-			.catch(() => res.status(404)
-				.json({
-					status: "Error",
-					message: "users not found"
-				}));
+			});
 	}
 
 	/**
@@ -68,12 +73,6 @@ export class Users {
 							logged_in: `${user.logged_in}`
 						});
 					});
-			})
-			.catch((err) => {
-				return res.status(500).json({
-					status: "Error",
-					message: err
-				});
 			});
 	}
 
@@ -86,21 +85,14 @@ export class Users {
 		const { email, password } = req.body;
 		db.any("SELECT * FROM users WHERE email = $1", [email])
 			.then(user => {
-				if (user[0].logged_in.toString() === "true") {
-					return res.status(400).json({
-						status: "Error",
-						message: "User is already logged in"
-					});
-				}
 				if (user.length > 0) {
 					bcrypt.compare(password, user[0].password, (error, result) => {
-						if (error) {
+						if (user[0].logged_in.toString() === "true") {
 							return res.status(400).json({
 								status: "Error",
-								message: "invalid user!"
+								message: "User is already logged in"
 							});
 						}
-
 						if (!result) {
 							return res.status(400).json({
 								status: "Error",
@@ -115,15 +107,14 @@ export class Users {
 										email: user2[0].email,
 										fullname: user2[0].fullname
 									}, process.env.SECRET_KEY, { expiresIn: "1d" });
-									if (token) {
-										return res.status(200).json({
-											status: "Success",
-											message: `User logged in successfully, Welcome ${user2[0].fullname}`,
-											mobile_number: "+234" + Number(user2[0].phone),
-											logged_in: user2[0].logged_in,
-											token: token
-										});
-									}
+
+									return res.status(200).json({
+										status: "Success",
+										message: `User logged in successfully, Welcome ${user2[0].fullname}`,
+										mobile_number: "+234" + Number(user2[0].phone),
+										logged_in: user2[0].logged_in,
+										token: token
+									});
 								});
 						}
 					});
@@ -133,12 +124,7 @@ export class Users {
 						message: "User doesn't exist, create user!"
 					});
 				}
-			})
-			.catch (err => res.status(400).json({
-				status: "Error",
-				message: "User doesn't exist, create user!",
-				err
-			}));
+			});
 	}
 
 
@@ -150,40 +136,34 @@ export class Users {
    */
 	logoutUser(req, res) {
 
-		const { email } = req.body;
+		const { email } = req.userInfo;
 
 		db.any("UPDATE users SET logged_in = false WHERE email = $1 RETURNING *", [email])
 			.then(user => {
 				if (user.length > 0) {
-					const token = jwt.sign({
+					jwt.sign({
 						id: user[0].id,
 						email
-					}, process.env.SECRET_KEY, { expiresIn: "1s" });
-					if (token) {
-						return res.status(200).json({
-							status: "Success",
-							message: "User Logged out Successfully",
-							logged_in: user[0].logged_in,
-							tokenMessage: "Token Expired",
-						});
-					}
+					}, process.env.SECRET_KEY, { expiresIn: "0s" });
+					return res.status(200).json({
+						status: "Success",
+						message: "User Logged out Successfully",
+						logged_in: user[0].logged_in,
+						tokenMessage: "Token Expired",
+					});
 				} else {
 					return res.status(400).json({
 						status: "Error",
 						message: "Invalid User!" });
 				}
-			})
-			.catch(error => res.status(500).json({
-				status: "Error",
-				error
-			}));
+			});
 	}
 
 
 
 
 	/**
-   * Represents a get all menu function
+   * @description Represents a get all menu function
    * @param { object } req - body request
    * @param { object } res - body response
    */
@@ -192,7 +172,7 @@ export class Users {
 		db.any("SELECT * FROM foods")
 			.then(data1 => {
 				foods = data1;
-				if (foods[0]) {
+				if (data1.length > 0) {
 					db.any("SELECT * FROM drinks")
 						.then(data2 => {
 							drinks = data2;
@@ -202,11 +182,6 @@ export class Users {
 								solid_meals: foods,
 								liquid_meals: drinks
 							});
-						}).catch(err => {
-							res.status(500).json({
-								status: "Error",
-								err
-							});
 						});
 				} else {
 					return res.status(404).json({
@@ -214,15 +189,118 @@ export class Users {
 						message: "Menu not found"
 					});
 				}
-			})
-			.catch(error => res.status(500)
-				.json({
-					status: "Error",
-					error
-				}));
+			});
+	}
+
+
+
+	/**
+   * @description Method that places an order
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	placeOrder(req, res) {
+
+		const { id }  = req.userInfo;
+
+		let { address, lga, state, foods,
+			foodsQuantity, drinks, drinksQuantity } = req.body;
+
+		foods = orderedMeals.displayFoods(foods);
+		drinks = orderedMeals.displayDrinks(drinks);
+		db.any("SELECT * FROM users where id = $1", [id])
+			.then(data => {
+				if (data.length > 0) {
+					db.any("UPDATE users SET address = $1 WHERE id = $2 RETURNING *", [address, id])
+						.then(() => {
+							db.any("UPDATE users SET lga = $1 WHERE id = $2 RETURNING *", [lga, id])
+								.then(() => {
+									db.any("UPDATE users SET state = $1 WHERE id = $2 RETURNING *", [state, id])
+										.then((userData) => {
+											const userInfo = userData[0];
+
+											let subtotal = billing.subtotal(drinks, foods, foodsQuantity, drinksQuantity);
+											let discount = billing.discount(drinks, foods, foodsQuantity, drinksQuantity);
+											let delivery = billing.delivery(drinks, foods);
+											let total = billing.total(drinks, foods, foodsQuantity, drinksQuantity);
+											let status = "NEW"; /**Order status could be: new, procesing, cancelled, or completed*/
+
+											foods = foods.join(","); drinks = drinks.join(",");
+
+											db.any("INSERT INTO orders (food_items, drink_items, subtotal, delivery, discount, total, status, user_id)" +
+                  "VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [foods, drinks, subtotal, delivery, discount, total, status, id])
+												.then(() => {
+
+													db.any("SELECT * FROM orders WHERE user_id = $1", [id])
+														.then(orderData => {
+															const orderDetails = orderData[(orderData.length) - 1];
+
+															return res.status(201).json({
+																status: "Success",
+																message: "Your order has been placed",
+																order_id: orderDetails.id,
+																shippingdetails: {
+																	name: userInfo.fullname,
+																	email: userInfo.email,
+																	phone_number: userInfo.phone,
+																	address: `${userInfo.address}, ${userInfo.lga}, ${userInfo.state}`,
+																},
+																items: {
+																	foods: orderDetails.food_items,
+																	drinks: orderDetails.drink_items
+																},
+																bill: {
+																	subtotal: `₦${orderDetails.subtotal}`,
+																	discount: `₦${orderDetails.discount}`,
+																	delivery: `₦${orderDetails.delivery}`,
+																	total: `₦${orderDetails.total}`
+																},
+																order_status: orderDetails.status,
+																ordered_datetime: orderDetails.created_date
+															});
+														});
+												});
+										});
+								});
+						});
+				} else {
+					return res.status(400).json({
+						status: "Error",
+						message: "user doesn't exist or is not logged in"
+					});
+				}
+			});
+
+	}
+
+
+
+	/**
+   * Represents a Get user order history
+   * @param { object } req - body request
+   * @param { object } res - body response
+   */
+	fetchUsersOrderHistory(req, res) {
+		const { id } = req.params;
+		db.any("SELECT * FROM orders WHERE user_id= $1", [id])
+			.then(history => {
+				if (history.length - 1 < 0) {
+					return res.status(404).json({
+						status: "Error",
+						message: "History not found"
+					});
+				}
+				return res.status(200)
+					.json({
+						status: "Success",
+						message: "All order history received successfully",
+						history
+					});
+			});
 	}
 
 
 }
+
 
 
