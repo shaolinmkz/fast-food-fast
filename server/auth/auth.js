@@ -12,7 +12,7 @@ export class Helper {
    * @param {string} email - users email
    */
 	static isValidEmail(email) {  /**hint from code mentor tutorials @OlawaleAladeusi*/
-		return /\S+@\S+\.\S+/.test(email);
+		return (/\S+@\S+\.\S+/.test(email) && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email));
 	}
 
 	/**
