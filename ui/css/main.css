@@ -122,7 +122,7 @@ body{
 }
 
 .main-header nav ul li:hover > ul.menu{
-    top: 25px;
+    bottom: -8.5em;
 } 
 .main-header .menu li a{
     width: 88%;
@@ -134,7 +134,7 @@ body{
 
 }
 .food-bg-covering{
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.9);
 }
 .pands, .about{
     padding: 0 2em 2em 2em;
@@ -153,6 +153,7 @@ body{
 .home-body{
     background: url("../images/food-Background.png")
 }
+
 
 /*---------------User ACCOUNT ENDS Here------------------*/
 
@@ -257,6 +258,7 @@ body{
 .bg{ /*body wrapper background*/
     padding: 50px 0 0 50px;
     background-image: url("../images/24hrs.png");
+    background-size: contain;
 }
 div.bg > div#center{
     width: 35em;
