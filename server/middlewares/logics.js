@@ -75,7 +75,7 @@ export class Billings {
 		for (i = 0; i < foodsCheck.length; i++) {
 			for (j = 0; j < foodsDB.length; j++) {
 				if (foodsCheck[i].trim() === foodsDB[j].name) {
-					cost += (foodsDB[i].price * (foodsQuantity[i]));
+					cost += (foodsDB[j].price * (foodsQuantity[i]));
 				}
 			}
 		}
@@ -101,7 +101,7 @@ export class Billings {
 		for (i = 0; i < drinksCheck.length; i++) {
 			for (j = 0; j < drinksDB.length; j++) {
 				if (drinksCheck[i].trim() === drinksDB[j].name) {
-					cost += (drinksDB[i].price * (drinksQuantity[i]));
+					cost += (drinksDB[j].price * (drinksQuantity[i]));
 				}
 			}
 		}
