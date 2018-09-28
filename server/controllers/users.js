@@ -67,6 +67,7 @@ export class Users {
 							status: "Success",
 							message: `User created Successfully, Welcome ${user.fullname} to f-cube`,
 							token,
+							user_id: user.id,
 							fullname: user.fullname,
 							email: user.email,
 							mobile_number: "+234" + Number(user.phone),
@@ -282,21 +283,29 @@ export class Users {
    */
 	fetchUsersOrderHistory(req, res) {
 		const { id } = req.params;
-		db.any("SELECT * FROM orders WHERE user_id= $1", [id])
-			.then(history => {
-				if (history.length - 1 < 0) {
-					return res.status(404).json({
-						status: "Error",
-						message: "History not found"
-					});
-				}
-				return res.status(200)
-					.json({
-						status: "Success",
-						message: "All order history received successfully",
-						history
-					});
+
+		if (Number(id) !== Number(req.userInfo.id)) {
+			return res.status(400).json({
+				status: "Error",
+				message: "Invalid user id"
 			});
+		} else {
+			db.any("SELECT * FROM orders WHERE user_id= $1", [id])
+				.then(history => {
+					if (history.length - 1 < 0) {
+						return res.status(404).json({
+							status: "Error",
+							message: "History not found"
+						});
+					}
+					return res.status(200)
+						.json({
+							status: "Success",
+							message: "All order history received successfully",
+							history
+						});
+				});
+		}
 	}
 
 

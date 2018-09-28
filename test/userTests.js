@@ -175,7 +175,7 @@ describe("User signup and activities", () => {
 	});
 
 
-	it("should return 201 if user doesn't exists", (done) => {
+	it("should return 201 and give a discount of 20%", (done) => {
 		chai.request(app)
 			.post("/api/v2/orders")
 			.send({
@@ -183,7 +183,7 @@ describe("User signup and activities", () => {
 				lga: "Apapa",
 				state: "Lagos",
 				foods: ["citizens meal", "pot lovers menu"],
-				foodsQuantity: [2, 1],
+				foodsQuantity: [2, 3],
 				drinks: ["five alive 1L", "fanta orange 50cl", "coca cola 50cl"],
 				drinksQuantity: [1, 1, 3]
 			})
@@ -283,17 +283,70 @@ describe("User signup and activities", () => {
 	});
 
 
-	it("should return 201 if user doesn't exists", (done) => {
+	it("should return 201 if user places orders successfully", (done) => {
 		chai.request(app)
 			.post("/api/v2/orders")
 			.send({
 				address: "XYZ building behinde genesis deluxe",
 				lga: "Apapa",
 				state: "Lagos",
-				foods: ["citizens meal", "pot lovers menu"],
-				foodsQuantity: [2, 5],
+				foods: ["pot lovers menu"],
+				foodsQuantity: [1],
 				drinks: ["five alive 1L", "fanta orange 50cl", "coca cola 50cl"],
-				drinksQuantity: [6, 1, 3]
+				drinksQuantity: [1, 1, 1]
+			})
+			.set("authorization", testToken)
+			.end((err, res) => {
+				expect(res.status).to.eql(201);
+				expect(res.body.message).to.eql("Your order has been placed");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+
+	it("should return 201 and give a discount of 5%", (done) => {
+		chai.request(app)
+			.post("/api/v2/orders")
+			.send({
+				address: "XYZ building behinde genesis deluxe",
+				lga: "Apapa",
+				state: "Lagos",
+				foods: ["pot lovers menu", "rice and beans"],
+				foodsQuantity: [1, 1],
+				drinks: ["five alive 1L", "fanta orange 50cl", "coca cola 50cl", "coca cola zero 50cl"],
+				drinksQuantity: [1, 1, 1, 1]
+			})
+			.set("authorization", testToken)
+			.end((err, res) => {
+				expect(res.status).to.eql(201);
+				expect(res.body.message).to.eql("Your order has been placed");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+	it("should return 201 and give a discount of 0%", (done) => {
+		chai.request(app)
+			.post("/api/v2/orders")
+			.send({
+				address: "XYZ building behinde genesis deluxe",
+				lga: "Apapa",
+				state: "Lagos",
+				foods: ["rice and beans"],
+				foodsQuantity: [1],
+				drinks: ["five alive 1L", "fanta orange 50cl", "coca cola 50cl", "coca cola zero 50cl"],
+				drinksQuantity: [1, 1, 1, 1]
 			})
 			.set("authorization", testToken)
 			.end((err, res) => {
@@ -337,6 +390,7 @@ describe("User signup and activities", () => {
 			});
 	});
 
+
 	it("should return 200 if order history exists", (done) => {
 		chai.request(app)
 			.get("/api/v2/users/5/orders")
@@ -356,11 +410,28 @@ describe("User signup and activities", () => {
 
 	it("should return 404 if order history isn't found", (done) => {
 		chai.request(app)
-			.get("/api/v2/users/10000/orders")
-			.set("x-access-token", testToken)
+			.get("/api/v2/users/6/orders")
+			.set("x-access-token", testToken2)
 			.end((err, res) => {
 				expect(res.status).to.eql(404);
 				expect(res.body.message).to.eql("History not found");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
+	it("should return 400 if decodedtoken id doesnt match param id", (done) => {
+		chai.request(app)
+			.get("/api/v2/users/10000/orders")
+			.set("x-access-token", testToken)
+			.end((err, res) => {
+				expect(res.status).to.eql(400);
+				expect(res.body.message).to.eql("Invalid user id");
 				expect(res.body.status).to.have.lengthOf(5);
 				expect(res.body).to.have.property("status").with.lengthOf(5);
 				should.not.exist(err);
@@ -378,10 +449,10 @@ describe("User signup and activities", () => {
 				address: "XYZ building behinde genesis deluxe",
 				lga: "Apapa",
 				state: "Lagos",
-				foods: ["citizens meal", "pot lovers menu"],
+				foods: ["pot lovers menu"],
 				foodsQuantity: [2, 1],
-				drinks: ["five alive 1L", "fanta orange 50cl", "coca cola 50cl"],
-				drinksQuantity: [1, 1, 3]
+				drinks: ["five alive 1L"],
+				drinksQuantity: [1]
 			})
 			.end((err, res) => {
 				expect(res.status).to.eql(400);

@@ -25,6 +25,7 @@ const invalidtoken = id => jwt.sign(
 	"asdadsdad", { expiresIn: 24 * 60 * 60 }
 ).toString();
 
+
 /**
  * Create Admin
  */

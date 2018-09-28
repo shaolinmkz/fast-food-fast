@@ -68,14 +68,10 @@ export class Billings {
 		const foodsCheck = orderedMeals.displayDrinks(foods);
 
 
-		if (foodsCheck[0] === "") {
-			return 0;
-		}
-
 		for (i = 0; i < foodsCheck.length; i++) {
 			for (j = 0; j < foodsDB.length; j++) {
 				if (foodsCheck[i].trim() === foodsDB[j].name) {
-					cost += (foodsDB[i].price * (foodsQuantity[i]));
+					cost += (foodsDB[j].price * (foodsQuantity[i]));
 				}
 			}
 		}
@@ -94,14 +90,10 @@ export class Billings {
 		const drinksCheck = orderedMeals.displayFoods(drinks);
 
 
-		if (drinksCheck[0] === "") {
-			return 0;
-		}
-
 		for (i = 0; i < drinksCheck.length; i++) {
 			for (j = 0; j < drinksDB.length; j++) {
 				if (drinksCheck[i].trim() === drinksDB[j].name) {
-					cost += (drinksDB[i].price * (drinksQuantity[i]));
+					cost += (drinksDB[j].price * (drinksQuantity[i]));
 				}
 			}
 		}
@@ -119,10 +111,10 @@ export class Billings {
 	discount(drinks, foods, foodsQuantity, drinksQuantity) {
 		const bill = new Billings();
 		const subtotal = bill.subtotal(drinks, foods, foodsQuantity, drinksQuantity);
-		if (subtotal > 5000) {
+		if (subtotal > 10000) {
+			return (0.2 * subtotal);
+		} else if (subtotal > 5000) {
 			return (0.05 * subtotal);
-		} else if (subtotal > 10000) {
-			return (0.1 * subtotal);
 		} else {
 			return 0;
 		}
