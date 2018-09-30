@@ -26,7 +26,7 @@ export const polulateDB = (req, res) => {
 			t.none("INSERT INTO drinks (name, price) VALUES ($1, $2)", ["five alive 1L", "600"]),
 			t.none("INSERT INTO users (fullname, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5)", ["Chris, Femi", "chrisfemi@yahoo.com", "08054325678", hash, logged_in]),
 			t.none("INSERT INTO users (fullname, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5)", ["Jumoke, Coleson", "jumokecoleson@gmail.com", "07097215678", hash, logged_in]),
-			t.none("INSERT INTO users (fullname, email, phone, address, lga, state, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", ["Ovie, Musa", "oviemusa@hotmail.com", "09062736478", "ABC building beside genesis deluxe", "Apapa", "Lagos", hash, "true"]),
+      t.none("INSERT INTO users (fullname, email, phone, address, lga, state, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", ["Ovie, Musa", "oviemusa@hotmail.com", "09062736478", "ABC building beside genesis deluxe", "Apapa", "Lagos", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Chris, Femi", "phemi", "chrisfemi@yahoo.com", "08054325678", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Jumoke, Coleson", "cole", "jumokecoleson@gmail.com", "07097215678", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Ovie, Musa", "musa", "oviemusa@hotmail.com", "09062736478", hash, logged_in]),
