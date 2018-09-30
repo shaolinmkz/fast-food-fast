@@ -720,6 +720,23 @@ describe("Add a menu by Admin", () => {
 
 describe("Polulate database", () => {
 
+	it("should return 404 if all users doesn't exist", (done) => {
+		request.get("/api/v2/users")
+			.set("authorization", tokenHeaderAdmin(2))
+			.end((err, res) => {
+				expect(res.status).to.eql(404);
+				expect(res.body.message).to.eql("users not found");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(5);
+				expect(res.body).to.have.property("status").with.lengthOf(5);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
 	it("should return 201 if all test menus are inserted", (done) => {
 		request.post("/api/v2/pushall")
 			.set("authorization", tokenHeaderAdmin(2))
@@ -739,15 +756,6 @@ describe("Polulate database", () => {
 			});
 	});
 
-
-});
-
-
-/**
- * GET ALL USER
- */
-describe("Fetch all users route", () => {
-
 	it("should return 200 if all users exist", (done) => {
 		request.get("/api/v2/users")
 			.set("authorization", tokenHeaderAdmin(2))
@@ -764,6 +772,33 @@ describe("Fetch all users route", () => {
 				done();
 			});
 	});
+
+
 });
+
+
+/**
+ * GET ALL USER
+ */
+// describe("Fetch all users route", () => {
+
+
+// 	it("should return 200 if all users exist", (done) => {
+// 		request.get("/api/v2/users")
+// 			.set("authorization", tokenHeaderAdmin(2))
+// 			.end((err, res) => {
+// 				expect(res.status).to.eql(200);
+// 				expect(res.body.message).to.eql("All users received successfully");
+// 				expect(res.body.message).to.be.a("string");
+// 				expect(res.body.status).to.have.lengthOf(7);
+// 				expect(res.body).to.have.property("status").with.lengthOf(7);
+// 				should.not.exist(err);
+// 				should.exist(res.body);
+// 				(res.body).should.be.an("object");
+// 				if (err) { return done(err); }
+// 				done();
+// 			});
+// 	});
+// });
 
 

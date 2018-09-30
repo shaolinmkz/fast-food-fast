@@ -13,7 +13,7 @@ export class Admins{
    * @param { object } res - body response
    */
 	fetchAdmins(req, res) {
-		db.any("SELECT * FROM admins")
+		db.any("SELECT id, username, fullname, email, phone, logged_in, created_date FROM admins")
 			.then(admins => {
 				if (admins.length - 1 < 0) {
 					return res.status(404).json({
@@ -73,6 +73,7 @@ export class Admins{
 							status: "Success",
 							message: `Admin created Successfully, Welcome Admin ${admin.username}`,
 							token,
+							admin_id: admin.id,
 							username: admin.username,
 							fullname: admin.fullname,
 							email: admin.email,

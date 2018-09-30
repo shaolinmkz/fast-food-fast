@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import logger from "morgan";
+import swaggerDocs from "./swaggerDocs.json";
+import swaggerUI from "swagger-ui-express";
 import { orderRoutes, userRoutes, adminRoutes } from "./server/routes";
 
 const app = express();
@@ -10,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/json" }));
 
+app.use("/api-documentation", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(orderRoutes);
 app.use(userRoutes);
 app.use(adminRoutes);

@@ -17,20 +17,20 @@ export class Users {
    * @param { object } res - body response
    */
 	fetchUsers (req, res) {
-		db.any("SELECT * FROM users")
+		db.any("SELECT id, fullname, email, phone, logged_in, created_date FROM users")
 			.then(users => {
-				if (users.length < 0) {
-					return res.status(404).json({
-						status: "Error",
-						message: "users not found"
-					});
+				if (users.length > 0) {
+					return res.status(200)
+						.json({
+							status: "Success",
+							message: "All users received successfully",
+							users
+						});
 				}
-				return res.status(200)
-					.json({
-						status: "Success",
-						message: "All users received successfully",
-						users
-					});
+				return res.status(404).json({
+					status: "Error",
+					message: "users not found"
+				});
 			});
 	}
 
@@ -226,10 +226,10 @@ export class Users {
 											let total = billing.total(drinks, foods, foodsQuantity, drinksQuantity);
 											let status = "NEW"; /**Order status could be: new, procesing, cancelled, or completed*/
 
-											foods = foods.join(","); drinks = drinks.join(",");
+											foods = foods.join(","); drinks = drinks.join(","); foodsQuantity = foodsQuantity.join(","); drinksQuantity = drinksQuantity.join(",");
 
-											db.any("INSERT INTO orders (food_items, drink_items, subtotal, delivery, discount, total, status, user_id)" +
-                  "VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [foods, drinks, subtotal, delivery, discount, total, status, id])
+											db.any("INSERT INTO orders (food_items, food_quantities, drink_items, drink_quantities, subtotal, delivery, discount, total, status, user_id)" +
+                  "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [foods, foodsQuantity, drinks, drinksQuantity, subtotal, delivery, discount, total, status, id])
 												.then(() => {
 
 													db.any("SELECT * FROM orders WHERE user_id = $1", [id])
@@ -248,7 +248,9 @@ export class Users {
 																},
 																items: {
 																	foods: orderDetails.food_items,
-																	drinks: orderDetails.drink_items
+																	food_quantity: orderDetails.food_quantities,
+																	drinks: orderDetails.drink_items,
+																	drink_quantity: orderDetails.drink_quantities
 																},
 																bill: {
 																	subtotal: `₦${orderDetails.subtotal}`,
