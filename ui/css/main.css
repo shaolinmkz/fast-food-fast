@@ -136,6 +136,9 @@ body{
 .food-bg-covering{
     background: rgba(255, 255, 255, 0.9);
 }
+.index-bg-covering{
+    background: rgba(255, 255, 255, 0.5);
+}
 .pands, .about{
     padding: 0 2em 2em 2em;
     line-height: 2em;
