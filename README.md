@@ -2,7 +2,8 @@
 
 # Fast-Food-Fast V2
 Fast-Food-Fast​ is a food delivery service app for a restaurant where you can place your order and get your food as soon as possible.
-It is written in Javascript(NodeJs for server), HTML and CSS.
+It is written in Javascript(NodeJs for server), HTML and CSS. The app version has been upgraded to version 2 which is for production. The version 1 is for the dummy database using data structure. 
+Thus for this purpose, use the v2 routes all through. The routes have been specified in the _Installation & Testing_ section.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -37,76 +38,78 @@ e.g
 User@guest MINGW64 ~/fast-food-fast
 $ npm start
 ```
-You can now test the API endpoints below via Postman
+## _You can now test the API endpoints below via Postman_
 
-**FOR TESTING PURPOSES**
-FETCHES ALL ADMINS
-GET verb => host:port/api/v2/admins     {secured} testing purposes
+## FOR TESTING PURPOSES
+**FETCHES ALL ADMINS**
+GET verb => host:port/api/v2/admins     {secured for only admin} testing purposes
 
-POPULATES SPECIFIC DATABASE TABLES
-POST verb => host:port/api/v2/pushall     {secured} populated table
+**POPULATES DATABASE FOR TESTING**
+POST verb => host:port/api/v2/pushall     {secured for only admin} populated table
 
 
-**REQUIRED FOR ADMINS**
-SIGNUP/ CREATE ACCOUNT
-POST verb => host:port/api/v2/auth/admin/signup {not secured}{authentication required}
+## REQUIRED FOR ADMINS
+**SIGNUP/ CREATE ACCOUNT**
+POST verb => host:port/api/v2/auth/admin/signup {authentication required}
 Input Fields => [username, firstname, lastname, phone, email
 		adminToken, password, confirmPassword]
+		
+Use the token **_adminToken_** => `asdf;lkj` tocreate a new admin and test the API
 
-SIGNIN/LOGIN
-POST verb => host:port/api/v2/auth/admin/login  {not secured}
+**SIGNIN/LOGIN**
+POST verb => host:port/api/v2/auth/admin/login  {secured}
 Input Fields => [username, password]  {authentication required}
 
-SIGNOUT/LOGOUT
+**SIGNOUT/LOGOUT**
 POST verb => host:port/api/v2/admin/logout  {secured}
 Input Fields => [username, password]  
 
-ADDS NEW MENU {DRINK}
+**ADDS NEW MENU {DRINK}**
 POST verb => host:port/api/v2/admin/menu/drinks  {secured}
 Input Fields => [name, price]
 
-ADDS NEW MENU {FOOD}
+**ADDS NEW MENU {FOOD}**
 POST verb => host:port/api/v2/admin/menu/foods  {secured}
 Input Fields => [name, price] 
 
-FETCHES ALL ORDERS
+**FETCHES ALL ORDERS**
 GET verb => host:port/api/v2/orders  {secured}
 
-FETCHES A SPECIFIC ORDER
+**FETCHES A SPECIFIC ORDER**
 GET verb => host:port/api/v2/orders/{orderid} =>  {secured} 
 
-UPDATE AN ORDER STATUS
+**UPDATE AN ORDER STATUS**
 PUT verb => host:port/api/v2/orders/{orderid} => {secured}
 Input Fields => [status] Entries => {completed, new, prcessing or cancelled }
 
 
-**REQUIRED FOR USERS**
+## REQUIRED FOR USERS
 FETCHES ALL USERS
 GET verb => host:port/api/v2/users => {secured} Admin only testing purposes
 
-SIGNUP/CREATE ACCOUNT
+**SIGNUP/CREATE ACCOUNT**
 POST verb => host:port/api/v2/auth/signup => {secured} {authentication required}
 Input Fields => [firstname, lastname, email, phone, password, confirmPassword]
 
-SIGNIN/LOGIN
+**SIGNIN/LOGIN**
 POST verb => host:port/api/v2/auth/login => {secured} 
 Input Fields => [email, password] => {authentication required}
 
-SIGNOUT/LOGOUT
+**SIGNOUT/LOGOUT**
 POST verb => host:port/api/v2/logout {secured} 
 Input Fields => [email, password]
 
-PLACE AN ORDER
+**PLACE AN ORDER**
 POST verb => host:port/api/v2/orders {secured}
 Input Fields => [address, lga, state, foods, foodsQuantity, drinks, drinksQuantity]  
 
-FETCH ALL ORDER HISTORY SPECIFIC TO A USER
+**FETCH ALL ORDER HISTORY SPECIFIC TO A USER**
 GET verb => host:port/api/v2/users/:id/orders {secured}
 
-FETCH ALL MENUS
+**FETCH ALL MENUS**
 GET verb => host:port/api/v2/menu {not secured}
 
-ACCESS THE ROOT API
+**ACCESS THE ROOT API**
 GET verb => host:port/ {not secured}
 
 
@@ -178,10 +181,9 @@ describe("Validation of users input", () => {
 	});
 });
 ```
-The example able is a test to check the GET all food menu route.
-It expects a status code of 200 if the user accesses the route `host:port/api/v1/orders/menus/foods`.
-It checks the length of the food database structure and asserts if there is any property called "price" in the food database object.
-Finally, it check if the respond message deeply equals the "All meals have been delivered successfully" before it ends.
+The example able is a test to validate the user form input fields.
+It expects a status code of 400 if the user accesses the route `host:port/api/v2/auth/signup` with an invalid firstname character.
+It checks the each character of the users input to check for an invalid English alphabet. It flags the field if its not a valid alphabet.
 
 
 ## Deployment
@@ -215,5 +217,6 @@ Git-Hub
 [Andela Fellowship](https://andela.com/fellowship/)
 
 ## Acknowledgments
-* I appreciate anynoe who has impacted in these project. You are all awesome!!!
-
+* I appreciate anyone who has impacted in these project. You are all awesome!!!
+* Salute to all my Learning facilitators and team mates. Your're the real MVP!!!
+* I appreciate my Dad and family members for their strong support. Your're truly exceptional!!!
