@@ -2,7 +2,7 @@
     font-family: Helvetica, Arial, sans-serif
 }
 
-.order-modal {
+.order-modal, .cart-modal {
     position: fixed;
     z-index: 1;
     display: none;
@@ -25,6 +25,25 @@
     transform: translate(-50%,-50%);
     box-sizing: border-box;
     padding: 30px 30px 50px 30px;
+}
+.order-modal, .cart-modal {
+    position: fixed;
+    z-index: 1;
+    display: none;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.cart-box {
+    min-width: 320px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
 }
 .order-box form{
     float: left;
@@ -141,7 +160,6 @@
     width: 250px;
     padding: 10% 30px;
     padding-top: 0;
-    border: 1px solid #ff3008;
     background: rgb(255, 255, 255);
 }
 
@@ -173,5 +191,13 @@
 }
 
 .main-header nav ul li:hover > ul.isolate{
-    bottom: -26em;
+    bottom: -1em;
+    z-index: 40;
+}
+
+@media(max-width:768px){
+.main-header nav ul li:hover > ul.isolate{
+    bottom: -1em;
+    z-index: 40;
+}
 }

@@ -1,0 +1,15 @@
+section.food-catalog div,
+section.drink-catalog div{
+    width: 20%;
+    margin-right: 5%;
+    margin-top: 2%;
+    cursor: none;
+    transition-property: width;
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+}
+
+section.food-catalog div:active,
+section.drink-catalog div:active{
+    width: 40%;
+}
