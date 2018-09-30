@@ -186,7 +186,10 @@ Finally, it check if the respond message deeply equals the "All meals have been 
 
 ## Deployment
 You can host this application on any server that is compatible with Nodejs apps.
-[Currently hosted on Heroku](https://f-cube.herokuapp.com/)
+* [Currently hosted on Heroku](https://f-cube.herokuapp.com/)
+
+## RESTful API documentation
+* [FastFoodFast API Documentation](https://f-cube.herokuapp.com/api-documentation)
 
 ## Built With
 * [Javascript | NodeJs](https://nodejs.org/en/) - The web framework used
