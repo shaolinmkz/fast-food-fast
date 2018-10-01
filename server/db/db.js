@@ -53,7 +53,9 @@ const createTable = () => {
         CREATE TABLE IF NOT EXISTS orders(
             id SERIAL PRIMARY KEY,
             food_items TEXT,
+            food_quantities TEXT,
             drink_items TEXT,
+            drink_quantities TEXT,
             subtotal TEXT NOT NULL,
             delivery TEXT NOT NULL,
             discount TEXT NOT NULL,

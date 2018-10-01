@@ -1,11 +1,13 @@
 const banner = document.getElementById("bannerImg");
+const quotesDisplay = document.getElementById("quotes");
+const words = document.getElementsByName("words");
 const signup = document.getElementById("signup");
 const signupModal = document.getElementsByClassName("signup-modal")[0];
 const login = document.getElementById("signin");
 const loginModal = document.getElementsByClassName("login-modal")[0];
 const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
 
-let nextCount = 1, format = "png";
+let nextCount = 1, i = 0;
 
 /**
  * Switches images every 1 minute or 60 seconds
@@ -13,20 +15,19 @@ let nextCount = 1, format = "png";
  * @function {{slideshow}}
  */
 const slideshow = () => {
-	if (nextCount === 12) {
-		format = "jpg";
-	} else {
-		format = "png";
-	}
-	banner.setAttribute("src", `./images/food${nextCount}.${format}`);
+	banner.setAttribute("src", `./images/food${nextCount}.png`);
+	quotesDisplay.innerHTML = words[i].innerHTML; 
 	nextCount++;
+	i++;
+	if (i > 11) {
+		i = 0;
+	}
 	if (nextCount === 14) {
 		nextCount = 1;
 	}
 };
 
-setInterval(slideshow, 60000);
-banner.addEventListener("click", slideshow);
+setInterval(slideshow, 3000);
 
 /**
  * Open modal for sign up
@@ -35,6 +36,7 @@ banner.addEventListener("click", slideshow);
  */
 signup.addEventListener("click", () => {
 	signupModal.style.display = "block";
+	loginModal.style.display = "none";
 });
 
 /**
@@ -56,6 +58,7 @@ window.addEventListener("click", closeSignupModal);
  */
 login.addEventListener("click", () => {
 	loginModal.style.display = "block";
+	signupModal.style.display = "none";
 });
 
 /**

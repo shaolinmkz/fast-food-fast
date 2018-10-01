@@ -132,6 +132,24 @@ describe("Admin signup and other activities", () => {
 			});
 	});
 
+	it("should return 200 if user exists in the database", (done) => {
+		chai.request(app)
+			.get("/api/v2/users")
+			.set("authorization", testTokenC)
+			.end((err, res) => {
+				expect(res.status).to.eql(200);
+				expect(res.body.message).to.eql("All users received successfully");
+				expect(res.body.message).to.be.a("string");
+				expect(res.body.status).to.have.lengthOf(7);
+				expect(res.body).to.have.property("status").with.lengthOf(7);
+				should.not.exist(err);
+				should.exist(res.body);
+				(res.body).should.be.an("object");
+				if (err) { return done(err); }
+				done();
+			});
+	});
+
 
 
 	it("should return 404 if a spicific order is not found", (done) => {

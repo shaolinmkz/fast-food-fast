@@ -1,0 +1,926 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API For FastFoodFast App",
+    "description": "This is a Swagger Spec for the REST API used by the Fastfoodfast App. Fast-Food-Fast​ also known as **f-cube** is a food delivery service app for a restaurant where you can place your order and get your food as soon as possible.  You can find out more about FastFoodFast at [our github repo](https://github.com/shaolinmkz/fast-food-fast) also view UI templates on [customers](https://shaolinmkz.github.io/fast-food-fast/ui/) and [admins](https://shaolinmkz.github.io/fast-food-fast/ui/admin.html).",
+    "termsOfService": "https://github.com/shaolinmkz/fast-food-fast",
+    "contact": {
+      "email": "nwabuzor.obiora@gmail.com"
+    },
+    "version": "2"
+  },
+  "servers": [
+    {
+      "url": "https://f-cube.herokuapp.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "About the user routes",
+      "externalDocs": {
+        "description": "All users operational activities"
+      }
+    },
+    {
+      "name": "admin",
+      "description": "About the admin routes",
+      "externalDocs": {
+        "description": "All admins operational activities"
+      }
+    },
+    {
+      "name": "user/admin",
+      "description": "Common routes",
+      "externalDocs": {
+        "description": "Routes common to both admin and user"
+      }
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "user/admin"
+        ],
+        "summary": "Root directory",
+        "description": "The API root directory deplaying a welcome message",
+        "responses": {
+          "200": {
+            "description": "Welcome to Fast-Food-Fast A.K.A 'f-cube', Andela 21 Level-Up Project",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/menu": {
+      "get": {
+        "tags": [
+          "user/admin"
+        ],
+        "summary": "Retrieves menu",
+        "description": "Get all available menu",
+        "responses": {
+          "200": {
+            "description": "All menus received successfully"
+          },
+          "404": {
+            "description": "Menu not found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/auth/signup": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Signup new user",
+        "description": "Create new user and save to database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n        \"firstname\": \"John\",\n        \"lastname\": \"Doe\",\n        \"email\": \"john.doe@gmail.com\",\n        \"phone\": \"08067443919\",\n        \"password\": \"123456789\",\n        \"confirmPassword\": \"123456789\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created Successfully, Welcome ${user.fullname} to f-cube"
+          },
+          "400": {
+            "description": "Password didn't match",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/api/v2/auth/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Login user",
+        "description": "Signs in already existing users",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_1"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n        \"email\": \"max.steel@gmail.com\",\n        \"password\": \"123456789\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in successfully, Welcome ${user.fullname}"
+          },
+          "400": {
+            "description": "User doesn't exist, create user!",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/logout": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logout user",
+        "description": "Signs-out already signed in users",
+        "parameters": [
+          {
+            "name": "x-access-token || authorization",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtYXguc3RlZWxAZ21haWwuY29tIiwiaWF0IjoxNTM4MTQ3ODE2LCJleHAiOjE1MzgyMzQyMTZ9.nGDTDJnZrG85ZWeycWpn67c7uwtKIDUHPVLuYBNlUb0"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_2"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n        \"email\": \"max.steel@gmail.com\",\n        \"password\": \"123456789\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User Logged out Successfully"
+          },
+          "400": {
+            "description": "Invalid User!",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/orders": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Place an order",
+        "description": "Place new orders for foods and drinks",
+        "parameters": [
+          {
+            "name": "x-access-token || authorization",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtYXguc3RlZWxAZ21haWwuY29tIiwiZnVsbG5hbWUiOiJTdGVlbCwgTWF4IiwiaWF0IjoxNTM4MTQ4MTg5LCJleHAiOjE1MzgyMzQ1ODl9.KuOjQ6Ly9ExlKB6UM2sg20R-N1OvJ7OZLiBmyT3mU3Y"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_3"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n    \"address\": \"XYZ building behinde genesis deluxe\",\n\t\"lga\": \"Apapa\",\n\t\"state\": \"Lagos\",\n\t\"foods\": \"citizens meal, pot lovers menu\",\n\t\"foodsQuantity\": [1, 2],\n\t\"drinks\": [\"five alive 1L\", \"fanta orange 50cl\", \"coca cola 50cl\"],\n\t\"drinksQuantity\": [2, 1, 1]\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Your order has been placed"
+          },
+          "400": {
+            "description": "user doesn't exist or is not logged in"
+          },
+          "401": {
+            "description": "Invalid Token",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/users/{userId}/orders": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Orders history",
+        "description": "Returns the order history of a user with id {userId}",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Parameter description in CommonMark or HTML.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "x-access-token || authorization",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJtYXguc3RlZWxAZ21haWwuY29tIiwiZnVsbG5hbWUiOiJTdGVlbCwgTWF4IiwiaWF0IjoxNTM4MTQ4MTg5LCJleHAiOjE1MzgyMzQ1ODl9.KuOjQ6Ly9ExlKB6UM2sg20R-N1OvJ7OZLiBmyT3mU3Y"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All order history received successfully"
+          },
+          "400": {
+            "description": "Invalid user id",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "History not found"
+          }
+        }
+      }
+    },
+    "/api/v2/auth/admin/signup": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Create new admin",
+        "description": "Creates a new admin with a super adminToken required",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_4"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"username\": \"talltony\",\n\t\"firstname\": \"Tony\",\n\t\"lastname\": \"Johnson\",\n\t\"email\": \"tony.johnson@yahoo.com\",\n\t\"phone\": \"08067442236\",\n\t\"adminToken\": \"asdf;lkj\",\n\t\"password\": \"1234567\",\n\t\"confirmPassword\": \"1234567\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Admin created Successfully, Welcome Admin ${admin.username}"
+          },
+          "400": {
+            "description": "Invalid token, check and try again"
+          },
+          "409": {
+            "description": "Admin already exists",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/auth/admin/login": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Login admin",
+        "description": "Signin already existing admin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_5"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"username\": \"talltony\",\n\t\"password\": \"1234567\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Admin ${admin.username} Logged in successfully"
+          },
+          "400": {
+            "description": "Admin is logged in already!",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/admin/logout": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin logout",
+        "description": "Signs out admin from the application",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_6"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"username\": \"talltony\",\n\t\"password\": \"1234567\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "${Admin admin.username} logged out Successfully"
+          },
+          "400": {
+            "description": "Token not provided",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid Token"
+          }
+        }
+      }
+    },
+    "/api/v2/admins": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get a list admins",
+        "description": "Retrieves all registered admins",
+        "responses": {
+          "200": {
+            "description": "All admins received successfully"
+          },
+          "404": {
+            "description": "Admins not found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/pushall": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Populates database",
+        "description": "Generates test data and populates the database for testing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_7"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"username\": \"talltony\",\n\t\"password\": \"1234567\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "DATABASE SUCCESSFULLY POPULATED",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/orders/{orderId}": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get a specific order",
+        "description": "Returns a particular users order",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Represents a users order. Each order is identified by a numeric `orderId`",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order received successfully"
+          },
+          "404": {
+            "description": "order not found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/admin/menu/foods": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Add a food menu",
+        "description": "Creates a new resource by adding a food item with two fields which are name and price. Name represents the name of the food and price represents the unit price.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_8"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"name\": \"Suya fiesta\",\n\t\"price\": \"2500\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Food created Successfully"
+          },
+          "409": {
+            "description": "Food already exists, choose a different name",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/admin/menu/drinks": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Add a drink menu",
+        "description": "Creates a new resource by adding a drink item with two fields which are name and price. Name represents the name of the drink and price represents the unit price.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_9"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"name\": \"Latino red wine\",\n\t\"price\": \"4000\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Drink created Successfully"
+          },
+          "409": {
+            "description": "Drink already exists, choose a different name",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/orders/{userId}": {
+      "put": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Update order status",
+        "description": "Updates the order status of a apecific user {userId}. the status can only be complete, new, cancelled and processing.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Parameter description in CommonMark or HTML.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_10"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n\t\"status\": \"cancelled\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order status updated"
+          },
+          "400": {
+            "description": "Should be either new, processing, cancelled or complete",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "/api/v2/{orders}": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Retrieve all orders",
+        "description": "Returns the orders of all users",
+        "parameters": [
+          {
+            "name": "orders",
+            "in": "path",
+            "description": "Parameter description in CommonMark or HTML.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All orders received successfully"
+          },
+          "404": {
+            "description": "orders not found",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "body_3": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "lga": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "foods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "foodsQuantity": {
+            "type": "array",
+            "properties": {
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "drinks": {
+            "type": "array",
+            "properties": {
+              "items": {
+                "type": "string"
+              }
+            },
+            "items": {
+              "type": "string"
+            }
+          },
+          "drinksQuantity": {
+            "type": "array",
+            "properties": {
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "body_4": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "adminToken": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "body_1": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "body_2": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "body_9": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "body_10": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "body": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "body_7": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "body_8": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          }
+        }
+      },
+      "body_5": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "body_6": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

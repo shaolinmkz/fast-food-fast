@@ -7,79 +7,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bodystyles.css" />
     <link rel="icon" href="./images/3f-logo.png" />
 </head>
 
-<body>
-    <header class="main-header clearfix">
-        <img src="./images/3f-logo.png" id="logo" class="logo fff" />
-        <img src="./images/fastfoodfast.png" class="fastfoodfast" />
-        <div class="signup_in">
-            <div id="signup">Sign up</div>
-            <div id="signin">Sign in</div>
-        </div>
-    </header>
-    <div class="wrapper">
-        <section class="banner">
-            <img id="bannerImg" src="./images/food1.png">
+<body class="clearfix">
+    <div class="index-bg-covering">
+        <header class="main-header clearfix">
+            <img src="./images/3f-logo.png" id="logo" class="logo fff" />
+            <img src="./images/fastfoodfast.png" class="fastfoodfast" />
+            <nav>
+                <ul>
+                    <li class="current"><a href="./index.html"><span><img src="./images/home-icon.png" alt="home-icon" class="home-icon"></span>HOME</a></li>
+                    <li><a href="./about_us.html"><span><img src="./images/services.png" alt="avatar-icon" class="avatar-icon"></span>ABOUT
+                            US
+                        </a></li>
+                    <li><a href="./products.html"><span><img src="./images/products.png" alt="avatar-icon" class="avatar-icon"></span>PRODUCTS/
+                            <span><img src="./images/deliver-food-services.png" alt="avatar-icon" class="avatar-icon">SERVICES</a></li>
+
+                    <div class="index_signup_in">
+                        <div id="signup">Sign up</div>
+                        <div id="signin">Sign in</div>
+                    </div>
+            </nav>
+        </header>
+
+        <section class="site-description">FastFoodFast is a food servicing restaurant with all your mouth watering meals
+            made just for you. To get started click the sign up button and get 15% discount on first purchase.
+        </section>
+
+        <section>
+            <div class="wrapper">
+                <div class="banner">
+                    <p name="words">"Nutritious"</p>
+                    <p name="words">"The foodie food"</p>
+                    <p name="words">"Food is our religion"</p>
+                    <p name="words">"If you don’t lick your fingers, enjoy only half"</p>
+                    <p name="words">"Experience the great food"</p>
+                    <p name="words">"Already ready"</p>
+                    <p name="words">"The pleasure of variety on your plate"</p>
+                    <p name="words">"Better food better mood"</p>
+                    <p name="words">"Beyond the boundaries of taste"</p>
+                    <p name="words">"The secret is at the table"</p>
+                    <p name="words">"For hungry people"</p>
+                    <p name="words" class="size2e bold themecolor block">Food at first sight</p>
+
+                    <img id="bannerImg" alt="slider" src="./images/food1.png">
+                    <h1 id="quotes"></h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="landingDetails">Place your orders and get your food items delivered to you instantly.
         </section>
         <p class="fullwidth center"><span class="bold themecolor block size2em">Satisfy your cravings</span>
-             Experience a world of food, with your favorite meals at your doorstep.
+            Experience a world of food, with your favorite meals at your doorstep.
         </p>
-        <section class="delivery-man">
-            <img src="./images/delivery-man.png" class="marquee" />
+
+        <section class="signup-modal">
+            <div class="signup-box">
+                <h1>Sign up</h1>
+                <form action="./home.html">
+                    <label>First name</label>
+                    <input type="text" name="text" placeholder="Jane">
+                    <label>Last name</label>
+                    <input type="text" name="text" placeholder="Doe">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="janedoe@testmail.com">
+                    <label>Mobile number</label>
+                    <input type="tel" name="number" placeholder="080xxxxxxxx">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter Password">
+                    <label>Confirm password</label>
+                    <input type="password" name="password" placeholder="Enter Confirm password">
+                    <input type="submit" name="submit" value="Sign up">
+                </form>
+            </div>
         </section>
-    </div>
-    <section class="signup-modal">
-        <div class="signup-box">
-            <h1>Sign up</h1>
-            <form action="./home.html">
-                <label>First name</label>
-                <input type="text" name="text" placeholder="Jane">
-                <label>Last name</label>
-                <input type="text" name="text" placeholder="Doe">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="janedoe@testmail.com">
-                <label>Mobile number</label>
-                <input type="tel" name="number" placeholder="080xxxxxxxx">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter Password">
-                <label>Confirm password</label>
-                <input type="password" name="password" placeholder="Enter Confirm password">
-                <input type="submit" name="submit" value="Sign up">
-            </form>
+
+        <section class="login-modal">
+            <div class="login-box">
+                <img src="./images/avatar.png" class="avatar" />
+                <h1>Sign in</h1>
+                <form action="./home.html">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="janedoe@testmail.com">
+
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter Password">
+
+                    <input type="submit" name="submit" value="Login">
+                    <a href="#">Forget Password?</a>
+                </form>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+            &copy; <label>F-cube</label>
+            <div>
+                <img src="./images/email.png" />
+                <img src="./images/facebook.png" />
+                <img src="./images/twitter.png" />
+                <img src="./images/instagram.png" />
+            </div>
+            <div>
+                <p>23, abc street victoria island Lagos</p>
+                <p>P.O.Box 4351</p>
+        </footer>
         </div>
-    </section>
-
-    <section class="login-modal">
-        <div class="login-box">
-            <img src="./images/avatar.png" class="avatar" />
-            <h1>Sign in</h1>
-            <form action="./home.html">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="janedoe@testmail.com">
-
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter Password">
-
-                <input type="submit" name="submit" value="Login">
-                <a href="#">Forget Password?</a>
-            </form>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        &copy; <label>3F Template</label>
-        <div>
-            <img src="./images/email.png" />
-            <img src="./images/facebook.png" />
-            <img src="./images/twitter.png" />
-            <img src="./images/instagram.png" />
-        </div>
-    </footer>
-
-
-    <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/main.js"></script>
 </body>
 
 </html>

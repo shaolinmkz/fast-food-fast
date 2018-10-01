@@ -26,10 +26,12 @@ export const polulateDB = (req, res) => {
 			t.none("INSERT INTO drinks (name, price) VALUES ($1, $2)", ["five alive 1L", "600"]),
 			t.none("INSERT INTO users (fullname, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5)", ["Chris, Femi", "chrisfemi@yahoo.com", "08054325678", hash, logged_in]),
 			t.none("INSERT INTO users (fullname, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5)", ["Jumoke, Coleson", "jumokecoleson@gmail.com", "07097215678", hash, logged_in]),
-			t.none("INSERT INTO users (fullname, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5)", ["Ovie, Musa", "oviemusa@hotmail.com", "09062736478", hash, logged_in]),
+      t.none("INSERT INTO users (fullname, email, phone, address, lga, state, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", ["Ovie, Musa", "oviemusa@hotmail.com", "09062736478", "ABC building beside genesis deluxe", "Apapa", "Lagos", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Chris, Femi", "phemi", "chrisfemi@yahoo.com", "08054325678", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Jumoke, Coleson", "cole", "jumokecoleson@gmail.com", "07097215678", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Ovie, Musa", "musa", "oviemusa@hotmail.com", "09062736478", hash, logged_in]),
+			t.none("INSERT INTO orders (food_items, food_quantities, drink_items, drink_quantities, subtotal, delivery, discount, total, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", ["citizens meal,pot lovers menu", "3,2", "five alive 1L","2", "8350", "250", "350", "7250", "CANCELLED", 1]),
+			t.none("INSERT INTO orders (food_items, food_quantities, drink_items, drink_quantities, subtotal, delivery, discount, total, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", ["pot lovers menu", "3,2", "five alive 1L", "1", "6250", "250", "100", "6400", "COMPLETE", 1]),
 		]);
 	});
 	// success;
