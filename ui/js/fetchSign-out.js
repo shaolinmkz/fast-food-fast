@@ -1,26 +1,42 @@
 const logout = document.getElementById("logout");
-const signUp = document.getElementById("signup-form");
 const token = window.localStorage.getItem("token");
 
+const index = "http://localhost:7000/";
+const home = "http://localhost:7000/home";
+
 //checks if token is valid
-
 const autoAuth1 = () => {
-	let current_time = new Date().getTime();
-	current_time = parseInt(current_time / 1000);
-	const decoded = jwt_decode(token);
-  console.log(token.iat - current_time);
+	if (getItems("token") !== null){
+		let current_time = new Date().getTime();
+		current_time = parseInt(current_time / 1000);
+		const decoded = jwt_decode(token);
 
-	if ((current_time > decoded.iat) && (token === undefined)) {
-		alert("Session expired, you need to login");
-    redirect("http://localhost:7000/index.html");
-	} else if (decoded.iat > current_time) {
-    redirect("http://localhost:7000/home.html");
+		if ((current_time > decoded.exp)) {
+			if (window.location.href !== index) {
+				return redirect(index);
+			}
+		} else if ((decoded.exp > current_time) && (typeof getItems(token) !== undefined)) {
+			if (window.location.href !== home) {
+				return redirect(home);
+			}
+		}
+	}
+
+	if ((getItems("token") === null)){
+		if (window.location.href !== index) {
+			return redirect(index);
+		}
 	}
 };
+
 window.addEventListener("load", autoAuth1);
 
 const redirect = (link) => {
 	window.location.assign(link);
+};
+
+const getItems = (item) => {
+	return localStorage.getItem(item);
 };
 
 const logOutUser = () => {
@@ -40,14 +56,14 @@ const logOutUser = () => {
 		});
 };
 
-signUp.addEventListener("submit", logOutUser);
+logout.addEventListener("click", logOutUser);
 
 
 const logoutUser = () => {
 	let check = confirm("DO YOU WANT TO LOGOUT?");
 	if (check) {
 		window.localStorage.clear();
-		window.location.assign("/index");
+		redirect(index);
 	}
 };
 logout.addEventListener("click", logoutUser);
@@ -60,7 +76,9 @@ window.onload = () => {
 	name.style.textAlign = "center";
 	name.style.marginTop = "1%";
 
-	name.innerHTML = `Welcome ${localStorage.getItem("fullname")}`;
+	const decode = jwt_decode(getItems("token"));
+
+	name.innerHTML = `Welcome ${decode.fullname}`;
 };
 
 

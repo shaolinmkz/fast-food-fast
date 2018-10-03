@@ -1,20 +1,40 @@
 const signUp = document.getElementById("signup-form");
 const token = window.localStorage.getItem("token");
 
-//checks if token is valid
+const index = "http://localhost:7000/";
+const home = "http://localhost:7000/home";
 
-const autoAuth1 = () => {
-	let current_time = new Date().getTime() / 1000;
-	const decoded = jwt_decode(token);
-	console.log(token.iat - current_time);
-	if ((current_time > decoded.iat) || (token === undefined)) {
-		window.location.assign("/index.html");
-		return;
+
+
+//checks if token is valid
+const autoAuth2 = () => {
+	if ((getItems("token") !== null)) {
+		let current_time = new Date().getTime();
+		current_time = parseInt(current_time / 1000);
+		const decoded = jwt_decode(token);
+
+    if ((current_time > decoded.exp) || (getItems("token") === null)) {
+			if (window.location.href !== index) {
+				return redirect(index);
+			}
+		} else if ((decoded.exp > current_time)) {
+			if (window.location.href !== home) {
+				return redirect(home);
+			}
+		}
 	}
 };
 
-window.addEventListener("load", autoAuth1);
+window.addEventListener("load", autoAuth2);
 
+
+const redirect = (link) => {
+	window.location.assign(link);
+};
+
+const getItems = (item) => {
+	return localStorage.getItem(item);
+};
 
 const signUpUser = (event) => {
 	event.preventDefault();

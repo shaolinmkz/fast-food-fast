@@ -60,7 +60,8 @@ export class Users {
 						const user = data[0];
 						const token = jwt.sign({
 							id: user.id,
-							email: email
+              email: user.email,
+              fullname: user.fullname
 						}, process.env.SECRET_KEY, {expiresIn: "1d"});
 
 						return res.status(201).json({
