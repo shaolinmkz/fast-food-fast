@@ -32,23 +32,25 @@
                         <li><a href="./history.html"><span><img src="./images/order-history.png" alt="order-history-icon" class="home-icon"></span>ORDER
                                 HISTORY</a></li>
                         <li><a href="#"><span><img src="./images/profile-icon.png" alt="profile-icon" class="home-icon"></span>PROFILE</a></li>
-                        <li><a href="./index.html"><span><img src="./images/sign-out.png" alt="sign-out-icon" class="home-icon"></span>SIGN-OUT</a></li>
+                        <li id="logout"><a href="./index.html"><span><img src="./images/sign-out.png" alt="sign-out-icon" class="home-icon"></span>SIGN-OUT</a></li>
                     </ul>
                 </li>
 
                 <li class="cart"><a href="#"><span><img src="./images/cart.png" alt="cart" class="cart"></span>CART</a>
                 </li>
             </ul>
+
         </nav>
     </header>
-
+<h3 id="user-welcome"></h3>
     <section class="banner" style="display:none">
         <img id="bannerImg" src="./images/food2.png">
     </section>
     <div class="bg clearfix">
         <div id="center">
             <img src="./images/smiley-deliveryman.png" class="smiley-deliveryman" />
-            <aside>Place your order and have your Fast Food delivered to you <span>Fast</span>.
+            <aside> 
+                Place your order and have your Fast Food delivered to you <span>Fast</span>.
                 <br> I deliver round the clock just in time.
                 <br>
                 <p>Click the food items below to add to cart. You call us on</p>
@@ -58,55 +60,9 @@
         </div>
     </div>
 
-    <section class="food-catalog">
-        <h1>Meals and Combos</h1>
-        <div class="order-item"><img src="./images/fd1.jpg" alt="food-catalog">
-            <p>RICE & BEANS</p><label class="price">₦600</label>
-        </div>
-        <div class="order-item"><img src="./images/fd2.png" alt="food-catalog">
-            <p>CITIZENS MEAL</p><label class="price">₦1350</label>
-        </div>
-        <div class="order-item"><img src="./images/fd3.png" alt="food-catalog">
-            <p>NAIJA 58 MEAL</p><label class="price">₦1200</label>
-        </div>
-        <div class="order-item"><img src="./images/fd4.jpg" alt="food-catalog">
-            <p>CHIEF BURGER</p><label class="price">₦1050</label>
-        </div>
-        <div class="order-item"><img src="./images/fd5.jpg" alt="food-catalog">
-            <p>ROTISSERIE CHICKEN</p><label class="price">₦3900</label>
-        </div>
-        <div class="order-item"><img src="./images/fd6.jpg" alt="food-catalog">
-            <p>SPICY CRUNCHY CHICKEN</p><label class="price">₦500</label>
-        </div>
-        <div class="order-item"><img src="./images/fd7.jpg" alt="food-catalog">
-            <p>POT LOVERS MENU</p><label class="price">₦5900</label>
-        </div>
-        <div class="order-item"><img src="./images/fd8.jpg" alt="food-catalog">
-            <p>WRAP STAR MEAL</p><label class="price">₦1500</label>
-        </div>
-    </section>
+    <section class="food-catalog"></section>
 
-    <section class="drink-catalog">
-        <h1>Drinks</h1>
-        <div class="order-item"><img src="./images/drinks1.jpg" alt="drink-catalog">
-            <p>EVA MINERAL WATER 75CL</p><label class="price">₦250</label>
-        </div>
-        <div class="order-item"><img src="./images/drinks2.jpg" alt="drink-catalog">
-            <p>5 ALIVE PULPY ORANGE JUICE 40CL</p><label class="price">₦400</label>
-        </div>
-        <div class="order-item"><img src="./images/drinks3.jpg" alt="drink-catalog">
-            <p>COCA-COLA 50CL</p><label class="price">₦300</label>
-        </div>
-        <div class="order-item"><img src="./images/drinks4.jpg" alt="drink-catalog">
-            <p>COCA-COLA ZERO 50CL</p><label class="price">₦300</label>
-        </div>
-        <div class="order-item"><img src="./images/drinks5.jpg" alt="drink-catalog">
-            <p>FANTA ORANGE 50CL</p><label class="price">₦300</label>
-        </div>
-        <div class="order-item"><img src="./images/drinks6.jpg" alt="drink-catalog">
-            <p>FIVE ALIVE 1L</p><label class="price">₦600</label>
-        </div>
-    </section>
+    <section class="drink-catalog"></section>
 
     <div class="isolate cart-modal">
         <section class="basket-box cart-box clearfix">
@@ -119,8 +75,6 @@
                 <hr>
 
                 <label>Subtotal &nbsp;</label>: <label>₦5550</label><br>
-                <label>Delivery &nbsp;</label>: <label>₦450</label><br>
-                <label>Total &nbsp;</label>: <label>₦6000</label>
 
                 <input type="submit" value="PROCEED TO CHECKOUT">
                 <label>Discount Code? Apply it here</label>
@@ -137,63 +91,20 @@
             <div id="display">
                 <img src="./images/smiley-deliveryman.png" alt="3f delivery man" id="item-image">
             </div>
-            <form>
-                <label>Meals</label>
-                <select>
-                    <option>
-                        Choose a Meal...
-                    </option>
-                    <option>
-                        RICE & BEANS
-                    </option>
-                    <option>
-                        CITIZENS MEAL
-                    </option>
-                    <option>
-                        NAIJA 58 MEAL
-                    </option>
-                    <option>
-                        CHIEF BURGER
-                    </option>
-                    <option>
-                        ROTISSERIE CHICKEN
-                    </option>
-                    <option>
-                        SPICY CRUNCHY CHICKEN
-                    </option>
-                    <option>
-                        POT LOVERS MENU
-                    </option>
-                    <option>
-                        WRAP STAR MEAL
-                    </option>
+            <form id="menu-selection">
+                <label class="label-meals">Meals</label>
+                <select class="select-option-m">
+                  
                 </select>
                 <label>Quantity</label>
-                <input type="number" name="meal-quantity" placeholder="Enter quantity of meal">
+                <input type="number" name="meal-quantity" id="foods-quantity" placeholder="Enter quantity of meal">
 
-                <label>Drinks</label>
-                <select>
-                    <option>
-                        Choose a drink...
-                    </option>
-                    <option>
-                        EVA MINERAL WATER 75CL
-                    </option>
-                    <option>
-                        5 ALIVE PULPY ORANGE JUICE 40CL
-                    </option>
-                    <option>
-                        COCA-COLA 50CL
-                    </option>
-                    <option>
-                        FIVE ALIVE 1L
-                    </option>
-                    <option>
-                        COCA-COLA ZERO 50CL
-                    </option>
+                <label class="label-drinks">Drinks</label>
+                <select class="select-option-d">
+                    
                 </select>
                 <label>Quantity</label>
-                <input type="number" name="drink-quantity" placeholder="Enter quantity of drink">
+                <input type="number" name="drink-quantity" id="drinks-quantity" placeholder="Enter quantity of drink">
 
                 <label>Price</label>
                 <label class="price">₦0</label>
@@ -215,8 +126,11 @@
             <p>P.O.Box 4351</p>
     </footer>
 </div>
-
+    <script type="text/javascript" src="js/jwt-decode.min.js"></script>
+    <script type="text/javascript" src="./js/renderHome.js"></script>
     <script type="text/javascript" src="./js/order.js"></script>
+    <script type="text/javascript" src="./js/fetchSign-out.js"></script>
+    
 </body>
 
 </html>
