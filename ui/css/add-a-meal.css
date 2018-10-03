@@ -1,0 +1,68 @@
+#disp-message-f, #disp-message-d{
+    text-align: center;
+    background: #fff;
+}
+#open-foods-form, #open-drinks-form{
+    display: inline-block;
+    color: white;
+    background: #ff3008;
+    width: 45%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    transition-property: color;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+#open-foods-form{
+    color: black;
+}
+
+section#btn-holder{
+    width: 100%;
+     background: #ff3008;
+}
+
+#open-foods-form:hover, #open-drinks-form:hover{
+    color: #000000;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+#add-menu-foods, #add-menu-drinks{
+    display: block;
+    width: 50%;
+    margin: 2% auto;
+    background: rgba(255, 255, 255, 0.534);
+    padding: 2%;
+}
+#add-menu-foods input[type="text"], 
+#add-menu-drinks input[type="text"],
+#add-menu-foods input[type="submit"], 
+#add-menu-drinks input[type="submit"]{
+    width: 100%;
+    margin: 2%;
+    border-radius: 0.3em;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#add-menu-foods input[type="submit"], 
+#add-menu-drinks input[type="submit"]{
+  background: #ff3008; 
+  color: #fff;
+    transition-property: color;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.3s;
+}
+
+#add-menu-foods input[type="submit"]:hover, 
+#add-menu-drinks input[type="submit"]:hover{
+    background: #f34523; 
+    color: #000000;
+    font-weight: bolder;
+}
+#add-menu-drinks{
+    display: none;
+}

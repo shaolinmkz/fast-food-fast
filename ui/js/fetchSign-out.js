@@ -1,37 +1,7 @@
 const logout = document.getElementById("logout");
-const token = window.localStorage.getItem("token");
+const tokenCheck = window.localStorage.getItem("token");
 
-const index = "http://localhost:7000/";
-// const home = "http://localhost:7000/home";
-// const products = "http://localhost:7000/products";
-// const about = "http://localhost:7000/about";
-
-// //checks if token is valid
-// const autoAuth1 = () => {
-// 	if (getItems("token") !== null){
-// 		let current_time = new Date().getTime();
-// 		current_time = parseInt(current_time / 1000);
-// 		const decoded = jwt_decode(token);
-
-// 		if ((current_time > decoded.exp)) {
-//       if (window.location.href !== index || window.location.href !== products || window.location.href !== about ) {
-// 				return redirect(index);
-// 			}
-// 		} else if ((decoded.exp > current_time) && (typeof getItems(token) !== undefined)) {
-// 			if (window.location.href !== home) {
-// 				return redirect(home);
-// 			}
-// 		}
-// 	}
-
-// 	if ((getItems("token") === null)){
-// 		if (window.location.href !== index) {
-// 			return redirect(index);
-// 		}
-// 	}
-// };
-
-// window.addEventListener("load", autoAuth1);
+const indexRedirect = "https://f-cube.herokuapp.com/";
 
 const redirect = (link) => {
 	window.location.assign(link);
@@ -43,12 +13,12 @@ const getItems = (item) => {
 
 const logOutUser = () => {
 
-	fetch("http://localhost:7000/api/v2/logout", {
+  fetch("https://f-cube.herokuapp.com/api/v2/logout", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json, text/plain, */*",
 			"Content-type": "application/json",
-			"authorization": token
+			"authorization": tokenCheck
 		}
 	})
 		.then((res) => res.json())
@@ -65,7 +35,7 @@ const logoutUser = () => {
 	let check = confirm("DO YOU WANT TO LOGOUT?");
 	if (check) {
 		window.localStorage.removeItem("token");
-		redirect(index);
+		redirect(indexRedirect);
 	}
 };
 logout.addEventListener("click", logoutUser);
