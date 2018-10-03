@@ -1,5 +1,5 @@
-const adminIndex = "http://localhost:7000/admin";
-const dashboard = "http://localhost:7000/dashboard";
+const adminIndex = "https://f-cube.herokuapp.com/admin";
+const dashboard = "https://f-cube.herokuapp.com/dashboard";
 
 
 const adminTokenCheck = window.localStorage.getItem("adminToken");

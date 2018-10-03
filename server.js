@@ -92,6 +92,12 @@ app.get("/placeorder", (req, res) => {
 	);
 });
 
+app.get("/addmenu", (req, res) => {
+  res.status(200).sendFile(
+    path.join(__dirname, "ui", "add_menu.html")
+  );
+});
+
 app.get("*", (req, res) => {
 	res.status(404).sendFile(
 		path.join(__dirname, "ui", "404_errors.html")

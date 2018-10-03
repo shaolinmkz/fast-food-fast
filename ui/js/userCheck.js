@@ -1,7 +1,7 @@
-const index = "http://localhost:7000/";
-const home = "http://localhost:7000/home";
-const products = "http://localhost:7000/products";
-const about = "http://localhost:7000/about";
+const index = "https://f-cube.herokuapp.com/";
+const home = "https://f-cube.herokuapp.com/home";
+const products = "https://f-cube.herokuapp.com/products";
+const about = "https://f-cube.herokuapp.com/about";
 
 const token = window.localStorage.getItem("token");
 

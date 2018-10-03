@@ -187,11 +187,14 @@ export class Admins{
    */
 	addFoods(req, res) {
 
-		let { name, price } = req.body;
+		let { name, price, image } = req.body;
 
-		name = name.toString().trim(); price = price.toString().trim();
+		if (!image) {
+			image = "null";
+		}
+		name = name.toString().trim(); price = price.toString().trim(); image = image.toString().trim();
 
-		db.none("INSERT INTO foods(name, price) VALUES ($1, $2)", [name, price])
+		db.none("INSERT INTO foods(name, price, image) VALUES ($1, $2, $3)", [name, price, image])
 			.then(() => {
 				db.any("SELECT * FROM foods WHERE name = $1", [name])
 					.then(data => {
@@ -202,6 +205,7 @@ export class Admins{
 							message: "Food created Successfully",
 							product_name: foods.name,
 							price: foods.price,
+							image_url: foods.image
 						});
 					});
 			})
@@ -220,11 +224,13 @@ export class Admins{
    */
 	addDrinks(req, res) {
 
-		let { name, price } = req.body;
+		let { name, price, image} = req.body;
+		if (!image) {
+			image = "null";
+		}
+		name = name.toString().trim(); price = price.toString().trim(); image = image.toString().trim();
 
-		name = name.toString().trim(); price = price.toString().trim();
-
-		db.none("INSERT INTO drinks(name, price) VALUES ($1, $2)", [name, price])
+		db.none("INSERT INTO drinks(name, price, image) VALUES ($1, $2, $3)", [name, price, image])
 			.then(() => {
 				db.any("SELECT * FROM drinks WHERE name = $1", [name])
 					.then(data => {
@@ -235,6 +241,7 @@ export class Admins{
 							message: "Drink created Successfully",
 							product_name: drinks.name,
 							price: drinks.price,
+							image_url: drinks.image
 						});
 					});
 			})
