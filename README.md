@@ -57,60 +57,61 @@ Input Fields => [username, firstname, lastname, phone, email
 Use the token **_adminToken_** => `asdf;lkj` tocreate a new admin and test the API
 
 **SIGNIN/LOGIN**
-POST verb => host:port/api/v2/auth/admin/login  {secured}
+POST verb => `host:port/api/v2/auth/admin/login`  {secured}
 Input Fields => [username, password]  {authentication required}
 
 **SIGNOUT/LOGOUT**
-POST verb => host:port/api/v2/admin/logout  {secured}
+POST verb => `host:port/api/v2/admin/logout`  {secured}
 Input Fields => [username, password]  
 
 **ADDS NEW MENU {DRINK}**
-POST verb => host:port/api/v2/admin/menu/drinks  {secured}
+POST verb => `host:port/api/v2/admin/menu/drinks`  {secured}
 Input Fields => [name, price]
 
 **ADDS NEW MENU {FOOD}**
-POST verb => host:port/api/v2/admin/menu/foods  {secured}
+POST verb => `host:port/api/v2/admin/menu/foods`  {secured}
 Input Fields => [name, price] 
 
 **FETCHES ALL ORDERS**
-GET verb => host:port/api/v2/orders  {secured}
+GET verb => `host:port/api/v2/orders`  {secured}
 
 **FETCHES A SPECIFIC ORDER**
-GET verb => host:port/api/v2/orders/{orderid} =>  {secured} 
+GET verb => `host:port/api/v2/orders/{orderid}` =>  {secured} 
 
 **UPDATE AN ORDER STATUS**
-PUT verb => host:port/api/v2/orders/{orderid} => {secured}
-Input Fields => [status] Entries => {completed, new, prcessing or cancelled }
+PUT verb => `host:port/api/v2/orders/{orderid}` => {secured}
+Input Fields => [status] Entries => {completed, new, processing or cancelled }
 
 
 ## REQUIRED FOR USERS
 FETCHES ALL USERS
-GET verb => host:port/api/v2/users => {secured} Admin only testing purposes
+GET verb => `host:port/api/v2/users` => {secured} Admin only testing purposes
 
 **SIGNUP/CREATE ACCOUNT**
-POST verb => host:port/api/v2/auth/signup => {secured} {authentication required}
+POST verb => `host:port/api/v2/auth/signup` => {secured} {authentication required}
 Input Fields => [firstname, lastname, email, phone, password, confirmPassword]
 
 **SIGNIN/LOGIN**
-POST verb => host:port/api/v2/auth/login => {secured} 
+POST verb => `host:port/api/v2/auth/login` => {secured} 
 Input Fields => [email, password] => {authentication required}
 
 **SIGNOUT/LOGOUT**
-POST verb => host:port/api/v2/logout {secured} 
+POST verb => `host:port/api/v2/logout` {secured} 
 Input Fields => [email, password]
 
 **PLACE AN ORDER**
-POST verb => host:port/api/v2/orders {secured}
+POST verb => `host:port/api/v2/orders` {secured}
 Input Fields => [address, lga, state, foods, foodsQuantity, drinks, drinksQuantity]  
 
 **FETCH ALL ORDER HISTORY SPECIFIC TO A USER**
-GET verb => host:port/api/v2/users/:id/orders {secured}
+GET verb => `host:port/api/v2/users/:id/orders` {secured}
 
 **FETCH ALL MENUS**
-GET verb => host:port/api/v2/menu {not secured}
+GET verb => `host:port/api/v2/menu` {not secured}
 
 **ACCESS THE ROOT API**
-GET verb => host:port/ {not secured}
+GET verb => `host:port/` {not secured}
+Returns the index page
 
 
 _Using the application/json format_

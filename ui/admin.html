@@ -23,35 +23,41 @@
     </header>
 
     <div class="wrapper">
+        <p class="fullwidth center">
+            <span class="bold block size2em">Welcome Admin</span>
+        </p>
+
         <section class="banner banneriso" id="banner">
             <img alt="admin" src="./images/Admin_banner.png">
         </section>
 
-        <p class="fullwidth center">
-            <span class="bold block size2em">Welcome Admin</span> 
-        </p>
+        <pre>
+
+
+        </pre>
     </div>
 
     <section class="signup-modal">
         <div class="signup-box">
             <h1>Create Admin</h1>
-            <form action="./admin_dashboard.html">
+            <form id="signup-form">
                 <label>Username</label>
-                <input type="text" name="text" placeholder="Admin"/>
+                <input type="text" name="uname" id="uname" placeholder="Admin"/>
                 <label>firstname</label>
-                <input type="text" name="text" placeholder="Tony" />
+                <input type="text" name="signup-form" id="fname" placeholder="Tony" />
                 <label>lastname</label>
-                <input type="text" name="text" placeholder="Cynthia" />
+                <input type="text" name="signup-form" id="lname" placeholder="Cynthia" />
                 <label>Phone</label>
-                <input type="tel" name="text" placeholder="0802 222 2222" />
+                <input type="tel" name="signup-form" id="phone" placeholder="0802 222 2222" />
                 <label>Email</label>
-                <input type="email" name="email" placeholder="janedoe@testmail.com">
+                <input type="email" name="signup-form" id="email" placeholder="janedoe@testmail.com">
                 <label>Admin token</label>
-                <input type="password" name="password" placeholder="Enter token">
+                <input type="password" name="signup-form" id="adminToken" placeholder="Enter token">
                 <label>Password</label>
-                <input type="password" name="password" placeholder="Enter Password">
+                <input type="password" name="signup-form" id="pword" placeholder="Enter Password">
                 <label>Confirm password</label>
-                <input type="password" name="password" placeholder="Enter Confirm password">
+                <input type="password" name="signup-form" id="repword" placeholder="Enter Confirm password">
+                <div id="disp-error-message" style="width: 100%; text-align:center;"></div>
                 <input type="submit" name="submit" value="Create">
             </form>
         </div>
@@ -61,13 +67,13 @@
         <div class="login-box">
             <img src="./images/admin.png" class="avatar" />
             <h1>Login</h1>
-            <form action="./admin_dashboard.html">
+            <form id="login-form">
                 <label>Username</label>
-                <input type="text" name="username" placeholder="Admin">
+                <input type="text" name="username" id="login-uname" placeholder="Admin">
 
                 <label>Password</label>
-                <input type="password" name="password" placeholder="Enter Password">
-
+                <input type="password" name="password" id="login-pword" placeholder="Enter Password">
+                <div id="disp-error-message1"></div>
                 <input type="submit" name="submit" value="Login">
                 <a href="#">Forget Password?</a>
             </form>
@@ -79,7 +85,12 @@
     </footer>
 
 </div>
+    <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
     <script type="text/javascript" src="./js/admin.js"></script>
+    <script type="text/javascript" src="./js/inputValidation.js"></script>
+    <script type="text/javascript" src="./js/adminFetchSign-up.js"></script>
+    <script type="text/javascript" src="./js/adminFetchSign-in.js"></script>
+    <script type="text/javascript" src="./js/checkAdmin.js"></script>
 </body>
 
 </html>

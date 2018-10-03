@@ -60,7 +60,8 @@ export class Users {
 						const user = data[0];
 						const token = jwt.sign({
 							id: user.id,
-							email: email
+              email: user.email,
+              fullname: user.fullname
 						}, process.env.SECRET_KEY, {expiresIn: "1d"});
 
 						return res.status(201).json({
@@ -106,13 +107,16 @@ export class Users {
 									const token = jwt.sign({
 										id: user2[0].id,
 										email: user2[0].email,
-										fullname: user2[0].fullname
+										phone: user2[0].phone,
+										fullname: user2[0].fullname,
 									}, process.env.SECRET_KEY, { expiresIn: "1d" });
 
 									return res.status(200).json({
 										status: "Success",
 										message: `User logged in successfully, Welcome ${user2[0].fullname}`,
+										fullname: user2[0].fullname,
 										mobile_number: "+234" + Number(user2[0].phone),
+										email: user2[0].email,
 										logged_in: user2[0].logged_in,
 										token: token
 									});

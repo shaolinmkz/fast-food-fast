@@ -5,7 +5,7 @@ const signup = document.getElementById("signup");
 const signupModal = document.getElementsByClassName("signup-modal")[0];
 const login = document.getElementById("signin");
 const loginModal = document.getElementsByClassName("login-modal")[0];
-const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
+//const fastfoodfast = document.getElementsByClassName("fastfoodfast")[0];
 
 let nextCount = 1, i = 0;
 
@@ -16,7 +16,7 @@ let nextCount = 1, i = 0;
  */
 const slideshow = () => {
 	banner.setAttribute("src", `./images/food${nextCount}.png`);
-	quotesDisplay.innerHTML = words[i].innerHTML; 
+	quotesDisplay.innerHTML = words[i].innerHTML;
 	nextCount++;
 	i++;
 	if (i > 11) {
@@ -73,11 +73,5 @@ const closeLoginModal = (e) => {
 };
 window.addEventListener("click", closeLoginModal);
 
-/**
- * Navigates user to the index or landing page
- * @event { onclick }
- * @function {{Anonymous function}}{{Click event that targets the HTML class "fastfoodfast"}}
- */
-fastfoodfast.onclick = () => {
-	window.location.assign("./home.html");
-};
+
+

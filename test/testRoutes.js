@@ -410,7 +410,6 @@ describe("The root of the api route", () => {
 			.expect(200)
 			.end((err, res) => {
 				expect(res.status).to.eql(200);
-				expect(res.body.message).to.eql("Welcome to Fast-Food-Fast A.K.A 'f-cube', Andela 21 Level-Up Project");
 				if (err) { return done(err); }
 				done();
 			});
