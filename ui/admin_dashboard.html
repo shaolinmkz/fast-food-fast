@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <title>Admin|Dashboard</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
     <link rel="stylesheet" type="text/css" href="./css/order.css" />
     <link rel="stylesheet" type="text/css" href="./css/admin.css" />
     <link rel="icon" href="./images/3f-logo.png" />
+    
 </head>
 
 <body class="bodycolor">
@@ -18,10 +20,14 @@
         <img src="./images/fastfoodfast1.png" class="fastfoodfast" />
         <nav>
             <ul>
+                <li><input type="button" id="logout-admin" title="logout" value="LOGOUT" style=" padding: 0.1em 0.2em; border-radius: 0.5em; color: white; background-color: #ff3008 " /></li>
                 <li class="current"><a href="./admin_dashboard.html"><span><img src="./images/dashboard.png" alt="home-icon"
                                 class="home-icon"></span>DASHBOARD</a></li>
                 <li><a href="#"><span><img src="./images/avatar-icon.png" alt="avatar-icon" class="avatar-icon"></span>ADMIN</a></li>
-    </header>
+                
+            </ul>
+            <div id="admin-welcome"></div>
+            </header>
 
     <section class="admin clearfix">
         <div class="grid">
@@ -239,6 +245,11 @@
 
 
     <script type="text/javascript" src="./js/admin_dashboard.js"></script>
+    <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
+    <script type="text/javascript" src="./js/checkAdmin.js"></script>
+    <script type="text/javascript" src="./js/adminFetchSign-out.js"></script>
 </body>
 
 </html>
+
+

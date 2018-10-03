@@ -3,6 +3,7 @@ const lname = document.getElementById("lname");
 const phone = document.getElementById("phone");
 const email = document.getElementById("email");
 const pword = document.getElementById("pword");
+const uname = document.getElementById("uname");
 const repword = document.getElementById("repword");
 const disp = document.getElementById("disp-error-message");
 const inputFields = document.getElementsByName("signup-form");
@@ -36,7 +37,7 @@ const signupValidation = () => {
 		return;
 	} else if ((pword.value === "") || (repword.value === "")) {
 		disp.innerHTML = "Please enter a password";
-    setTimeout(() => disp.style.color = "rgba(255, 45, 45,0)", 2000);
+		setTimeout(() => disp.style.color = "rgba(255, 45, 45,0)", 2000);
 		return;
 	} else if ((pword.value).length < 6) {
 		disp.innerHTML = "Minimum password length is 6";
@@ -53,6 +54,19 @@ inputFields.forEach((input) => {
 	input.addEventListener("input", userSignup);
 });
 
+/**
+ * Admin
+ */
+const checkAdmin = () => {
+	if (uname.value === "") {
+		disp.innerHTML = "Username is required";
+		setTimeout(() => disp.style.color = "rgba(255, 45, 45,0)", 2000);
+	}
+};
+
+if (window.location.href === "http://localhost:7000/admin") {
+	uname.addEventListener("input", checkAdmin);
+}
 /**
  * Password strength tester
  */

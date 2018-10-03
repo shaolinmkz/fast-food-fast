@@ -56,7 +56,7 @@ app.get("/home", (req, res) => {
 	);
 });
 
-app.get("/about_us", (req, res) => {
+app.get("/about", (req, res) => {
 	res.status(200).sendFile(
 		path.join(__dirname, "ui", "about_us.html")
 	);
@@ -74,7 +74,7 @@ app.get("/history", (req, res) => {
 	);
 });
 
-app.get("/admin/dashboard", (req, res) => {
+app.get("/dashboard", (req, res) => {
 	res.status(200).sendFile(
 		path.join(__dirname, "ui", "admin_dashboard.html")
 	);
@@ -93,6 +93,12 @@ app.get("/placeorder", (req, res) => {
 });
 
 app.get("*", (req, res) => {
+	res.status(404).sendFile(
+		path.join(__dirname, "ui", "404_errors.html")
+	);
+});
+
+app.get("/*", (req, res) => {
 	res.status(404).sendFile(
 		path.join(__dirname, "ui", "404_errors.html")
 	);
