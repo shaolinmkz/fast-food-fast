@@ -93,9 +93,9 @@ app.get("/placeorder", (req, res) => {
 });
 
 app.get("/addmenu", (req, res) => {
-  res.status(200).sendFile(
-    path.join(__dirname, "ui", "add_menu.html")
-  );
+	res.status(200).sendFile(
+		path.join(__dirname, "ui", "add_menu.html")
+	);
 });
 
 app.get("*", (req, res) => {

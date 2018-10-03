@@ -1,7 +1,7 @@
 const logout = document.getElementById("logout");
 const tokenCheck = window.localStorage.getItem("token");
 
-const indexRedirect = "https://f-cube.herokuapp.com/";
+const indexRedirect = "http://localhost:7000/";
 
 const redirect = (link) => {
 	window.location.assign(link);
@@ -13,7 +13,7 @@ const getItems = (item) => {
 
 const logOutUser = () => {
 
-  fetch("https://f-cube.herokuapp.com/api/v2/logout", {
+  fetch("http://localhost:7000/api/v2/logout", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json, text/plain, */*",

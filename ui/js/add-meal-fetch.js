@@ -1,8 +1,8 @@
 const addFoodsMenu = document.getElementById("add-menu-foods");
 const addDrinksDrink = document.getElementById("add-menu-drinks");
 
-const addFoodUrl = "https://f-cube.herokuapp.com/api/v2/admin/menu/foods";
-const addDrinkUrl = "https://f-cube.herokuapp.com/api/v2/admin/menu/drinks";
+const addFoodUrl = "http://localhost:7000/api/v2/admin/menu/foods";
+const addDrinkUrl = "http://localhost:7000/api/v2/admin/menu/drinks";
 
 const token = localStorage.getItem("adminToken");
 

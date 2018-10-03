@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
     <link rel="stylesheet" type="text/css" href="./css/order.css" />
     <link rel="icon" href="./images/3f-logo.png" />
-    <script type="text/javascript" src="./js/userCheck.js"></script>
+    
 </head>
 
 <body class="history-body">
@@ -54,31 +54,8 @@
 
         <section class="history">
             <h1> ORDER HISTORY</h1>
-            <div class="grid">
-                <div class="bold">Order No.</div>
-                <div class="bold">Order Details</div>
-                <div class="bold">Price</div>
-                <div class="bold">Date</div>
-                <div>361804</div>
-                <div>Spicy crunchy &times; 2
-                    <p>Fanta orange 50cl</p>
-                </div>
-                <div>₦1500</div>
-                <div>11/08/2018</div>
+            <div class="grid" id="grid-history" style="overflow:auto;" >
 
-                <div>320190</div>
-                <div>Chief Burger &times; 2
-                    <p>Five alive 1L</p>
-                </div>
-                <div>₦3500</div>
-                <div>05/04/2018</div>
-
-                <div>351607</div>
-                <div>Pot lovers menu
-                    <p>Coca-cola 50cl &times; 2</p>
-                </div>
-                <div>₦7500</div>
-                <div>02/07/2018</div>
             </div>
         </section>
 
@@ -119,8 +96,9 @@
                 <p>P.O.Box 4351</p>
         </footer>
         </div>
-        <script type="text/javascript" src="./js/order.js"></script>
-        <script type="text/javascript" src="./js/admin.js"></script>
+        <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
+        <!-- <script type="text/javascript" src="./js/userCheck.js"></script> -->
+        <script type="text/javascript" src="./js/get-order-history.js"></script>
 </body>
 
 </html>
