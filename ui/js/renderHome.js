@@ -1,6 +1,6 @@
 
 const getMenu = () => {
-  fetch("https://f-cube.herokuapp.com/api/v2/menu")
+  fetch("http://localhost:7000/api/v2/menu")
 		.then(res => res.json())
 		.then(data => {
 			let solidmeals = "<h1>Meals and Combos</h1>";

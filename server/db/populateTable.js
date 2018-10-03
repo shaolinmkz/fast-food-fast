@@ -31,7 +31,7 @@ export const polulateDB = (req, res) => {
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Jumoke, Coleson", "cole", "jumokecoleson@gmail.com", "07097215678", hash, logged_in]),
 			t.none("INSERT INTO admins (fullname, username, email, phone, password, logged_in) VALUES ($1, $2, $3, $4, $5, $6)", ["Ovie, Musa", "musa", "oviemusa@hotmail.com", "09062736478", hash, logged_in]),
 			t.none("INSERT INTO orders (food_items, food_quantities, drink_items, drink_quantities, subtotal, delivery, discount, total, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", ["citizens meal,pot lovers menu", "3,2", "five alive 1L","2", "8350", "250", "350", "7250", "CANCELLED", 1]),
-			t.none("INSERT INTO orders (food_items, food_quantities, drink_items, drink_quantities, subtotal, delivery, discount, total, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", ["pot lovers menu", "3,2", "five alive 1L", "1", "6250", "250", "100", "6400", "COMPLETE", 1]),
+			t.none("INSERT INTO orders (food_items, food_quantities, drink_items, drink_quantities, subtotal, delivery, discount, total, status, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", ["pot lovers menu", "3", "five alive 1L", "1", "6250", "250", "100", "6400", "COMPLETE", 1]),
 		]);
 	});
 	// success;

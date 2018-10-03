@@ -64,7 +64,7 @@ const checkAdmin = () => {
 	}
 };
 
-if (window.location.href === "https://f-cube.herokuapp.com/admin") {
+if (window.location.href === "http://localhost:7000/admin") {
 	uname.addEventListener("input", checkAdmin);
 }
 /**
