@@ -17,7 +17,7 @@ export class Users {
    * @param { object } res - body response
    */
 	fetchUsers (req, res) {
-		db.any("SELECT id, fullname, email, phone, logged_in, created_date FROM users")
+		db.any("SELECT id, fullname, email, phone, address, lga, state, logged_in, created_date FROM users")
 			.then(users => {
 				if (users.length > 0) {
 					return res.status(200)

@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Admin|Dashboard</title>
-    
+    <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
+    <script type="text/javascript" src="./js/checkAdmin.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
@@ -32,147 +33,28 @@
 
     <section class="admin clearfix">
         <div class="grid">
-            <div>SOLD TODAY</div>
-            <div>₦150000</div>
-            <div></div>
+            <div>CURRENT TIME</div>
+            <div id="inputTime"></div>
+            <div> </div>
         </div>
-
+    
         <div class="grid">
-            <div>ORDER TODAY</div>
-            <div>2</div>
-            <div>cancelled: 0 <br> rejected: 0</div>
+            <div> TOTAL ORDERS </div>
+            <div id="total-orders"></div>
+            <div> </div>
         </div>
-
+    
         <div class="grid">
-            <div>PENDING</div>
-            <div>2</div>
+            <div>REPORTS</div>
+            <div style="text-align: center; font-size: 1.2em;" id="displayResult"></div>
             <div></div>
         </div>
     </section>
 
-    <section class="clearfix dashboard">
-        <div class="div-container clearfix">
-            <div>
-                <p class="bold">Order No.</p>
 
-            </div>
-            <div>
-                <p class="bold">Order Details</p>
-            </div>
-            <div>
-                <p class="bold">Order Status</p>
-            </div>
-            <div>
-                <p class="bold">Completed</p>
-            </div>
-        </div>
-
-        <div class="div-container new-container clearfix">
-            <div>
-                <p class="pad order-number">512465</p>
-                <p class="redbg white margin">Unpaid</p>
-
-            </div>
-            <div>
-                <p><span class="green bold">collection</span> <span class="pending">Pending</span></p>
-                <p><span class="blue bold">ordered on</span> 17/09/2018 &nbsp; 11:01:36</p>
-            </div>
-            <div>
-                <p class="bluebg white margin-auto view-order">View Order</p>
-                <p class="redbg white margin-auto">Cancel</p>
-                <p class="greenbg white margin-auto">Acknowledge</p>
-            </div>
-            <div>
-                <input type="checkbox" title="check if oreder has been completed" class="checkbox" />
-                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
-            </div>
-        </div>
-
-        <div class="div-container new-container clearfix">
-            <div>
-                <p class="pad order-number">762912</p>
-                <p class="redbg white margin">Unpaid</p>
+    
+<section class="clearfix dashboard">
         
-            </div>
-            <div>
-                <p><span class="green bold">collection</span> <span class="pending">Pending</span></p>
-                <p><span class="blue bold">ordered on</span> 25/08/2018 &nbsp; 12:20:16</p>
-            </div>
-            <div>
-                <p class="bluebg white margin-auto view-order">View Order</p>
-                <p class="redbg white margin-auto">Cancel</p>
-                <p class="greenbg white margin-auto">Acknowledge</p>
-            </div>
-            <div>
-                <input type="checkbox" title="check if oreder has been completed" class="checkbox" />
-                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
-            </div>
-        </div>
-
-        <div class="div-container new-container clearfix">
-            <div>
-                <p class="pad order-number">817262</p>
-                <p class="greenbg white margin alter-greenbg">Paid</p>
-
-            </div>
-            <div>
-                <p><span class="green bold">collection</span> 16/08/2018 &nbsp; 10:29:52</p>
-                <p><span class="blue bold">ordered on</span> 16/08/2018 &nbsp; 10:05:12</p>
-            </div>
-            <div>
-                <p class="bluebg white margin-auto view-order">View Order</p>
-                <p class="redbg white margin-auto">Cancel</p>
-                <p class="greenbg white margin-auto">Acknowledge</p>
-            </div>
-            <div>
-                <input type="checkbox" title="check if oreder has been completed" class="checkbox" checked disabled/>
-                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
-            </div>
-        </div>
-
-        <div class="div-container new-container clearfix">
-            <div>
-                <p class="pad order-number">817231</p>
-                <p class="greenbg white margin alter-greenbg">Paid</p>
-
-            </div>
-            <div>
-                <p><span class="green bold">collection</span> 21/07/2018 &nbsp; 17:20:00</p>
-                <p><span class="blue bold">ordered on</span> 211/07/2018 &nbsp; 17:01:46</p>
-            </div>
-            <div>
-                <p class="bluebg white margin-auto view-order">View Order</p>
-                <p class="redbg white margin-auto">Cancel</p>
-                <p class="greenbg white margin-auto">Acknowledge</p>
-            </div>
-            <div>
-                <input type="checkbox" title="check if oreder has been completed" class="checkbox" checked disabled />
-                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
-            </div>
-        </div>
-
-        <div class="div-container new-container clearfix">
-            <div>
-                <p class="pad order-number">637242</p>
-                <p class="greenbg white margin alter-greenbg">Paid</p>
-
-            </div>
-            <div>
-                <p><span class="green bold">collection</span> 15/07/2018 &nbsp; 15:45:15</p>
-                <p><span class="blue bold">ordered on</span> 15/07/2018 &nbsp; 15:01:06</p>
-            </div>
-            <div>
-                <p class="bluebg white margin-auto view-order">View Order</p>
-                <p class="redbg white margin-auto">Cancel</p>
-                <p class="greenbg white margin-auto">Acknowledge</p>
-            </div>
-            <div>
-                <input type="checkbox" title="check if oreder has been completed" class="checkbox" checked disabled/>
-                <p class="greenbg white alter-greenbg margin-auto">Completed</p>
-            </div>
-        </div>
-
-
 
     </section>
 
@@ -185,59 +67,15 @@
                 <img src="./images/order-history.png" alt="order tracking" id="item-image">
             </div>
 
-            <section>                               
-                   <section class="clearfix">
-                        <div>
-                            <ol>
-                                <li class="bold">Item(s)</li>
-                                <li>Rotisserie</li>
-                                <li>Chief burger</li>
-                                <li>Five alive</li>
-                                <li class="bold">Subtotal</li>
-                                <li class="bold">Discount</li>
-                                <li class="bold">Delivery</li>
-                                <li class="bold">Total</li>
-                            </ol>
-                        </div>
-                        <div>
-                            <ol>
-                                <li class="bold">Amount</li>
-                                <li>₦3900</li>
-                                <li>₦1050</li>
-                                <li>₦600</li>
-                                <li>₦5550</li>
-                                <li>₦0</li>
-                                <li>₦450</li>
-                                <li>₦6000</li>
-                            </ol>
-                        </div>
-                    </section>
+            <section id="target2">                               
+      
             </section> 
 
             <h1>CUSTOMER DETAILS</h1>
-            <section>
-                <div class="iso">
-                    <ol>
-                        <li>Full name</li>
-                        <li>Email</li>
-                        <li>Mobile number</li>
-                        <li>Address</li>
-                        <li>Local government</li>
-                        <li>State</li>
-                    </ol>
-                </div>
-                <div>
-                    <ol>
-                        <li>Jane Doe</li>
-                        <li>janedoe@testmail.com</li>
-                        <li>08098765432</li>
-                        <li>13 xyz estate GRA Lagos</li>
-                        <li>Lagos island</li>
-                        <li>Lagos</li>
-                    </ol>
-                </div>
+            <section id="target3">
+             
             </section>
-        </div>
+        </div> 
     </section>
 
     <footer class="main-footer">
@@ -246,8 +84,6 @@
 
 
     <script type="text/javascript" src="./js/admin_dashboard.js"></script>
-    <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
-    <script type="text/javascript" src="./js/checkAdmin.js"></script>
     <script type="text/javascript" src="./js/adminFetchSign-out.js"></script>
 </body>
 

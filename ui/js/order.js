@@ -36,7 +36,7 @@ banner.addEventListener("click", slideshow);
 window.onclick = () => {
 	let index;
 	for (index = 0; index < orderItem.length; ++index) {
-		orderItem[index].onclick = function(){
+		orderItem[index].onclick = () => {
 			orderModal.style.display = "block";
 		};
 	}
@@ -49,7 +49,7 @@ window.onclick = () => {
  */
 const displayCart = () => {
 	cartModal.style.display = "block";
-}
+};
 
 cart.addEventListener("click", displayCart);
 

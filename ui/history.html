@@ -5,11 +5,13 @@
     <meta charset="utf-8" />
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
+    <script type="text/javascript" src="./js/history_auth.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
     <link rel="stylesheet" type="text/css" href="./css/signup_in.css" />
     <link rel="stylesheet" type="text/css" href="./css/order.css" />
     <link rel="icon" href="./images/3f-logo.png" />
-    
+   
 </head>
 
 <body class="history-body">
@@ -55,7 +57,7 @@
         <section class="history">
             <h1> ORDER HISTORY</h1>
             <div class="grid" id="grid-history" style="overflow:auto;" >
-
+                <h1 style="color: green" class="historyDisplay">NO ORDERS PLACED</h1>
             </div>
         </section>
 
@@ -96,8 +98,7 @@
                 <p>P.O.Box 4351</p>
         </footer>
         </div>
-        <script type="text/javascript" src="./js/jwt-decode.min.js"></script>
-        <!-- <script type="text/javascript" src="./js/userCheck.js"></script> -->
+        
         <script type="text/javascript" src="./js/get-order-history.js"></script>
 </body>
 
