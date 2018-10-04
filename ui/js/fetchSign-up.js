@@ -1,8 +1,8 @@
 const signUp = document.getElementById("signup-form");
 const token = window.localStorage.getItem("token");
 
-const index = "http://localhost:7000/";
-const home = "http://localhost:7000/home";
+const index = "https://f-cube.herokuapp.com/";
+const home = "https://f-cube.herokuapp.com/home";
 
 
 
@@ -48,7 +48,7 @@ const signUpUser = (event) => {
 	const disp = document.getElementById("disp-error-message");
 
 
-  fetch("http://localhost:7000/api/v2/auth/signup", {
+	fetch("https://f-cube.herokuapp.com/api/v2/auth/signup", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json, text/plain, */*",

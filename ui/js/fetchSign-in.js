@@ -8,7 +8,7 @@ const loginUser = (event) => {
 	const disp = document.getElementById("disp-error-message1");
 
 
-  fetch("http://localhost:7000/api/v2/auth/login", {
+  fetch("https://f-cube.herokuapp.com/api/v2/auth/login", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json, text/plain, */*",

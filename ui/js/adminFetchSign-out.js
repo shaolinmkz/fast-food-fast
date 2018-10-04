@@ -1,7 +1,7 @@
 const logoutAdmin = document.getElementById("logout-admin");
 const token1 = window.localStorage.getItem("adminToken");
 
-const index1 = "http://localhost:7000/admin";
+const index1 = "https://f-cube.herokuapp.com/admin";
 
 /**
  * Redirect user
@@ -20,7 +20,7 @@ const getItems = (item) => {
  */
 const logOutUser = () => {
 
-	fetch("http://localhost:7000/api/v2/admin/logout", {
+	fetch("https://f-cube.herokuapp.com/api/v2/admin/logout", {
 		method: "POST",
 		headers: {
 			"Accept": "application/json, text/plain, */*",

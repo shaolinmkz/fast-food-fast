@@ -3,7 +3,7 @@ const decodedToken = jwt_decode(token3);
 const userId = decodedToken.id;
 
 const getHistory = () => {
-	fetch(`http://localhost:7000/api/v2/users/${userId}/orders`, {
+	fetch(`https://f-cube.herokuapp.com/api/v2/users/${userId}/orders`, {
 		method: "GET",
 		headers: {
 			"Accept": "application/json, text/plain, */*",

@@ -1,6 +1,6 @@
-const index = "http://localhost:7000/";
-const products = "http://localhost:7000/products";
-const about = "http://localhost:7000/about";
+const index = "https://f-cube.herokuapp.com/";
+const products = "https://f-cube.herokuapp.com/products";
+const about = "https://f-cube.herokuapp.com/about";
 
 
 //checks if token is valid

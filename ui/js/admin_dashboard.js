@@ -35,7 +35,6 @@ const runSearch1 = () => {
 			let tag = b.target.innerHTML;
 			orderId2 = tag.toString().slice(tag.length - 1, tag.length);
 			status = tag;
-			console.log(tag);
 			const check = confirm("ARE YOU SURE?");
 			if (check) {
 				changeOrderStatus();
@@ -51,7 +50,6 @@ const runSearch2 = () => {
 			let tag = b.target.innerHTML;
 			orderId2 = tag.toString().slice(tag.length - 1, tag.length);
 			status = tag;
-			console.log(tag);
 			const check = confirm("ARE YOU SURE?");
 			if (check) {
 				changeOrderStatus();
@@ -67,7 +65,6 @@ const runSearch3 = () => {
 			let tag = b.target.innerHTML;
 			orderId2 = tag.toString().slice(tag.length - 1, tag.length);
 			status = tag;
-			console.log(tag);
 			const check = confirm("ARE YOU SURE?");
 			if (check) {
 				changeOrderStatus();
@@ -115,7 +112,7 @@ logo.onclick = () => {
 
 
 const getAllOrders = () => {
-	fetch("http://localhost:7000/api/v2/orders", {
+	fetch("https://f-cube.herokuapp.com/api/v2/orders", {
 		method: "GET",
 		headers: {
 			"Accept": "application/json, text/plain, */*",
@@ -192,7 +189,7 @@ window.addEventListener("load", getAllOrders);
 
 
 const getSpecificOrder = () => {
-	fetch(`http://localhost:7000/api/v2/orders/${Number(orderId)}`, {
+	fetch(`https://f-cube.herokuapp.com/api/v2/orders/${Number(orderId)}`, {
 		method: "GET",
 		headers: {
 			"Accept": "application/json, text/plain, */*",
@@ -277,7 +274,7 @@ const changeOrderStatus = () => {
 
 	const statusChange = status.toString().slice(0,status.length-2);
 
-	fetch(`http://localhost:7000/api/v2/orders/${Number(orderId2)}`, {
+	fetch(`https://f-cube.herokuapp.com/api/v2/orders/${Number(orderId2)}`, {
 		method: "PUT",
 		headers: {
 			"Accept": "application/json, text/plain, */*",

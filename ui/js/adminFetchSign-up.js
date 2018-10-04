@@ -1,10 +1,10 @@
 const signUp = document.getElementById("signup-form");
 const token = window.localStorage.getItem("token");
 
-const index = "http://localhost:7000/admin";
-const home = "http://localhost:7000/dashboard";
+const index = "https://f-cube.herokuapp.com/admin";
+const home = "https://f-cube.herokuapp.com/dashboard";
 
-const signupFetch = "http://localhost:7000/api/v2/auth/admin/signup";
+const signupFetch = "https://f-cube.herokuapp.com/api/v2/auth/admin/signup";
 
 
 

@@ -1,5 +1,5 @@
 const loginForm = document.getElementById("login-form");
-const signinFetch = "http://localhost:7000/api/v2/auth/admin/login";
+const signinFetch = "https://f-cube.herokuapp.com/api/v2/auth/admin/login";
 
 const loginAdmin = (event) => {
 	event.preventDefault();
@@ -29,7 +29,7 @@ const loginAdmin = (event) => {
 				disp.innerHTML = message;
 				setTimeout(() => {
 					localStorage.setItem("adminToken", token);
-          window.location.href = "http://localhost:7000/dashboard";
+          window.location.href = "https://f-cube.herokuapp.com/dashboard";
 				}, 1000);
 				return;
 			} else {
