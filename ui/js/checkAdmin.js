@@ -29,8 +29,6 @@ const autoAuth1 = () => {
 	}
 };
 
-window.addEventListener("load", autoAuth1);
-
 
 const redirect1 = (link) => {
 	window.location.href = link;
@@ -40,4 +38,5 @@ const getItems1 = (item) => {
 	return localStorage.getItem(item);
 };
 
+autoAuth1();
 

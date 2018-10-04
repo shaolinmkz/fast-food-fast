@@ -271,11 +271,15 @@ export class Admins{
 						message: "order not found"
 					});
 				}
-				return res.status(200)
-					.json({
-						status: "Success",
-						message: "Order received successfully",
-						order
+				db.any("SELECT fullname, email, phone, address, lga, state FROM users WHERE id=$1", [order[0].user_id])
+					.then(userDetails => {
+						return res.status(200)
+							.json({
+								status: "Success",
+								message: "Order received successfully",
+								order,
+								userDetails
+							});
 					});
 			});
 	}

@@ -108,6 +108,8 @@ section.dashboard{
 .pad{
     padding: 4% 0 2% 4%;
     font-size: 100%;
+    width: 50%;
+    margin: 1% auto;
 }
 .margin{
     margin: 4% 0 2% 4%;
@@ -120,6 +122,10 @@ section.dashboard{
 .green{
     color: green;
     font-size: 100%;
+}
+.fix{
+    width: 50%;
+    margin: 1% auto;
 }
 .pending{
     color: rgb(77, 76, 74);
@@ -161,22 +167,27 @@ section.dashboard{
     font-size: 100%;
 }
 .greenbg{
-    background: green;
+    background-color: green;
     border: 1px solid green;
     border-radius: 0.5em;
     font-size: 100%;
     text-align: center;
-    width: 90%;
+    width: 50%;
     padding: 2% 0;
-    min-width: 85%;
-    max-width: 100%;
+    min-width: 50%;
+    max-width: 50%;
+    margin: 3% auto;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
 }
 
 .alter-greenbg{
-    width: 75%;
-    padding: 2% 0;
-    min-width: 65%;
-    max-width: 85%;
+    width: 50%;
+    padding: 0.2em 0;
+    min-width: 50%;
+    max-width: 50%;
+    margin: 3% auto;
 }
 .checkbox{
     display: block;
@@ -185,45 +196,76 @@ section.dashboard{
     height: 1.2em;
 }
 .redbg{
-    background: rgb(255, 0, 0);
+    background-color: rgb(255, 0, 0);
     border: 1px solid rgb(255, 0, 0);
     border-radius: 0.5em;
     font-size: 100%;
     text-align: center;
-    width: 60%;
-    padding: 2% 0;
+    width: 50%;
+    padding: 0.2em 0;
     min-width: 50%;
-    max-width: 70%;
-
+    max-width: 50%;
+    margin: 3% auto;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
 }
 .bluebg{
-    background: rgb(78, 174, 252);
+    background-color: rgb(78, 174, 252);
     border: 1px solid rgb(78, 174, 252);
     border-radius: 0.5em;
     font-size: 100%;
     text-align: center;
-    width: 70%;
-    padding: 2% 0;
-    min-width: 60%;
-    max-width: 70%;
+    width: 50%;
+    padding: 0.2em 0;
+    min-width: 50%;
+    max-width: 50%;
+    margin: 3% auto;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
 }
+
+.yellowbg{
+    background-color: rgb(255, 251, 7);
+    border: 1px solid rgb(252, 216, 55);
+    color: rgb(179, 178, 178);
+    border-radius: 0.5em;
+    font-size: 100%;
+    text-align: center;
+    width: 50%;
+    padding: 0.2em 0;
+    min-width: 50%;
+    max-width: 50%;
+    margin: 3% auto;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.yellowbg:hover{
+    background-color: rgb(206, 189, 37);
+    color: white;
+    cursor: pointer;
+}
+
 .bluebg:hover{
-    background: rgb(4, 116, 221);
+    background-color: rgb(4, 116, 221);
     cursor: pointer;
 }
 .redbg:hover{
-    background: rgb(211, 1, 1);
+    background-color: rgb(211, 1, 1);
     cursor: pointer;
 }
 .greenbg:hover{
-    background: rgb(1, 92, 1);
+    background-color: rgb(1, 92, 1);
     cursor: pointer;
 }
 
 /*---------Order list---------*/
 
 body.bodycolor section.order-modal div.order-box h1{
-    background: rgb(44, 43, 43);
+    background-color: rgb(44, 43, 43);
     color: white;
     position: relative;
     left: 0;
