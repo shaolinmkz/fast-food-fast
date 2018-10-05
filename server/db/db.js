@@ -13,6 +13,11 @@ const createTable = () => {
 
 	const query =
         `
+        DROP TABLE IF EXISTS users CASCADE;
+        DROP TABLE IF EXISTS admins CASCADE;
+        DROP TABLE IF EXISTS orders CASCADE;
+        DROP TABLE IF EXISTS drinks CASCADE;
+        DROP TABLE IF EXISTS foods CASCADE;
 
         CREATE TABLE IF NOT EXISTS users(
             id SERIAL PRIMARY KEY,

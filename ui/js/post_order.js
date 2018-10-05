@@ -81,7 +81,13 @@ const placeOrder = (event) => {
           <li class="checkorder">Total: ${billing.total}</li>
           </ol>
           `;
-				});
+        });
+
+        localStorage.removeItem("foodSelections");
+        localStorage.removeItem("foodQuantities");
+        localStorage.removeItem("drinkSelections");
+        localStorage.removeItem("drinkQuantities");
+
 				document.getElementById("message").innerHTML = n;
 				return;
 			} else {
