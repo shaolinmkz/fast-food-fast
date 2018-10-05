@@ -38,7 +38,7 @@
                     </ul>
                 </li>
 
-                <li class="cart"><a href="#"><span><img src="./images/cart.png" alt="cart" class="cart"></span>CART</a>
+                <li class="cart" id="nav-cart"><a href="#"><span><img src="./images/cart.png" alt="cart" class="cart"></span>CART</a>
                 </li>
             </ul>
 
@@ -69,14 +69,18 @@
     <div class="isolate cart-modal">
         <section class="basket-box cart-box clearfix">
             <form action="./placeorder.html" class="basket">
-                <h1>CART</h1>
-
-                <label>Rotisserie &nbsp;</label>: <label>₦3900</label><br>
-                <label>Chief burger &nbsp;</label>: <label>₦1050</label><br>
-                <label>Five alive &nbsp;</label>: <label>600</label>
-                <hr>
-
-                <label>Subtotal &nbsp;</label>: <label>₦5550</label><br>
+                <h1 class="cartHeading">CART</h1>
+                <div class="clearfix">
+                    <div class="itemList" style="float:left; width: 70%">
+              
+                <h2 style="width:100%; font-size: 0.9em; color:green">NO ITEM SELECTED</h2>
+                </div>
+                <hr> 
+                        
+                        <div class="quantityList" style="float:right; width: 30%"> 
+                        
+                        </div>
+                </div>
 
                 <input type="submit" value="PROCEED TO CHECKOUT">
                 <label>Discount Code? Apply it here</label>
@@ -96,21 +100,21 @@
             <form id="menu-selection">
                 <label class="label-meals">Meals</label>
                 <select class="select-option-m">
-                  
+
                 </select>
                 <label>Quantity</label>
                 <input type="number" name="meal-quantity" id="foods-quantity" placeholder="Enter quantity of meal">
 
                 <label class="label-drinks">Drinks</label>
                 <select class="select-option-d">
-                    
+
                 </select>
                 <label>Quantity</label>
                 <input type="number" name="drink-quantity" id="drinks-quantity" placeholder="Enter quantity of drink">
 
-                <label>Price</label>
-                <label class="price">₦0</label>
-                <input type="submit" name="add-to-cart" value="Add To Cart">
+                
+                <input type="button" name="add-to-cart" value="Add To Cart" id="add-to-cart">
+                <p id="displayActions" style="text-align: center;"></p>
             </form>
         </div>
     </section>

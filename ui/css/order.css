@@ -124,6 +124,7 @@
     font-size: 16px;
 }
 
+.order-modal input[type="button"],
 .order-modal input[type="submit"],
 .basket input[type="submit"],
 .basket input[type="button"] {
@@ -140,6 +141,7 @@
     transition-timing-function: ease-in-out;
 }
 
+.order-modal input[type="button"]:hover,
 .order-modal input[type="submit"]:hover,
 .basket input[type="submit"]:hover,
 .basket input[type="button"]:hover {
@@ -148,6 +150,7 @@
     color: wheat;
 }
 
+.order-modal input[type="button"]:active,
 .order-modal input[type="submit"]:active,
 .basket input[type="submit"]:active,
 .basket input[type="button"]:active{

@@ -42,14 +42,14 @@
                                 <form action="./placeorder.html" class="basket">
                                     <h1>YOUR ORDER</h1>
 
-                                    <label>Rotisserie &nbsp;</label>: <label>₦3900</label><br>
+                                    <!-- <label>Rotisserie &nbsp;</label>: <label>₦3900</label><br>
                                     <label>Chief burger &nbsp;</label>: <label>₦1050</label><br>
                                     <label>Five alive &nbsp;</label>: <label>600</label>
                                     <hr>
 
                                     <label>Subtotal &nbsp;</label>: <label>₦5550</label><br>
                                     <label>Delivery &nbsp;</label>: <label>₦450</label><br>
-                                    <label>Total &nbsp;</label>: <label>₦6000</label>
+                                    <label>Total &nbsp;</label>: <label>₦6000</label> -->
 
                                     <input type="submit" value="PROCEED TO CHECKOUT">
                                     <label>Discount Code? Apply it here</label>
@@ -64,7 +64,7 @@
         </nav>
     </header>
     <section class="billing">
-        <form>
+        <form id= "order-form">
             <h1>BILLING DETAILS</h1>
             <label class="bold">First name</label>: <label class="format">Jane</label> 
             <span>&nbsp; &nbsp;</span>
@@ -74,62 +74,51 @@
             <br>
             <label class="bold">Mobile number</label>: <label class="format">08012345678</label> 
             <br>
-            <p class="bold">Address</p>
-            <input type="number" placeholder="House number e.g 23" class="block"/>
-            <input type="text" placeholder="Street/Estate address"/>
-            <input type="checkbox" title="save address to record" /> 
-            <label>save address</label>
+            <p class="bold">Address</p> <br>
+            <input type="text" placeholder="Street/Estate address" id="address"/> 
             <br>
             <label class="bold block">Local government</label>
             <br>
-            <input type="text" placeholder="Apapa" />
-            <input type="checkbox" title="save LGA to record" /> <label>save LGA</label>
+            <input type="text" placeholder="Apapa" id="lga"/>
             <br>
             <label class="bold block">State</label> 
             <br>
-            <input type="text" placeholder="Lagos" />
-            <input type="checkbox" title="save state to record" /> <label>save state</label>
+            <input type="text" placeholder="Lagos" id="state"/>
 
             <h1>YOUR ORDER</h1>
             <section class="clearfix">
                 <div>
                     <ol class="list">
                         <li class="bold">Item(s)</li>
-                        <li>Rotisserie</li>
+                        <!-- <li>Rotisserie</li>
                         <li>Chief burger</li>
                         <li>Five alive</li>
                         <li class="bold">Subtotal</li>
                         <li class="bold">Discount</li>
                         <li class="bold">Delivery</li>
-                        <li class="bold">Total</li>
+                        <li class="bold">Total</li> -->
                     </ol>
                 </div>
                 <div>
-                    <ol>
-                        <li class="bold">Amount</li>
+                    <ol class="listq">
+                        <!-- <li class="bold">Amount</li>
                         <li>₦3900</li>
                         <li>₦1050</li>
                         <li>₦600</li>
                         <li>₦5550</li>
                         <li>₦0</li>
                         <li>₦450</li>
-                        <li>₦6000</li>
+                        <li>₦6000</li> -->
                     </ol>
                 </div>
             </section>
             <br>
-            <input type="radio" name="payment-type" /> <label>pay on delivery</label>
-            <input type="radio" name="payment-type" /> <label>webpay by interswitch</label>
-            
-            <img src="./images/interswitch.png" alt="online payment options"/> 
-
+            <p id="disp-mssg"></p>
+            <div id="message"></div>
             <input type="submit" value="PLACE ORDER"/>
         </form>
     </section>
 
-    <section class="delivery-man">
-        <img src="./images/delivery-man.png" class="marquee" />
-    </section>
     <footer class="main-footer">
          &copy; <label>F-cube</label>
         <div>
@@ -142,7 +131,7 @@
             <p>23, abc street victoria island Lagos</p>
             <p>P.O.Box 4351</p>
     </footer>
-<script type="text/javascript" src="./js/admin.js"></script>
+<script type="text/javascript" src="./js/post_order.js"></script>
 </body>
 
 </html>
